@@ -9,20 +9,20 @@
         <filter-class>filter.AdminFilter</filter-class>
     </filter>
     <filter>
-        <filter-name>StudentFilter</filter-name>
-        <filter-class>filter.StudentFilter</filter-class>
-    </filter>
-    <filter>
         <filter-name>ProviderFilter</filter-name>
         <filter-class>filter.ProviderFilter</filter-class>
     </filter>
-    <filter-mapping>
-        <filter-name>ProviderFilter</filter-name>
-        <url-pattern>/provider/*</url-pattern>
-    </filter-mapping>
+    <filter>
+        <filter-name>StudentFilter</filter-name>
+        <filter-class>filter.StudentFilter</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>StudentFilter</filter-name>
         <url-pattern>/student/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ProviderFilter</filter-name>
+        <url-pattern>/provider/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>

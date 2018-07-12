@@ -24,6 +24,7 @@
             <form>
                 <input type="submit" class="btn btn-warning btn-block" value="All"/>
                 <input type="submit" class="btn btn-warning btn-block" value="Banned"/>
+                <input type="submit" class="btn btn-warning btn-block" value="Register"/>
             </form>
             <br/>
             <h4>Create</h4>
