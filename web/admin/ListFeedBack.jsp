@@ -20,13 +20,11 @@
     <body>
         <jsp:include page="../header.jsp"/>
         <div class="right-bar text-center">
+            <h4>Filter</h4>
             <form>
-                <form>
-                    <input type="submit" class="btn btn-warning btn-block" value="All"/>
-                    <input type="submit" class="btn btn-warning btn-block" value="Student"/>
-                    <input type="submit" class="btn btn-warning btn-block" value="Provider"/>
-                    <input type="submit" class="btn btn-warning btn-block" value="Administrator"/>
-                </form>
+                <input type="submit" class="btn btn-warning btn-block" value="All"/>
+                <input type="submit" class="btn btn-warning btn-block" value="Feedback"/>
+                <input type="submit" class="btn btn-warning btn-block" value="Report"/>
             </form>
         </div>
 

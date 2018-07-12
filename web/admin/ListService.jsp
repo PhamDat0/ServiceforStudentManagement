@@ -20,13 +20,15 @@
     <body>
         <jsp:include page="../header.jsp"/>
         <div class="right-bar text-center">
+            <h4>Filter</h4>
             <form>
-                <form>
-                    <input type="submit" class="btn btn-warning btn-block" value="All"/>
-                    <input type="submit" class="btn btn-warning btn-block" value="Student"/>
-                    <input type="submit" class="btn btn-warning btn-block" value="Provider"/>
-                    <input type="submit" class="btn btn-warning btn-block" value="Administrator"/>
-                </form>
+                <input type="submit" class="btn btn-warning btn-block" value="All"/>
+                <input type="submit" class="btn btn-warning btn-block" value="Banned"/>
+            </form>
+            <br/>
+            <h4>Create</h4>
+            <form>
+                <input type="submit" class="btn btn-warning btn-block" value="New Service"/>
             </form>
         </div>
 
@@ -34,20 +36,20 @@
             <thead>
                 <tr>
                     <th>Number</th>
-                    <th>Service ID</th>
                     <th>Service Name</th>
-                    <th>Provider ID</th>
-                    <th>Price</th> 
+                    <th>Provider Name</th>
+                    <th>Fee</th> 
+                    <th>Status</th> 
                     <th style="text-align: center">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>S1</td>
                     <td>Dump the trash</td>
-                    <td>PV1</td>
+                    <td>Hi hi</td>
                     <td>10000</td>
+                    <td>Actived</td>
                     <td style="text-align: center">
                         <input type="submit" class="btn btn-success" value="View"></input>
                         <input type="submit" class="btn btn-warning" value="Ban"></input>
@@ -56,190 +58,10 @@
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>S2</td>
                     <td>Library Management</td>
-                    <td>PV2</td>
+                    <td>Ha ha</td>
                     <td>100000</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="View"></input>
-                        <input type="submit" class="btn btn-warning" value="Ban"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC2</td>
-                    <td>phongtt</td>
-                    <td>Tran Tuan Phong</td>
-                    <td>Administrator</td>
+                    <td>Banned</td>
                     <td style="text-align: center">
                         <input type="submit" class="btn btn-success" value="View"></input>
                         <input type="submit" class="btn btn-warning" value="Ban"></input>
@@ -248,7 +70,5 @@
                 </tr>
             </tbody>
         </table>
-
-
     </body>
 </html>
