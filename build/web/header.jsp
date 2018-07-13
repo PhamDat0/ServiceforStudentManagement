@@ -22,7 +22,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="/ServiceforStudentManagement/user/MyProfile.jsp">My Profile</a></li>
                             <li><a href="/ServiceforStudentManagement/user/Transaction.jsp">Transaction</a></li>
-                            <li><a href="#">Feedback</a></li>
+                            <li><a href="/ServiceforStudentManagement/user/FeedbackAdmin.jsp">Feedback Admin</a></li>
                         </ul>
                     </li>
                     <li><a href="/ServiceforStudentManagement/user/Service.jsp">Service</a></li>
