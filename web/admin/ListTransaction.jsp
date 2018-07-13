@@ -23,7 +23,7 @@
                 <div class="navbar col-sm-6 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
                     <form class="form-inline">
                         <div class="form-group">
-                            <label for="type">Filter</label>
+                            <label for="type">Filter: </label>
                             <select class="form-control" id="type">
                                 <option>All</option>
                                 <option>Top-up</option>
