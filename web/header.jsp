@@ -14,7 +14,7 @@
                     <a class="navbar-brand" href="/ServiceforStudentManagement/Home.jsp">Service for Student Management</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/ServiceforStudentManagement/Home.jsp">Home</a></li>
+                    <li><a href="/ServiceforStudentManagement/Home.jsp">Home</a></li>
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Contact Us</a></li>
                     <li><a href="#">Notification<span class="badge">5</span></a></li>
