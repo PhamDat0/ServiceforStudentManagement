@@ -19,48 +19,52 @@
     </head>
     <body>
         <jsp:include page="../header.jsp"/>
-        <div class="right-bar text-center">
-            <h4>Filter</h4>
-            <form>
-                <input type="submit" class="btn btn-warning btn-block" value="All"/>
-                <input type="submit" class="btn btn-warning btn-block" value="Feedback"/>
-                <input type="submit" class="btn btn-warning btn-block" value="Report"/>
-            </form>
+        <div class="container">
+            <div class="row">
+                <div class="navbar navbar-default text-center" style="padding-top: 7px;">
+                    <form>
+                        <input type="submit" class="btn btn-warning" value="All"/>
+                        <input type="submit" class="btn btn-warning" value="Feedback"/>
+                        <input type="submit" class="btn btn-warning" value="Report"/>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Number</th>
+                            <th>Report ID</th>
+                            <th>Account ID</th>
+                            <th>Detail</th>                 
+                            <th style="text-align: center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>R1</td>
+                            <td>AC1</td>
+                            <td>Thai do phuc vu cua nhan vien qua te</td>
+                            <td style="text-align: center">
+                                <input type="submit" class="btn btn-success" value="Send"></input>
+                                <input type="submit" class="btn btn-danger" value="Delete"></input>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>R2</td>
+                            <td>AC2</td>
+                            <td>Gia ca qua cao</td>
+                            <td style="text-align: center">
+                                <input type="submit" class="btn btn-success" value="Send"></input>
+                                <input type="submit" class="btn btn-danger" value="Delete"></input>
+                            </td>
+                        </tr>               
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Number</th>
-                    <th>Report ID</th>
-                    <th>Account ID</th>
-                    <th>Detail</th>                 
-                    <th style="text-align: center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>R1</td>
-                    <td>AC1</td>
-                    <td>Thai do phuc vu cua nhan vien qua te</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="Send"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>R2</td>
-                    <td>AC2</td>
-                    <td>Gia ca qua cao</td>
-                    <td style="text-align: center">
-                        <input type="submit" class="btn btn-success" value="Send"></input>
-                        <input type="submit" class="btn btn-danger" value="Delete"></input>
-                    </td>
-                </tr>               
-            </tbody>
-        </table>
     </body>
     <jsp:include page="../footer.jsp"/>
 </html>
