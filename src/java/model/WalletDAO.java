@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 3b45fce8e60042e525d960e0e1e1b130ea3e32f9
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,48 +37,3 @@ public class WalletDAO {
         conn.close();
     }
 }
-<<<<<<< HEAD
-=======
-=======
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package model;
-
-import entity.Wallet;
-import connect.DBContext;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-
-/**
- *
- * @author ADMIN
- */
-public class WalletDAO {
-
-    public void insertWallet(Wallet a) throws Exception {
-        String query = "insert into Wallet values(?,?,?)";
-        Connection conn = new DBContext().getConnection();
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setInt(1, a.getWalletID());
-        ps.setInt(2, a.getBalance());
-        ps.setDate(3, (Date) a.getDateCreated());
-        ps.executeUpdate();
-        conn.close();
-    }
-
-    public void setBalance(int walletid, int newbalance) throws Exception {
-        String query = "update WalletID set Balance=? where WalletID=?";
-        Connection conn = new DBContext().getConnection();
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setInt(1, newbalance);
-        ps.setInt(2, walletid);
-        ps.executeUpdate();
-        conn.close();
-    }
-}
->>>>>>> 23aa4c1c75df345ccccfbdd78cade15c6d3fe48a
->>>>>>> 3b45fce8e60042e525d960e0e1e1b130ea3e32f9
