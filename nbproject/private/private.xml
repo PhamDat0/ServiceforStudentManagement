@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/GitClone/ServiceforStudentManagement/web/Home.jsp</file>
             <file>file:/D:/GitClone/ServiceforStudentManagement/web/admin/ListService.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/web/src/css/MyserviceTable.css</file>
             <file>file:/D:/GitClone/ServiceforStudentManagement/web/admin/ListTransaction.jsp</file>
-            <file>file:/D:/GitClone/ServiceforStudentManagement/web/footer.jsp</file>
-            <file>file:/D:/GitClone/ServiceforStudentManagement/web/header.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/web/user/MyProfile.jsp</file>
             <file>file:/D:/GitClone/ServiceforStudentManagement/web/admin/ListFeedBack.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/web/user/Service.jsp</file>
             <file>file:/D:/GitClone/ServiceforStudentManagement/web/admin/ListAccount.jsp</file>
-            <file>file:/D:/GitClone/ServiceforStudentManagement/web/admin/NewAccount.jsp</file>
         </group>
     </open-files>
 </project-private>
