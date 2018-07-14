@@ -24,11 +24,11 @@
         </style>
     </head>
     <body >
-        <jsp:include page="../header.jsp"/>
+        <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
 
-            <jsp:include page="../functionBar.jsp"/>
+            <jsp:include page="/functionBar.jsp"/>
 
             <div class="col-sm-7">
                 <!--payment-->
@@ -52,7 +52,7 @@
                             <div class="tab-content">
                                 <!--top-up-->
                                 <div role="tabpanel" class="tab-pane active" id="topUp">
-                                    <form action="">
+                                    <form action="/ServiceforStudentManagement/AccountController" method="POST">
                                         <div class="form-group">
                                             <label for="amount">Amount:</label>
                                             <input type="text" class="form-control" id="amount" placeholder="Enter amount" name="amount">
@@ -69,11 +69,13 @@
                                             <button type="submit" class="btn-success">Top-up</button>
                                             <button type="reset" class="btn-warning">Clear</button>
                                         </div>
+                                        <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
+                                        <input type="hidden" name="action" value="topUp"/>
                                     </form>
                                 </div>
                                 <!--trade-->
                                 <div role="tabpanel" class="tab-pane" id="trade">
-                                    <form action="">
+                                    <form action="/ServiceforStudentManagement/AccountController" method="POST">
                                         <div class="form-group">
                                             <label for="receiver">Receiver:</label>
                                             <input type="text" class="form-control" id="receiver" placeholder="Enter receiver name" name="receiver">
@@ -98,6 +100,8 @@
                                             <button type="submit" class="btn-success">Send</button>
                                             <button type="reset" class="btn-warning">Clear</button>
                                         </div>
+                                        <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
+                                        <input type="hidden" name="action" value="payment"/>
                                     </form>
                                 </div>
                             </div>
@@ -137,7 +141,7 @@
                 </div>
             </div>
 
-            <jsp:include page="../informationBar.jsp"/>
+            <jsp:include page="/informationBar.jsp"/>
         </div>
     </body>
 </html>

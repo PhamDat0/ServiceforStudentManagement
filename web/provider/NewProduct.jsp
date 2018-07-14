@@ -15,10 +15,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <jsp:include page="../header.jsp"/>
+        <jsp:include page="/header.jsp"/>
         <div class="container-fluid row">
 
-            <jsp:include page="../functionBar.jsp"/>
+            <jsp:include page="/functionBar.jsp"/>
 
             <div class="col-sm-7">
                 <div class="panel panel-primary">
@@ -26,7 +26,7 @@
                         <h3 style="text-align: center">ADD NEW PRODUCT</h3>
                     </div>
                     <div class="panel-body">
-                        <form>
+                        <form action="/ServiceforStudentManagement/ProviderController" method="POST">
                             <div class="form-group">
                                 <label for="service">Service:</label>
                                 <select class="form-control" id="service">
@@ -51,12 +51,14 @@
                                 <button type="submit" class="btn btn-success">Add</button>
                                 <button type="reset" class="btn btn-warning">Clear</button>
                             </div>
+                            <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
+                            <input type="hidden" name="action" value="newProvider"/>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <jsp:include page="../informationBar.jsp"/>
+            <jsp:include page="/informationBar.jsp"/>
         </div>
     </body>
 </html>

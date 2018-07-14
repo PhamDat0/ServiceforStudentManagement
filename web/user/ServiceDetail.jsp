@@ -21,11 +21,11 @@
         </style>
     </head>
     <body>
-        <jsp:include page="../header.jsp"/>
+        <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
 
-            <jsp:include page="../functionBar.jsp"/>
+            <jsp:include page="/functionBar.jsp"/>
 
             <div class="col-sm-10">
                 <!--introduction-->

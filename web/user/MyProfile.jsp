@@ -25,11 +25,11 @@
         </style>
     </head>
     <body>
-        <jsp:include page="../header.jsp"/>
+        <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
 
-            <jsp:include page="../functionBar.jsp"/>
+            <jsp:include page="/functionBar.jsp"/>
 
             <div class="col-sm-7">
                 <!--account-->
@@ -114,7 +114,7 @@
                 </div>
             </div>
 
-            <jsp:include page="../informationBar.jsp"/>
+            <jsp:include page="/informationBar.jsp"/>
         </div>
 
     </body>

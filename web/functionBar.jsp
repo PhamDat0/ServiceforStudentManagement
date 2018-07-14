@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <body>
@@ -51,12 +52,15 @@
             </div>
             <!--</div>-->
         </div>
+        
+        <c:if test="${param.error == 'changePasswordError'}">
+            <script type="text/javascript">
+                $(window).on('load', function () {
+                    $('#pwdModal').modal('show');
+                });
+            </script>
+        </c:if>
 
-<!--        <script type="text/javascript">
-            $(window).on('load', function () {
-                $('#pwdModal').modal('show');
-            });
-        </script>-->
         <!--change password-->
         <div class="modal fade in" id="pwdModal" role="dialog">
             <div class="modal-dialog">
@@ -69,7 +73,7 @@
                     </div>
                     <!--body-->
                     <div class="modal-body">
-                        <form action="">
+                        <form action="/ServiceforStudentManagement/AccountController" method="POST">
                             <div class="form-group">
                                 <label for="oldPwd">Old Password:</label>
                                 <input type="password" class="form-control" id="oldPwd" placeholder="Enter old Password" name="txtOldPwd">
@@ -87,6 +91,8 @@
                                 <button type="reset" class="btn btn-warning">Clear</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                             </div>
+                            <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
+                            <input type="hidden" name="action" value="changePassword"/>
                         </form>
                     </div>
                 </div>

@@ -15,14 +15,14 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <jsp:include page="../header.jsp"/>
+        <jsp:include page="/header.jsp"/>
         <div class="col-sm-6" style="margin-left: 25%">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 style="text-align: center">CREATE NEW ACCOUNT</h3>
                 </div>
                 <div class="panel-body">
-                    <form>
+                    <form action="/ServiceforStudentManagement/AdminController" method="POST">
                         <div class="form-group">
                             <label for="fullname">Full Name</label>
                             <input type="text" class="form-control" id="fullname" placeholder="Enter full name" name="fullname">
@@ -85,6 +85,8 @@
                             <button type="submit" class="btn btn-success">Create</button>
                             <button type="reset" class="btn btn-warning">Clear</button>
                         </div>
+                        <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
+                        <input type="hidden" name="action" value="newAccount"/>
                     </form>
                 </div>
             </div>
