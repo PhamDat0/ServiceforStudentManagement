@@ -18,27 +18,22 @@
                 border-collapse: separate;
                 border-spacing: 10px;
             }
-            h3{
+            h3, h4{
                 text-align: center;
-            }
-            .align-items-center{
-                -ms-flex-align: center!important;
-                align-items: center!important;
-            }
-            .d-flex{
-                display: -ms-flexbox!important;
-                display: flex!important;
             }
         </style>
     </head>
     <body>
         <jsp:include page="../header.jsp"/>
 
-        <!--displaying content-->
-        <div class="container" style="padding: 10px">
-            <div class="row d-flex align-items-center">
-                <!--account info-->
-                <div class="col-sm-6">
+        <div class="container-fluid row">
+            
+            <jsp:include page="../functionBar.jsp"/>
+            
+            <div class="col-sm-7">
+                <!--account-->
+                <div class="row">
+                    <!--account info-->
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3>Account Information</h3>
@@ -53,6 +48,10 @@
                                 <tr>
                                     <td align="right">Role Number:</td>
                                     <td>SE05711</td>
+                                </tr>
+                                <tr>
+                                    <td align="right">Wallet ID:</td>
+                                    <td>101011235</td>
                                 </tr>
                                 <tr>
                                     <td align="right">Created Date:</td>
@@ -71,8 +70,9 @@
                         </div>
                     </div>
                 </div>
-                <!--personal info-->
-                <div class="col-sm-6">
+
+                <!--personal-->
+                <div class="row">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3>Personal Information</h3>
@@ -109,45 +109,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+            
+            <jsp:include page="../informationBar.jsp"/>
         </div>
-
-        <!--modal-->
-        <div class="modal fade" id="pwdModal" role="dialog">
-            <div class="modal-dialog">
-                <!--content-->
-                <div class="modal-content">
-                    <!--header-->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title text-center">Change Password</h4>
-                    </div>
-                    <!--body-->
-                    <div class="modal-body">
-                        <form action="">
-                            <div class="form-group">
-                                <label for="oldPwd">Old Password:</label>
-                                <input type="password" class="form-control" id="oldPwd" placeholder="Enter old Password" name="txtOldPwd">
-                            </div>
-                            <div class="form-group">
-                                <label for="newPwd">New Password:</label>
-                                <input type="password" class="form-control" id="newPwd" placeholder="Enter new password" name="txtNewPwd">
-                            </div>
-                            <div class="form-group">
-                                <label for="reNewPwd">New Password:</label>
-                                <input type="password" class="form-control" id="reNewPwd" placeholder="Re-enter new password" name="txtReNewPwd">
-                            </div>
-                            <div style="text-align:center">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                                <button type="reset" class="btn btn-warning">Clear</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+ 
     </body>
-    <jsp:include page="../footer.jsp"/>
 </html>

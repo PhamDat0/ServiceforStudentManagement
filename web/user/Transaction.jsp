@@ -25,11 +25,14 @@
     </head>
     <body >
         <jsp:include page="../header.jsp"/>
-        <!--displaying content-->
-        <div class="container">
-            <div class="row d-flex align-items-center">
+
+        <div class="container-fluid row">
+
+            <jsp:include page="../functionBar.jsp"/>
+
+            <div class="col-sm-7">
                 <!--payment-->
-                <div class="col-sm-6">
+                <div class="row">
                     <div class="panel panel-primary">
                         <!--heading-->
                         <div class="panel-heading">
@@ -103,8 +106,9 @@
 
                     </div>
                 </div>
+
                 <!--history-->
-                <div class="col-sm-6">
+                <div class="row">
                     <div class="panel panel-primary">
                         <div class="panel-heading text-center">
                             <h3>HISTORY</h3>
@@ -132,7 +136,8 @@
                     </div>
                 </div>
             </div>
+
+            <jsp:include page="../informationBar.jsp"/>
         </div>
     </body>
-    <jsp:include page="../footer.jsp"/>
 </html>

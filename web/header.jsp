@@ -14,26 +14,11 @@
                     <a class="navbar-brand" href="/ServiceforStudentManagement/Home.jsp">Service for Student Management</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="/ServiceforStudentManagement/Home.jsp">Home</a></li>
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Contact Us</a></li>
                     <li><a href="#">Notification<span class="badge">5</span></a></li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Account<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/ServiceforStudentManagement/user/MyProfile.jsp">My Profile</a></li>
-                            <li><a href="/ServiceforStudentManagement/user/Transaction.jsp">Transaction</a></li>
-                            <li><a href="/ServiceforStudentManagement/user/FeedbackAdmin.jsp">Feedback Admin</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="/ServiceforStudentManagement/user/MyProfile.jsp">Profile</a></li>
                     <li><a href="/ServiceforStudentManagement/user/Service.jsp">Service</a></li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/ServiceforStudentManagement/admin/ListAccount.jsp">Account</a></li>
-                            <li><a href="/ServiceforStudentManagement/admin/ListService.jsp">Service</a></li>
-                            <li><a href="/ServiceforStudentManagement/admin/ListFeedBack.jsp">Feedback</a></li>
-                            <li><a href="/ServiceforStudentManagement/admin/ListTransaction.jsp">Transaction</a></li>
-                        </ul>
-                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#signupModal" data-toggle="modal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -42,8 +27,20 @@
             </div>
         </nav>
 
+<!--        <script type="text/javascript">
+            $(window).on('load', function () {
+                $('#loginModal').modal('show');
+            });
+        </script>-->
+
+<!--        <script type="text/javascript">
+            $(window).on('load', function () {
+                $('#signupModal').modal('show');
+            });
+        </script>-->
+        
         <!-- Login Modal -->
-        <div id="loginModal" class="modal fade" role="dialog">
+        <div id="loginModal" class="modal fade in" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -69,7 +66,7 @@
         </div>
 
         <!-- Sign up Modal -->
-        <div id="signupModal" class="modal fade" role="dialog">
+        <div id="signupModal" class="modal fade in" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -119,7 +116,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Forgot Modal -->
         <div id="forgotModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
