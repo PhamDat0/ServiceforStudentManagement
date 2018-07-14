@@ -20,9 +20,9 @@ import java.util.List;
  */
 public class AccountDAO {
 
-    public List<Account> selectAccountByID(int id) throws Exception {
+    public List<Account> selectAccountByName(String name) throws Exception {
         Connection conn = new DBContext().getConnection();
-        String query = "select * from Account where AccountID=" + id;
+        String query = "select * from Account where AccountName like '" + name + "'";
         PreparedStatement ps = conn.prepareStatement(query);
         List<Account> a = new ArrayList<>();
         ResultSet rs = ps.executeQuery();
@@ -35,7 +35,7 @@ public class AccountDAO {
             String rolenumber = rs.getString("RoleNumber");
             String address = rs.getString("Address");
             String phone = rs.getString("Phone");
-            Date dob = rs.getDate("DOB");
+            Date dob = rs.getDate("BOD");
             int walletid = rs.getInt("WalletID");
             int balance = rs.getInt("Balance");
             Date datecreated = rs.getDate("DateCreated");

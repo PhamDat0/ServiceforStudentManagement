@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,9 +28,9 @@
         <jsp:include page="../header.jsp"/>
 
         <div class="container-fluid row">
-            
+
             <jsp:include page="../functionBar.jsp"/>
-            
+
             <div class="col-sm-7">
                 <!--account-->
                 <div class="row">
@@ -42,24 +43,26 @@
                             <table align="center" class="customTable">
                                 <tr>
                                     <td align="right">Balance:</td>
-                                    <td>10000</td>
+                                    <td>${sessionScope.account.balance}</td>
                                     <td><a href="Transaction.jsp"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></td>
                                 </tr>
-                                <tr>
-                                    <td align="right">Role Number:</td>
-                                    <td>SE05711</td>
-                                </tr>
+                                <c:if test="${sessionScope.account.type == 3}">
+                                    <tr>
+                                        <td align="right">Role Number:</td>
+                                        <td>${sessionScope.account.roleNumber}</td>
+                                    </tr>
+                                </c:if>
                                 <tr>
                                     <td align="right">Wallet ID:</td>
-                                    <td>101011235</td>
+                                    <td>${sessionScope.account.walletID}</td>
                                 </tr>
                                 <tr>
                                     <td align="right">Created Date:</td>
-                                    <td>SE05711</td>
+                                    <td>${sessionScope.account.dateCreated}</td>
                                 </tr>
                                 <tr>
                                     <td align="right">Account Name:</td>
-                                    <td>Administrator</td>
+                                    <td>${sessionScope.account.accountName}</td>
                                 </tr>
                                 <tr>
                                     <td align="right">Password:</td>
@@ -81,23 +84,23 @@
                             <table align="center" class="customTable">
                                 <tr>
                                     <td align="right">Full Name:</td>
-                                    <td><input type="text" value="PhongTT"/></td>
+                                    <td><input type="text" value="${sessionScope.account.userName}"/></td>
                                 </tr>
                                 <tr>
                                     <td align="right">Email:</td>
-                                    <td><input type="text" value="phongttse05711@fpt.edu.vn"/></td>
+                                    <td><input type="text" value="${sessionScope.account.email}"/></td>
                                 </tr>
                                 <tr>
                                     <td align="right">Date of Birth:</td>
-                                    <td><input type="date" value="1998-10-05"/></td>
+                                    <td><input type="date" value="${sessionScope.account.dob}"/></td>
                                 </tr>
                                 <tr>
                                     <td align="right">Address:</td>
-                                    <td><input type="text" value="C412"/></td>
+                                    <td><input type="text" value="${sessionScope.account.address}"/></td>
                                 </tr>
                                 <tr>
                                     <td align="right">Phone:</td>
-                                    <td><input type="text" value="0123456789"/></td>
+                                    <td><input type="text" value="${sessionScope.account.phone}"/></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" align="center">
@@ -110,9 +113,9 @@
                     </div>
                 </div>
             </div>
-            
+
             <jsp:include page="../informationBar.jsp"/>
         </div>
- 
+
     </body>
 </html>

@@ -6,27 +6,27 @@
 package entity;
 
 import java.util.Date;
-import jdk.nashorn.internal.objects.annotations.Getter;
 
 /**
  *
  * @author ADMIN
  */
 public class Account {
-    int accountID;
-    String accountName;
-    String password;
-    String email;
-    String userName;
-    String roleNumber;
-    String address;
-    String phone;
-    Date dob;
-    int walletID;
-    int balance;
-    Date dateCreated;
-    String status;
-    int type;
+
+    private int accountID;
+    private String accountName;
+    private String password;
+    private String email;
+    private String userName;
+    private String roleNumber;
+    private String address;
+    private String phone;
+    private Date dob;
+    private int walletID;
+    private int balance;
+    private Date dateCreated;
+    private String status;
+    private int type;
 
     public Account() {
     }
@@ -46,7 +46,7 @@ public class Account {
         this.dateCreated = dateCreated;
         this.status = status;
         this.type = type;
-    }  
+    }
 
     public Date getDob() {
         return dob;
@@ -108,7 +108,7 @@ public class Account {
         return type;
     }
 
-        public void setAccountID(int accountID) {
+    public void setAccountID(int accountID) {
         this.accountID = accountID;
     }
 
@@ -160,12 +160,4 @@ public class Account {
         this.type = type;
     }
 
-   
-
-    
-
-
-    
-    
-    
 }

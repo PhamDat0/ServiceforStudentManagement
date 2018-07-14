@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <body>
@@ -16,36 +17,50 @@
                 <ul class="nav navbar-nav">
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Notification<span class="badge">5</span></a></li>
-                    <li><a href="/ServiceforStudentManagement/user/MyProfile.jsp">Profile</a></li>
-                    <li><a href="/ServiceforStudentManagement/user/Service.jsp">Service</a></li>
+                        <c:if test="${not empty sessionScope.account}">
+                        <li><a href="#">Notification<span class="badge">5</span></a></li>
+                        <li><a href="/ServiceforStudentManagement/user/MyProfile.jsp">Profile</a></li>
+                        <li><a href="/ServiceforStudentManagement/user/Service.jsp">Service</a></li>
+                        </c:if>
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#signupModal" data-toggle="modal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="#loginModal" data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <c:if test="${empty sessionScope.account}">
+                        <li><a href="#signupModal" data-toggle="modal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="#loginModal" data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        </c:if>
+                        <c:if test="${not empty sessionScope.account}">
+                        <li><a>Hello, ${sessionScope.account.userName}</a></li>
+                        <li><a href="/ServiceforStudentManagement/HeaderController"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                        </c:if>
                 </ul>
             </div>
         </nav>
 
-<!--        <script type="text/javascript">
-            $(window).on('load', function () {
-                $('#loginModal').modal('show');
-            });
-        </script>-->
+        <c:if test="${param.error == 'loginError'}">
+            <script type="text/javascript">
+                $(window).on('load', function () {
+                    $('#loginModal').modal('show');
+                });
+            </script>
+        </c:if>
 
-<!--        <script type="text/javascript">
-            $(window).on('load', function () {
-                $('#signupModal').modal('show');
-            });
-        </script>-->
-        
+        <c:if test="${param.error == 'signupError'}">
+            <script type="text/javascript">
+                $(window).on('load', function () {
+                    $('#signupModal').modal('show');
+                });
+            </script>
+        </c:if>
+
+
         <!-- Login Modal -->
         <div id="loginModal" class="modal fade in" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-body">
-                        <form action="">
+                        <form action="/ServiceforStudentManagement/HeaderController" method="POST">
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
@@ -59,6 +74,8 @@
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#forgotModal" data-dismiss="modal">Forgot Password</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                             </div>
+                            <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
+                            <input type="hidden" name="action" value="login"/>
                         </form>
                     </div>
                 </div>
