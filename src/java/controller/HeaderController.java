@@ -99,11 +99,11 @@ public class HeaderController extends HttpServlet {
                     HttpSession session = request.getSession();
                     session.setAttribute("account", acc);
                     //redirect current page
-                    response.sendRedirect(request.getParameter("link").split("8080")[1]); 
+                    response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1]); 
                 }
             }
             //redirect current link with param error
-            response.sendRedirect(request.getParameter("link").split("8080")[1] + "?error=loginError"); 
+            response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=loginError"); 
         } catch (Exception ex) {
             Logger.getLogger(HeaderController.class.getName()).log(Level.SEVERE, null, ex);
         }
