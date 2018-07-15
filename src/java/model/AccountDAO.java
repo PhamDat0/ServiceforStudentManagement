@@ -20,6 +20,33 @@ import java.util.List;
  */
 public class AccountDAO {
 
+    public List<Account> selectAccount(String query) throws Exception {
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+        List<Account> a = new ArrayList<>();
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int accid = rs.getInt("AccountID");
+            String accname = rs.getString("AccountName");
+            String password = rs.getString("Password");
+            String email = rs.getString("Email");
+            String username = rs.getString("UserName");
+            String rolenumber = rs.getString("RoleNumber");
+            String address = rs.getString("Address");
+            String phone = rs.getString("Phone");
+            Date dob = rs.getDate("BOD");
+            int walletid = rs.getInt("WalletID");
+            int balance = rs.getInt("Balance");
+            Date datecreated = rs.getDate("DateCreated");
+            String status = rs.getString("Status");
+            int type = rs.getInt("Type");
+            a.add(new Account(accid, accname, password, email, username, rolenumber, address, phone, dob, walletid, balance, datecreated, status, type));
+        }
+        rs.close();
+        conn.close();
+        return a;
+    }
+    
     public List<Account> selectAccountByName(String name) throws Exception {
         Connection conn = new DBContext().getConnection();
         String query = "select * from Account where AccountName like '" + name + "'";

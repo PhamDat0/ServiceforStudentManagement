@@ -16,8 +16,13 @@
     </head>
     <body>
         <jsp:include page="/header.jsp"/>
-        <div class="col-sm-6" style="margin-left: 25%">
-            <div class="panel panel-primary">
+        
+        <div class="container-fluid row">
+            
+            <jsp:include page="/functionBar.jsp"/>
+            
+            <div class="col-sm-7">
+                <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 style="text-align: center">CREATE NEW ACCOUNT</h3>
                 </div>
@@ -90,6 +95,9 @@
                     </form>
                 </div>
             </div>
+            </div>
+            
+            <jsp:include page="/informationBar.jsp"/>            
         </div>
     </body>
 </html>

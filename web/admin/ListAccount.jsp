@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,6 +16,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <jsp:useBean id="listAccount" class="bean.ListAccountBean" scope="session"/>
+        <jsp:setProperty property="*" name="listAccount"/>
+
         <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
@@ -22,24 +26,25 @@
             <jsp:include page="/functionBar.jsp"/>
 
             <div class="col-sm-10">
+
                 <!--Filter-->
                 <div class="row">
                     <div class="navbar col-sm-6 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
                         <form class="form-inline">
                             <div class="form-group">
                                 <label for="type">Filter: </label>
-                                <select class="form-control" id="type">
-                                    <option>All</option>
-                                    <option>Student</option>
-                                    <option>Provider</option>
-                                    <option>Admin</option>
+                                <select class="form-control" id="type" name="type">
+                                    <option value="0" ${param.type == '0' ? "selected" : ""}>All</option>
+                                    <option value="1" ${param.type == '1' ? "selected" : ""}>Student</option>
+                                    <option value="2" ${param.type == '2' ? "selected" : ""}>Provider</option>
+                                    <option value="3" ${param.type == '3' ? "selected" : ""}>Admin</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="form-control" id="type">
-                                    <option>All</option>
-                                    <option>Actived</option>
-                                    <option>Banned</option>
+                                <select class="form-control" id="status" name="status">
+                                    <option value="All" ${param.status == 'All' ? "selected" : ""}>All</option>
+                                    <option value="Actived" ${param.status == 'Actived' ? "selected" : ""}>Actived</option>
+                                    <option value="Banned" ${param.status == 'Banned' ? "selected" : ""}>Banned</option>
                                 </select>
                             </div>
                             <div class="input-group" class="text-center">
@@ -53,6 +58,7 @@
                         </form>
                     </div>
                 </div>
+
                 <!--Table-->
                 <div class="row">
                     <div class="panel panel-primary">
@@ -63,8 +69,7 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Number</th>
-                                        <th>Account ID</th>
+                                        <th>ID</th>
                                         <th>Username</th>
                                         <th>Full Name</th>
                                         <th>Type</th> 
@@ -72,30 +77,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>AC1</td>
-                                        <td>phongtt</td>
-                                        <td>Tran Tuan Phong</td>
-                                        <td>Administrator</td>
-                                        <td style="text-align: center">
-                                            <input type="submit" class="btn btn-success" value="View"></input>
-                                            <input type="submit" class="btn btn-warning" value="Ban"></input>
-                                            <input type="submit" class="btn btn-danger" value="Delete"></input>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>AC2</td>
-                                        <td>phongtt</td>
-                                        <td>Tran Tuan Phong</td>
-                                        <td>Administrator</td>
-                                        <td style="text-align: center">
-                                            <input type="submit" class="btn btn-success" value="View"></input>
-                                            <input type="submit" class="btn btn-warning" value="Ban"></input>
-                                            <input type="submit" class="btn btn-danger" value="Delete"></input>
-                                        </td>
-                                    </tr>
+                                    <c:forEach var="acc" items="${listAccount.account}">
+                                        <tr>
+                                            <td>${acc.accountID}</td>
+                                            <td>${acc.accountName}</td>
+                                            <td>${acc.userName}</td>
+                                            <c:if test="${acc.type == '3'}">
+                                                <td>Administrator</td>
+                                            </c:if>
+                                            <c:if test="${acc.type != '3'}">
+                                                <td>${acc.type == '1' ? "Student" : "Provider"}</td>
+                                            </c:if>
+                                            <td style="text-align: center">
+                                                <input type="submit" class="btn btn-success" value="View"></input>
+                                                <input type="submit" class="btn btn-warning" value="Ban"></input>
+                                                <input type="submit" class="btn btn-danger" value="Delete"></input>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -103,6 +102,6 @@
                 </div>
             </div>
         </div>
-            
+
     </body>
 </html>

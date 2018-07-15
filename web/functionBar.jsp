@@ -10,49 +10,50 @@
 <html>
     <body>
         <div class="col-sm-2">
-            <!--<div data-spy="affix" style="margin-left: 15px;">-->
+            <!--Basic function-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Basic Function</h4>
+                </div>
+                <div class="list-group">
+                    <a href="/ServiceforStudentManagement/user/MyProfile.jsp" class="list-group-item">View My Profile</a>
+                    <a href="#pwdModal" data-toggle="modal" class="list-group-item">Change Password</a>
+                    <a href="#" class="list-group-item">Register Wallet</a>
+                </div>                    
+            </div>
+
             <!--User function-->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4>User Function</h4>
                 </div>
                 <div class="list-group">
-                    <a href="/ServiceforStudentManagement/user/MyProfile.jsp" class="list-group-item">View My Profile</a>
-                    <a href="#pwdModal" data-toggle="modal" actived class="list-group-item">Change Password</a>
-                    <a href="/ServiceforStudentManagement/user/Service.jsp" class="list-group-item">View Service</a>
+                    <!--student-->
                     <a href="/ServiceforStudentManagement/user/FeedbackAdmin.jsp" class="list-group-item">Feedback to Admin</a>
-                    <a href="/ServiceforStudentManagement/user/Transaction.jsp" class="list-group-item">Transaction</a>
-                </div>                    
-            </div>
-
-            <!--Provider function-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4>Provider Function</h4>
-                </div>
-                <div class="list-group">
+                    <a href="/ServiceforStudentManagement/student/Report.jsp" class="list-group-item">Report Service</a>
+                    
+                    <!--provider-->
                     <a href="/ServiceforStudentManagement/provider/NewProduct.jsp" class="list-group-item">New Product</a>
                     <a href="#" class="list-group-item">Register Service</a>
+                    <a href="#" class="list-group-item">Make Bill</a>
                     <a href="#" class="list-group-item">List Feedback</a>
-                </div>                    
-            </div>
-
-            <!--Administrator Function-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4>Admin Function</h4>
-                </div>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">New Account</a>
+                    <a href="#" class="list-group-item">List Service's Users</a>
+                    
+                    <!--student and provider-->
+                    <a href="/ServiceforStudentManagement/user/Transaction.jsp" class="list-group-item">Transaction</a>
+                    <a href="/ServiceforStudentManagement/user/Service.jsp" class="list-group-item">View Service</a>
+                    <a href="#" class="list-group-item">View Order</a>
+                    
+                    <!--administrator-->
+                    <a href="/ServiceforStudentManagement/admin/NewAccount.jsp" class="list-group-item">New Account</a>
                     <a href="/ServiceforStudentManagement/admin/ListAccount.jsp" class="list-group-item">List Account</a>
                     <a href="/ServiceforStudentManagement/admin/ListService.jsp" class="list-group-item">List Service</a>
                     <a href="/ServiceforStudentManagement/admin/ListFeedBack.jsp" class="list-group-item">List Feedback</a>
                     <a href="/ServiceforStudentManagement/admin/ListTransaction.jsp" class="list-group-item">List Transaction</a>
                 </div>                    
             </div>
-            <!--</div>-->
         </div>
-        
+
         <c:if test="${param.error == 'changePasswordError'}">
             <script type="text/javascript">
                 $(window).on('load', function () {
