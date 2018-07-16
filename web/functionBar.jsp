@@ -32,7 +32,6 @@
                 <div class="list-group">
                     <!--student-->
                     <c:if test="${sessionScope.account.type == 1}">
-                        <a href="/ServiceforStudentManagement/student/Report.jsp" class="list-group-item">Report Service</a>
                         <a href="/ServiceforStudentManagement/student/FeedbackService.jsp" class="list-group-item">Feedback Service</a>
                     </c:if>
 
@@ -113,5 +112,6 @@
                 </div>
             </div>
         </div>
+                            
     </body>
 </html>
