@@ -20,7 +20,7 @@
                         <c:if test="${not empty sessionScope.account}">
                         <li><a href="#">Notification<span class="badge">5</span></a></li>
                         <li><a href="/ServiceforStudentManagement/user/MyProfile.jsp">Profile</a></li>
-                        <li><a href="/ServiceforStudentManagement/user/Service.jsp">Service</a></li>
+                        <li><a href="/ServiceforStudentManagement/studentProvider/Service.jsp">Service</a></li>
                         </c:if>
 
                 </ul>
