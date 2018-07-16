@@ -31,8 +31,6 @@ public class Service {
         this.status = status;
     }
 
-
-
     public String getDetail() {
         return detail;
     }

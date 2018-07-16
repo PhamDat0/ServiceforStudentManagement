@@ -88,26 +88,27 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-body">
-                        <form action="">
+                        <form data-toggle="validator" role="form">
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+                                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
                             </div>
                             <div class="form-group">
                                 <label for="pwd">Password:</label>
-                                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" required>
                             </div>
                             <div class="form-group">
                                 <label for="repwd">Re-password:</label>
-                                <input type="password" class="form-control" id="repwd" placeholder="Re-enter password" name="repwd">
+                                <input type="password" class="form-control" id="repwd" data-match="#pwd"
+                                       data-match-error="Doesn't match" placeholder="Re-enter password" name="repwd" required>
                             </div>
                             <div class="form-group">
                                 <label for="roleNumber">Role Number:</label>
-                                <input type="text" class="form-control" id="roleNumber" placeholder="Enter role number" name="roleNumber">
+                                <input type="text" class="form-control" id="roleNumber" placeholder="Enter role number" name="roleNumber" required>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone:</label>
-                                <input type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone">
+                                <input type="number" data-minlength="9" data-maxlength="10" class="form-control" id="phone" placeholder="Enter phone" name="phone" required>
                             </div>
                             <div class="form-group">
                                 <label>Gender:</label>
@@ -121,7 +122,7 @@
 
                             <div class="form-group">
                                 <label for="date">Date:</label>
-                                <input type="date" class="form-control" id="date" placeholder="Enter date" name="date">
+                                <input type="date" class="form-control" id="date" placeholder="Enter date" name="date" required>
                             </div>
                             <div style="text-align:center">
                                 <button type="submit" class="btn btn-success">Register</button>

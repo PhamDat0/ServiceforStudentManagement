@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,6 +22,9 @@
         </style>
     </head>
     <body>
+        <jsp:useBean id="service" class="bean.ServiceDetail" scope="request"/>
+        <jsp:setProperty name="service" property="serviceID" param="serviceID"/>
+
         <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
@@ -38,7 +42,28 @@
                             </div>
                             <!--product list-->
                             <div class="panel-body">
-
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Duration</th>   
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="product" items="${service.product}">
+                                            <tr>
+                                                <td>${product.productID}</td>
+                                                <td>${product.productName}</td>
+                                                <td>${product.price}</td>
+                                                <td>${product.duration}</td>
+                                                <td><button class="btn btn-default">Buy</button></td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

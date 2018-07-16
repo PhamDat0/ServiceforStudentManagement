@@ -20,6 +20,25 @@ import java.util.List;
  */
 public class ServiceDAO {
 
+    public List<Service> selectService(String query) throws Exception {
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+        List<Service> a = new ArrayList<>();
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int serviceID = rs.getInt("ServiceID");
+            String serviceName = rs.getString("ServiceName");
+            int providerID = rs.getInt("ProviderID");
+            String detail = rs.getString("Detail");
+            Date dateCreated = rs.getDate("DateCreated");
+            String status = rs.getString("Status");
+            a.add(new Service(serviceID, serviceName, providerID, detail, dateCreated, status));
+        }
+        rs.close();
+        conn.close();
+        return a;
+    }
+    
     public List<Service> selectAllService() throws Exception {
         Connection conn = new DBContext().getConnection();
         String query = "select * from Service";

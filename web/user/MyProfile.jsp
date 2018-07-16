@@ -25,6 +25,10 @@
         </style>
     </head>
     <body>
+        
+        <jsp:useBean id="profile" class="bean.ProfileBean" scope="page"/>
+        <jsp:setProperty name="profile" property="username" value="${sessionScope.account.accountName}"/>
+        
         <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
@@ -43,26 +47,26 @@
                             <table align="center" class="customTable">
                                 <tr>
                                     <td align="right">Balance:</td>
-                                    <td>${sessionScope.account.balance}</td>
+                                    <td>?????</td>
                                     <td><a href="Transaction.jsp"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></td>
                                 </tr>
-                                <c:if test="${sessionScope.account.type == 3}">
+                                <c:if test="${sessionScope.account.type == 1}">
                                     <tr>
                                         <td align="right">Role Number:</td>
-                                        <td>${sessionScope.account.roleNumber}</td>
+                                        <td>${profile.account.roleNumber}</td>
                                     </tr>
                                 </c:if>
                                 <tr>
                                     <td align="right">Wallet ID:</td>
-                                    <td>${sessionScope.account.walletID}</td>
+                                    <td>${profile.account.walletID}</td>
                                 </tr>
                                 <tr>
                                     <td align="right">Created Date:</td>
-                                    <td>${sessionScope.account.dateCreated}</td>
+                                    <td>${profile.account.dateCreated}</td>
                                 </tr>
                                 <tr>
                                     <td align="right">Account Name:</td>
-                                    <td>${sessionScope.account.accountName}</td>
+                                    <td>${profile.account.accountName}</td>
                                 </tr>
                                 <tr>
                                     <td align="right">Password:</td>
@@ -84,23 +88,23 @@
                             <table align="center" class="customTable">
                                 <tr>
                                     <td align="right">Full Name:</td>
-                                    <td><input type="text" value="${sessionScope.account.userName}"/></td>
+                                    <td><input type="text" value="${profile.account.userName}"/></td>
                                 </tr>
                                 <tr>
                                     <td align="right">Email:</td>
-                                    <td><input type="text" value="${sessionScope.account.email}"/></td>
+                                    <td><input type="text" value="${profile.account.email}"/></td>
                                 </tr>
                                 <tr>
                                     <td align="right">Date of Birth:</td>
-                                    <td><input type="date" value="${sessionScope.account.dob}"/></td>
+                                    <td><input type="date" value="${profile.account.dob}"/></td>
                                 </tr>
                                 <tr>
                                     <td align="right">Address:</td>
-                                    <td><input type="text" value="${sessionScope.account.address}"/></td>
+                                    <td><input type="text" value="${profile.account.address}"/></td>
                                 </tr>
                                 <tr>
                                     <td align="right">Phone:</td>
-                                    <td><input type="text" value="${sessionScope.account.phone}"/></td>
+                                    <td><input type="text" value="${profile.account.phone}"/></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" align="center">

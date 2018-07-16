@@ -16,7 +16,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <jsp:useBean id="listAccount" class="bean.ListAccountBean" scope="session"/>
+        <jsp:useBean id="listAccount" class="bean.ListAccountBean" scope="page"/>
         <jsp:setProperty property="*" name="listAccount"/>
 
         <jsp:include page="/header.jsp"/>
@@ -48,7 +48,7 @@
                                 </select>
                             </div>
                             <div class="input-group" class="text-center">
-                                <input type="text" class="form-control" placeholder="Enter name">
+                                <input type="text" class="form-control" placeholder="Enter name" id="filterName" name="filterName">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="submit">
                                         <i class="glyphicon glyphicon-search"></i>
@@ -76,7 +76,7 @@
                                         <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="myTable"> 
                                     <c:forEach var="acc" items="${listAccount.account}">
                                         <tr>
                                             <td>${acc.accountID}</td>
@@ -103,5 +103,15 @@
             </div>
         </div>
 
+        <script>
+            $(document).ready(function () {
+                $("#filterName").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

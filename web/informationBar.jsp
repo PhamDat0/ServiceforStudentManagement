@@ -5,9 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <body>
+        <jsp:useBean id="infor" scope="page" class="bean.InformationBarBean"/>
+
         <div class="col-sm-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -27,7 +30,7 @@
                     </table>
                 </div>
             </div>
-            
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4>NEW MEMBER</h4>
@@ -36,17 +39,24 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>No.</th>
-                                <th>Name</th>
-                                <th>Gender</th>
+                                <th>A-Name</th>
+                                <th>R-Name</th>
+                                <th>Type</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <c:forEach var="acc" items="${infor.newAccount}">
+                                <tr>
+                                    <td>${acc.accountName}</td>
+                                    <td>${acc.userName}</td>
+                                    <td>${acc.type == '1' ? "Student" : "Provider"}</td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </div>
-            
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4>NEW SERVICE</h4>
@@ -55,17 +65,24 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>No.</th>
                                 <th>Name</th>
                                 <th>Provider</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <c:forEach var="ser" items="${infor.newService}">
+                                <tr>
+                                    <td>${ser.serviceName}</td>
+                                    <td>${ser.providerID}</td>
+                                    <td>${ser.dateCreated}</td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </div>
-            
+
         </div>
     </body>
 </html>

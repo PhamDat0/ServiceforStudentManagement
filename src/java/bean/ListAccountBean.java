@@ -21,7 +21,7 @@ public class ListAccountBean implements Serializable {
 
     public ListAccountBean() {
         this.type = "0";
-        this.status = "";
+        this.status = "All";
     }
 
     public String getType() {
@@ -47,7 +47,6 @@ public class ListAccountBean implements Serializable {
             if (type.equals("0")) query = query + " WHERE Status LIKE '" + status +"'";
             else query = query + " AND Status LIKE '" + status + "'";
         }
-        System.out.println(query);
         return new AccountDAO().selectAccount(query);
     }
     

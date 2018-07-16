@@ -29,26 +29,27 @@
                 </div>
                 <div class="list-group">
                     <!--student-->
-                    <a href="/ServiceforStudentManagement/user/FeedbackAdmin.jsp" class="list-group-item">Feedback to Admin</a>
                     <a href="/ServiceforStudentManagement/student/Report.jsp" class="list-group-item">Report Service</a>
                     
                     <!--provider-->
-                    <a href="/ServiceforStudentManagement/provider/NewProduct.jsp" class="list-group-item">New Product</a>
+                    <a href="/ServiceforStudentManagement/provider/ListProduct.jsp" class="list-group-item">List Product</a>
                     <a href="#" class="list-group-item">Register Service</a>
                     <a href="#" class="list-group-item">Make Bill</a>
-                    <a href="#" class="list-group-item">List Feedback</a>
                     <a href="#" class="list-group-item">List Service's Users</a>
                     
                     <!--student and provider-->
+                    <a href="/ServiceforStudentManagement/user/FeedbackAdmin.jsp" class="list-group-item">Feedback to Admin</a>
                     <a href="/ServiceforStudentManagement/user/Transaction.jsp" class="list-group-item">Transaction</a>
                     <a href="/ServiceforStudentManagement/user/Service.jsp" class="list-group-item">View Service</a>
                     <a href="#" class="list-group-item">View Order</a>
+                    
+                    <!--provider and administrator-->
+                    <a href="/ServiceforStudentManagement/admin/ListFeedBack.jsp" class="list-group-item">List Feedback</a>
                     
                     <!--administrator-->
                     <a href="/ServiceforStudentManagement/admin/NewAccount.jsp" class="list-group-item">New Account</a>
                     <a href="/ServiceforStudentManagement/admin/ListAccount.jsp" class="list-group-item">List Account</a>
                     <a href="/ServiceforStudentManagement/admin/ListService.jsp" class="list-group-item">List Service</a>
-                    <a href="/ServiceforStudentManagement/admin/ListFeedBack.jsp" class="list-group-item">List Feedback</a>
                     <a href="/ServiceforStudentManagement/admin/ListTransaction.jsp" class="list-group-item">List Transaction</a>
                 </div>                    
             </div>
