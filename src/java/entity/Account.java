@@ -5,44 +5,40 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author ADMIN
  */
-public class Account {
-
-    private int accountID;
+public class Account implements Serializable{
     private String accountName;
     private String password;
     private String email;
-    private String userName;
+    private String fullname;
     private String roleNumber;
     private String address;
     private String phone;
     private Date dob;
     private int walletID;
-    private int balance;
     private Date dateCreated;
     private String status;
     private int type;
 
     public Account() {
     }
-
-    public Account(int accountID, String accountName, String password, String email, String userName, String roleNumber, String address, String phone, Date dob, int walletID, int balance, Date dateCreated, String status, int type) {
-        this.accountID = accountID;
+    
+    public Account(String accountName, String password, String email, String userName, String roleNumber, String address, String phone, Date dob, int walletID, Date dateCreated, String status, int type) {
         this.accountName = accountName;
         this.password = password;
         this.email = email;
-        this.userName = userName;
+        this.fullname = userName;
         this.roleNumber = roleNumber;
         this.address = address;
         this.phone = phone;
         this.dob = dob;
         this.walletID = walletID;
-        this.balance = balance;
         this.dateCreated = dateCreated;
         this.status = status;
         this.type = type;
@@ -64,10 +60,6 @@ public class Account {
         this.dateCreated = dateCreated;
     }
 
-    public int getAccountID() {
-        return accountID;
-    }
-
     public String getAccountName() {
         return accountName;
     }
@@ -80,9 +72,6 @@ public class Account {
         return email;
     }
 
-    public String getUserName() {
-        return userName;
-    }
 
     public String getRoleNumber() {
         return roleNumber;
@@ -100,16 +89,8 @@ public class Account {
         return walletID;
     }
 
-    public int getBalance() {
-        return balance;
-    }
-
     public int getType() {
         return type;
-    }
-
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
     }
 
     public void setAccountName(String accountName) {
@@ -124,9 +105,14 @@ public class Account {
         this.email = email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getFullname() {
+        return fullname;
     }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
 
     public void setRoleNumber(String roleNumber) {
         this.roleNumber = roleNumber;
@@ -144,10 +130,6 @@ public class Account {
         this.walletID = walletID;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -160,4 +142,12 @@ public class Account {
         this.type = type;
     }
 
+   
+
+    
+
+
+    
+    
+    
 }

@@ -5,33 +5,47 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author ADMIN
  */
-public class Order {
-    int orderID;
-    int serviceID;
-    int providerID;
-    int productID;
-    int userID;
-    int price;
-    int quantity;
-    Date startDate;
-    Date endDate;
-    String status;
+public class Order implements Serializable {
+    private int orderID;
+    private int serviceID;
+    private String providerName;
+    private int productID;
+    private String userName;
+    private int price;
+    private int quantity;
+    private Date startDate;
+    private Date endDate;
+    private String status;
 
     public Order() {
     }
 
-    public Order(int orderID, int serviceID, int providerID, int productID, int userID, int price, int quantity, Date startDate, Date endDate, String status) {
+    public Order(int orderID, int serviceID, String providerName, int productID, String userName, int price, int quantity, Date startDate, Date endDate, String status) {
         this.orderID = orderID;
         this.serviceID = serviceID;
-        this.providerID = providerID;
+        this.providerName = providerName;
         this.productID = productID;
-        this.userID = userID;
+        this.userName = userName;
+        this.price = price;
+        this.quantity = quantity;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+    }
+
+   public Order(int serviceID, String providerName, int productID, String userName, int price, int quantity, Date startDate, Date endDate, String status) {
+      
+        this.serviceID = serviceID;
+        this.providerName = providerName;
+        this.productID = productID;
+        this.userName = userName;
         this.price = price;
         this.quantity = quantity;
         this.startDate = startDate;
@@ -65,21 +79,23 @@ public class Order {
         this.serviceID = serviceID;
     }
 
-    public int getProviderID() {
-        return providerID;
+    public String getProviderName() {
+        return providerName;
     }
 
-    public void setProviderID(int providerID) {
-        this.providerID = providerID;
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
     }
 
-    public int getUserID() {
-        return userID;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public String getUserName() {
+        return userName;
     }
+
+    
 
     public int getPrice() {
         return price;

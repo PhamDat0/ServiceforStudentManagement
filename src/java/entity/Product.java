@@ -5,28 +5,50 @@
  */
 package entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ADMIN
  */
-public class Product {
-    int productID;
-    String productName;
-    int serviceID;
-    int providerID;
-    int price;
-    int duration;
+public class Product implements Serializable {
+    private int productID;
+    private String productName;
+    private int serviceID;
+    private String providerName;
+    private int quantity;
+    private int price;
+    private int unit;
+    
 
     public Product() {
     }
 
-    public Product(int productID, String productName, int serviceID, int providerID, int price, int duration) {
+    public Product(int productID, String productName, int serviceID, String providerName, int quantity, int price, int unit) {
         this.productID = productID;
         this.productName = productName;
         this.serviceID = serviceID;
-        this.providerID = providerID;
+        this.providerName = providerName;
+        this.quantity = quantity;
         this.price = price;
-        this.duration = duration;
+        this.unit = unit;
+    }
+
+    public Product(String productName, int serviceID, String providerName, int quantity, int price, int unit) {
+        this.productName = productName;
+        this.serviceID = serviceID;
+        this.providerName = providerName;
+        this.quantity = quantity;
+        this.price = price;
+        this.unit = unit;
+    }
+
+    public int getProductID() {
+        return productID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     public String getProductName() {
@@ -37,16 +59,6 @@ public class Product {
         this.productName = productName;
     }
 
-   
-
-    public int getProductID() {
-        return productID;
-    }
-
-    public void setProductID(int productID) {
-        this.productID = productID;
-    }
-
     public int getServiceID() {
         return serviceID;
     }
@@ -55,12 +67,20 @@ public class Product {
         this.serviceID = serviceID;
     }
 
-    public int getProviderID() {
-        return providerID;
+    public String getProviderName() {
+        return providerName;
     }
 
-    public void setProviderID(int providerID) {
-        this.providerID = providerID;
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getPrice() {
@@ -71,12 +91,15 @@ public class Product {
         this.price = price;
     }
 
-    public int getDuration() {
-        return duration;
+    public int getUnit() {
+        return unit;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setUnit(int unit) {
+        this.unit = unit;
     }
+    
+    
+    
     
 }

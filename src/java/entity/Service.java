@@ -5,30 +5,50 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author ADMIN
  */
-public class Service {
-    int serviceID;
-    String serviceName;
-    int providerID;
-    String detail;
-    Date dateCreated;
-    String status;
+public class Service implements Serializable {
+    private int serviceID;
+    private String serviceName;
+    private String providerName;
+    private String detail;
+    private Date dateCreated;
+    private String status;
+    private String picture;
 
     public Service() {
     }
 
-    public Service(int serviceID, String serviceName, int providerID, String detail, Date dateCreated, String status) {
+    public Service(int serviceID, String serviceName, String providerName, String detail, Date dateCreated, String status, String picture) {
         this.serviceID = serviceID;
         this.serviceName = serviceName;
-        this.providerID = providerID;
+        this.providerName = providerName;
         this.detail = detail;
         this.dateCreated = dateCreated;
         this.status = status;
+        this.picture = picture;
+    }
+
+    public Service(String serviceName, String providerName, String detail, Date dateCreated, String status, String picture) {
+        this.serviceName = serviceName;
+        this.providerName = providerName;
+        this.detail = detail;
+        this.dateCreated = dateCreated;
+        this.status = status;
+        this.picture = picture;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public String getDetail() {
@@ -57,12 +77,12 @@ public class Service {
         this.serviceName = serviceName;
     }
 
-    public int getProviderID() {
-        return providerID;
+    public String getProviderName() {
+        return providerName;
     }
 
-    public void setProviderID(int providerID) {
-        this.providerID = providerID;
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
     }
 
     public String getDescription() {

@@ -5,25 +5,33 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author ADMIN
  */
-public class BuyBalance {
-    int id;
-    int accountID;
-    int walletID;
-    int value;
-    Date date;
+public class BuyBalance implements Serializable {
+    private int id;
+    private String accountName;
+    private int walletID;
+    private int value;
+    private Date date;
 
     public BuyBalance() {
     }
 
-    public BuyBalance(int id, int accountID, int walletID, int value, Date date) {
+    public BuyBalance(int id, String accountName, int walletID, int value, Date date) {
         this.id = id;
-        this.accountID = accountID;
+        this.accountName = accountName;
+        this.walletID = walletID;
+        this.value = value;
+        this.date = date;
+    }
+
+    public BuyBalance(String accountName, int walletID, int value, Date date) {
+        this.accountName = accountName;
         this.walletID = walletID;
         this.value = value;
         this.date = date;
@@ -37,13 +45,15 @@ public class BuyBalance {
         this.id = id;
     }
 
-    public int getAccountID() {
-        return accountID;
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
+    public String getAccountName() {
+        return accountName;
     }
+
+    
 
     public int getWalletID() {
         return walletID;

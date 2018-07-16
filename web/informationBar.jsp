@@ -48,7 +48,7 @@
                             <c:forEach var="acc" items="${infor.newAccount}">
                                 <tr>
                                     <td>${acc.accountName}</td>
-                                    <td>${acc.userName}</td>
+                                    <td>${acc.fullname}</td>
                                     <td>${acc.type == '1' ? "Student" : "Provider"}</td>
                                 </tr>
                             </c:forEach>
@@ -74,7 +74,7 @@
                             <c:forEach var="ser" items="${infor.newService}">
                                 <tr>
                                     <td>${ser.serviceName}</td>
-                                    <td>${ser.providerID}</td>
+                                    <td>${ser.providerName}</td>
                                     <td>${ser.dateCreated}</td>
                                 </tr>
                             </c:forEach>

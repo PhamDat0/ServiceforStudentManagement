@@ -113,7 +113,7 @@ public class AccountController extends HttpServlet {
             {
                 response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=changePasswordError");
             }
-            new AccountDAO().setAccountPasswordByID(a.get(0).getAccountID(), newPass);
+            new AccountDAO().setAccountPasswordByName(a.get(0).getAccountName(), newPass);
             response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1]);
         } catch (Exception ex) {
             System.out.println("Change password error");

@@ -89,7 +89,7 @@
                                 <table align="center" class="customTable">
                                     <tr>
                                         <td align="right">Full Name:</td>
-                                        <td><input type="text" name="txtName" value="${profile.account.userName}"/></td>
+                                        <td><input type="text" name="txtName" value="${profile.account.fullname}"/></td>
                                     </tr>
                                     <tr>
                                         <td align="right">Email:</td>
@@ -105,7 +105,7 @@
                                     </tr>
                                     <tr>
                                         <td align="right">Phone:</td>
-                                        <td><input type="number" name="txtPhone" value="${profile.account.phone}"/></td>
+                                        <td><input type="text" name="txtPhone" value="${profile.account.phone}"/></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" align="center">

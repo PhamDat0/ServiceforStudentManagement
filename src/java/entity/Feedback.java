@@ -12,33 +12,34 @@ import java.util.Date;
  *
  * @author ADMIN
  */
-public class Notification implements Serializable{
+public class Feedback implements Serializable {
     private int id;
-    private String receiverName;
+    private String senderName;
     private String title;
     private String detail;
     private Date date;
     private String status;
 
-    public Notification() {
+    public Feedback() {
     }
 
-    public Notification(int id, String receiverName, String title, String detail, Date date, String status) {
+    public Feedback(int id, String senderName, String title, String detail, Date date, String status) {
         this.id = id;
-        this.receiverName = receiverName;
+        this.senderName = senderName;
         this.title = title;
         this.detail = detail;
         this.date = date;
         this.status = status;
     }
 
-    public Notification(String receiverName, String title, String detail, Date date, String status) {
-        this.receiverName = receiverName;
+    public Feedback(String senderName, String title, String detail, Date date, String status) {
+        this.senderName = senderName;
         this.title = title;
         this.detail = detail;
         this.date = date;
         this.status = status;
     }
+    
 
     public int getId() {
         return id;
@@ -48,12 +49,12 @@ public class Notification implements Serializable{
         this.id = id;
     }
 
-    public String getReceiverName() {
-        return receiverName;
+    public String getSenderName() {
+        return senderName;
     }
 
-    public void setReceiverName(String receiverName) {
-        this.receiverName = receiverName;
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 
     
@@ -90,5 +91,6 @@ public class Notification implements Serializable{
         this.status = status;
     }
 
+   
     
 }

@@ -30,7 +30,7 @@
                         <li><a href="#loginModal" data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         </c:if>
                         <c:if test="${not empty sessionScope.account}">
-                        <li><a>Hello, ${sessionScope.account.userName}</a></li>
+                        <li><a>Hello, ${sessionScope.account.fullname}</a></li>
                         <li><a href="/ServiceforStudentManagement/HeaderController"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
                         </c:if>
                 </ul>
