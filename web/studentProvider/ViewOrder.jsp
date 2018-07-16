@@ -1,11 +1,10 @@
 <%-- 
-    Document   : AllAccount
-    Created on : Jul 11, 2018, 9:36:57 AM
+    Document   : ViewOrder
+    Created on : Jul 16, 2018, 3:31:43 PM
     Author     : Phong
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,9 +15,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <jsp:useBean id="listAccount" class="bean.ListAccountBean" scope="page"/>
-        <jsp:setProperty property="*" name="listAccount"/>
-
         <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
@@ -63,39 +59,41 @@
                 <div class="row">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 style="text-align: center">ACCOUNT LIST</h3>
+                            <h3 style="text-align: center">ORDER LIST</h3>
                         </div>
                         <div class="panel-body">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Username</th>
-                                        <th>Full Name</th>
-                                        <th>Type</th> 
+                                        <th>Product</th>
+                                        <th>Service</th>
+                                        <th>User</th>
+                                        <th>Price</th> 
+                                        <th>Quantity</th> 
+                                        <th>Status</th> 
                                         <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="myTable"> 
-                                    <c:forEach var="acc" items="${listAccount.account}">
-                                        <tr>
-                                            <td>${acc.accountID}</td>
-                                            <td>${acc.accountName}</td>
-                                            <td>${acc.userName}</td>
-                                            <c:if test="${acc.type == '3'}">
-                                                <td>Administrator</td>
-                                            </c:if>
-                                            <c:if test="${acc.type != '3'}">
-                                                <td>${acc.type == '1' ? "Student" : "Provider"}</td>
-                                            </c:if>
-                                            <td style="text-align: center">
-                                                <input type="submit" class="btn btn-default" value="View"></input>
-                                                <input type="submit" class="btn btn-default" value="Reset"></input>
-                                                <input type="submit" class="btn btn-default" value="Ban"></input>
-                                                <input type="submit" class="btn btn-default" value="Delete"></input>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                <c:forEach var="acc" items="${listAccount.account}">
+                                    <tr>
+                                        <td>${acc.accountID}</td>
+                                        <td>${acc.accountName}</td>
+                                        <td>${acc.userName}</td>
+                                    <c:if test="${acc.type == '3'}">
+                                        <td>Administrator</td>
+                                    </c:if>
+                                    <c:if test="${acc.type != '3'}">
+                                        <td>${acc.type == '1' ? "Student" : "Provider"}</td>
+                                    </c:if>
+                                    <td style="text-align: center">
+                                        <input type="submit" class="btn btn-default" value="View"></input>
+                                        <input type="submit" class="btn btn-default" value="Reset"></input>
+                                        <input type="submit" class="btn btn-default" value="Ban"></input>
+                                        <input type="submit" class="btn btn-default" value="Delete"></input>
+                                    </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -103,17 +101,5 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            $(document).ready(function () {
-                $("#filterName").on("keyup", function () {
-                    var value = $(this).val().toLowerCase();
-                    $("#myTable tr").filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
-                });
-            });
-        </script>
-        
     </body>
 </html>

@@ -5,12 +5,16 @@
  */
 package controller;
 
+import entity.Account;
+import model.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -98,7 +102,22 @@ public class AccountController extends HttpServlet {
     }// </editor-fold>
 
     private void changePassword(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       HttpSession session= request.getSession();
+       String oldPass= request.getParameter("txtOldPwd");
+       String newPass= request.getParameter("txtNewPwd");
+       Account c = (Account) session.getAttribute("account");
+       c = (Account) session.getAttribute("account");
+        try {
+            List <Account> a= new AccountDAO().selectAccount("select * from Account where AccountName = '"+ c.getAccountName()+"'");
+            if(!a.get(0).getPassword().equals(oldPass))
+            {
+                response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=changePasswordError");
+            }
+            new AccountDAO().setAccountPasswordByID(a.get(0).getAccountID(), newPass);
+            response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1]);
+        } catch (Exception ex) {
+            System.out.println("Change password error");
+        }
     }
 
     private void feedback(HttpServletRequest request, HttpServletResponse response) {
