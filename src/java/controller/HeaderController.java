@@ -88,6 +88,7 @@ public class HeaderController extends HttpServlet {
             throws ServletException, IOException {
         try {
             //get data
+            System.out.println(request.getParameter("link"));
             String username = request.getParameter("username");
             String password = request.getParameter("pwd");
             List<Account> list = new AccountDAO().selectAccountByName(username);

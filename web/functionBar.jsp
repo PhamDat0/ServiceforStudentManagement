@@ -13,44 +13,56 @@
             <!--Basic function-->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4>Basic Function</h4>
+                    <h4 style="text-align: center">Basic Function</h4>
                 </div>
                 <div class="list-group">
                     <a href="/ServiceforStudentManagement/user/MyProfile.jsp" class="list-group-item">View My Profile</a>
                     <a href="#pwdModal" data-toggle="modal" class="list-group-item">Change Password</a>
-                    <a href="#" class="list-group-item">Register Wallet</a>
+                    <c:if test="${sessionScope.account.type < 3}">
+                        <a href="#" class="list-group-item">Register Wallet</a>
+                    </c:if>
                 </div>                    
             </div>
 
             <!--User function-->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4>User Function</h4>
+                    <h4 style="text-align: center">User Function</h4>
                 </div>
                 <div class="list-group">
                     <!--student-->
-                    <a href="/ServiceforStudentManagement/student/Report.jsp" class="list-group-item">Report Service</a>
-                    
+                    <c:if test="${sessionScope.account.type == 1}">
+                        <a href="/ServiceforStudentManagement/student/Report.jsp" class="list-group-item">Report Service</a>
+                    </c:if>
+
                     <!--provider-->
-                    <a href="/ServiceforStudentManagement/provider/ListProduct.jsp" class="list-group-item">List Product</a>
-                    <a href="#" class="list-group-item">Register Service</a>
-                    <a href="#" class="list-group-item">Make Bill</a>
-                    <a href="#" class="list-group-item">List Service's Users</a>
-                    
+                    <c:if test="${sessionScope.account.type == 2}">
+                        <a href="/ServiceforStudentManagement/provider/ListProduct.jsp" class="list-group-item">List Product</a>
+                        <a href="#" class="list-group-item">Register Service</a>
+                        <a href="#" class="list-group-item">Make Bill</a>
+                        <a href="#" class="list-group-item">List Service's Users</a>
+                    </c:if>
+
                     <!--student and provider-->
-                    <a href="/ServiceforStudentManagement/user/FeedbackAdmin.jsp" class="list-group-item">Feedback to Admin</a>
-                    <a href="/ServiceforStudentManagement/user/Transaction.jsp" class="list-group-item">Transaction</a>
-                    <a href="/ServiceforStudentManagement/user/Service.jsp" class="list-group-item">View Service</a>
-                    <a href="#" class="list-group-item">View Order</a>
-                    
+                    <c:if test="${sessionScope.account.type < 3}">
+                        <a href="/ServiceforStudentManagement/user/FeedbackAdmin.jsp" class="list-group-item">Feedback to Admin</a>
+                        <a href="/ServiceforStudentManagement/user/Transaction.jsp" class="list-group-item">Transaction</a>
+                        <a href="/ServiceforStudentManagement/user/Service.jsp" class="list-group-item">View Service</a>
+                        <a href="#" class="list-group-item">View Order</a>
+                    </c:if>
+
                     <!--provider and administrator-->
-                    <a href="/ServiceforStudentManagement/admin/ListFeedBack.jsp" class="list-group-item">List Feedback</a>
-                    
+                    <c:if test="${sessionScope.account.type > 1}">
+                        <a href="/ServiceforStudentManagement/admin/ListFeedBack.jsp" class="list-group-item">List Feedback</a>
+                    </c:if>
+
                     <!--administrator-->
-                    <a href="/ServiceforStudentManagement/admin/NewAccount.jsp" class="list-group-item">New Account</a>
-                    <a href="/ServiceforStudentManagement/admin/ListAccount.jsp" class="list-group-item">List Account</a>
-                    <a href="/ServiceforStudentManagement/admin/ListService.jsp" class="list-group-item">List Service</a>
-                    <a href="/ServiceforStudentManagement/admin/ListTransaction.jsp" class="list-group-item">List Transaction</a>
+                    <c:if test="${sessionScope.account.type == 3}">
+                        <a href="/ServiceforStudentManagement/admin/ListAccount.jsp" class="list-group-item">List Account</a>
+                        <a href="/ServiceforStudentManagement/admin/ListService.jsp" class="list-group-item">List Service</a>
+                        <a href="/ServiceforStudentManagement/admin/ListTransaction.jsp" class="list-group-item">List Transaction</a>
+                        <a href="/ServiceforStudentManagement/admin/NewAccount.jsp" class="list-group-item">New Account</a>
+                    </c:if>
                 </div>                    
             </div>
         </div>

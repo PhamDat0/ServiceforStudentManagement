@@ -25,10 +25,10 @@
         </style>
     </head>
     <body>
-        
+
         <jsp:useBean id="profile" class="bean.ProfileBean" scope="page"/>
         <jsp:setProperty name="profile" property="username" value="${sessionScope.account.accountName}"/>
-        
+
         <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
@@ -85,34 +85,36 @@
                             <h3>Personal Information</h3>
                         </div>
                         <div class="panel-body">
-                            <table align="center" class="customTable">
-                                <tr>
-                                    <td align="right">Full Name:</td>
-                                    <td><input type="text" value="${profile.account.userName}"/></td>
-                                </tr>
-                                <tr>
-                                    <td align="right">Email:</td>
-                                    <td><input type="text" value="${profile.account.email}"/></td>
-                                </tr>
-                                <tr>
-                                    <td align="right">Date of Birth:</td>
-                                    <td><input type="date" value="${profile.account.dob}"/></td>
-                                </tr>
-                                <tr>
-                                    <td align="right">Address:</td>
-                                    <td><input type="text" value="${profile.account.address}"/></td>
-                                </tr>
-                                <tr>
-                                    <td align="right">Phone:</td>
-                                    <td><input type="text" value="${profile.account.phone}"/></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" align="center">
-                                        <button type="button" class="btn-primary">Save</button>
-                                        <button type="button" class="btn-warning">Cancel</button>
-                                    </td>
-                                </tr>
-                            </table>
+                            <form action="/ServiceforStudentManagement/AccountController">
+                                <table align="center" class="customTable">
+                                    <tr>
+                                        <td align="right">Full Name:</td>
+                                        <td><input type="text" name="txtName" value="${profile.account.userName}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right">Email:</td>
+                                        <td><input type="email" name="txtEmail" value="${profile.account.email}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right">Date of Birth:</td>
+                                        <td><input type="date" name="txtDOB" value="${profile.account.dob}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right">Address:</td>
+                                        <td><input type="text" name="txtAddress" value="${profile.account.address}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right">Phone:</td>
+                                        <td><input type="number" name="txtPhone" value="${profile.account.phone}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" align="center">
+                                            <button type="submit" name="btnSave" class="btn-primary">Save</button>
+                                            <button type="button" class="btn-warning">Cancel</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
                         </div>
                     </div>
                 </div>

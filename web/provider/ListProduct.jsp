@@ -36,20 +36,9 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="type">Filter: </label>
-                                <select class="form-control" id="type">
-                                    <option>All</option>
-                                    <option>Actived</option>
-                                    <option>Banned</option>
-                                    <option>Register</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control" id="type">
-                                    <option>All</option>
-                                    <option>Service</option>
-                                    <option>Provider</option>
-                                </select>
+                                <label for="type">Order By: </label>
+                                <label class="radio-inline"><input type="radio" name="optradio">High Price</label>
+                                <label class="radio-inline"><input type="radio" name="optradio">Low Price</label>
                             </div>
                             <div class="input-group" class="text-center">
                                 <input type="text" class="form-control" placeholder="Enter name">
@@ -67,7 +56,7 @@
                 <div class="row">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 h3 style="text-align: center">SERVICE LIST</h3>
+                            <h3 h3 style="text-align: center">Product List</h3>
                         </div>
                         <div class="panel-body">
                             <table class="table table-hover">

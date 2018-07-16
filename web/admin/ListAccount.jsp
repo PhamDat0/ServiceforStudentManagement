@@ -89,9 +89,10 @@
                                                 <td>${acc.type == '1' ? "Student" : "Provider"}</td>
                                             </c:if>
                                             <td style="text-align: center">
-                                                <input type="submit" class="btn btn-success" value="View"></input>
-                                                <input type="submit" class="btn btn-warning" value="Ban"></input>
-                                                <input type="submit" class="btn btn-danger" value="Delete"></input>
+                                                <input type="submit" class="btn btn-default" value="View"></input>
+                                                <input type="submit" class="btn btn-default" value="Reset"></input>
+                                                <input type="submit" class="btn btn-default" value="Ban"></input>
+                                                <input type="submit" class="btn btn-default" value="Delete"></input>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -103,6 +104,44 @@
             </div>
         </div>
 
+        <!--view more password-->
+        <div class="modal fade in" id="pwdModal" role="dialog">
+            <div class="modal-dialog">
+                <!--content-->
+                <div class="modal-content">
+                    <!--header-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-center">Change Password</h4>
+                    </div>
+                    <!--body-->
+                    <div class="modal-body">
+                        <form action="/ServiceforStudentManagement/AccountController" method="POST">
+                            <div class="form-group">
+                                <label for="oldPwd">Old Password:</label>
+                                <input type="password" class="form-control" id="oldPwd" placeholder="Enter old Password" name="txtOldPwd">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPwd">New Password:</label>
+                                <input type="password" class="form-control" id="newPwd" placeholder="Enter new password" name="txtNewPwd">
+                            </div>
+                            <div class="form-group">
+                                <label for="reNewPwd">New Password:</label>
+                                <input type="password" class="form-control" id="reNewPwd" placeholder="Re-enter new password" name="txtReNewPwd">
+                            </div>
+                            <div style="text-align:center">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="reset" class="btn btn-warning">Clear</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                            <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
+                            <input type="hidden" name="action" value="changePassword"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+                            
         <script>
             $(document).ready(function () {
                 $("#filterName").on("keyup", function () {
