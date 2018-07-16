@@ -81,11 +81,6 @@
                                 <option>Administrator</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="wallet">Wallet:</label>
-                            <input type="text" class="form-control" id="wallet" placeholder="Enter wallet ID" name="wallet"/>
-                            <p>Not have wallet ID? Click <a href="#">here</a></p>
-                        </div>
                         <div style="text-align:center">
                             <button type="submit" class="btn btn-success">Create</button>
                             <button type="reset" class="btn btn-warning">Clear</button>

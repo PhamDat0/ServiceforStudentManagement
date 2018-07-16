@@ -69,27 +69,27 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Username</th>
                                         <th>Full Name</th>
                                         <th>Type</th> 
+                                        <th>Status</th>
                                         <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="myTable"> 
                                     <c:forEach var="acc" items="${listAccount.account}">
                                         <tr>
-                                            <td>${acc.accountID}</td>
                                             <td>${acc.accountName}</td>
-                                            <td>${acc.userName}</td>
+                                            <td>${acc.fullname}</td>
+
                                             <c:if test="${acc.type == '3'}">
                                                 <td>Administrator</td>
                                             </c:if>
                                             <c:if test="${acc.type != '3'}">
                                                 <td>${acc.type == '1' ? "Student" : "Provider"}</td>
                                             </c:if>
+                                            <td>${acc.status}</td>
                                             <td style="text-align: center">
-                                                <input type="submit" class="btn btn-default" value="View"></input>
                                                 <input type="submit" class="btn btn-default" value="Reset"></input>
                                                 <input type="submit" class="btn btn-default" value="Ban"></input>
                                                 <input type="submit" class="btn btn-default" value="Delete"></input>
@@ -114,6 +114,6 @@
                 });
             });
         </script>
-        
+
     </body>
 </html>
