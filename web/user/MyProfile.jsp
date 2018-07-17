@@ -48,7 +48,7 @@
                                 <tr>
                                     <td align="right">Balance:</td>
                                     <td>${profile.wallet.balance}</td>
-                                    <td><a href="Transaction.jsp"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></td>
+                                    <td><a href="/ServiceforStudentManagement/studentProvider/Transaction.jsp"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></td>
                                 </tr>
                                 <c:if test="${sessionScope.account.type == 1}">
                                     <tr>
