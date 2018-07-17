@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,6 +16,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <jsp:useBean id="viewOrder" class="bean.OrderBean" scope="page"/>
+        <jsp:setProperty name="viewOrder" property="account" value="${sessionScope.account}"/>
+
         <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
@@ -29,22 +33,16 @@
                         <form class="form-inline">
                             <div class="form-group">
                                 <label for="type">Filter: </label>
-                                <select class="form-control" id="type" name="type">
-                                    <option value="0" ${param.type == '0' ? "selected" : ""}>All</option>
-                                    <option value="1" ${param.type == '1' ? "selected" : ""}>Student</option>
-                                    <option value="2" ${param.type == '2' ? "selected" : ""}>Provider</option>
-                                    <option value="3" ${param.type == '3' ? "selected" : ""}>Admin</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control" id="status" name="status">
-                                    <option value="All" ${param.status == 'All' ? "selected" : ""}>All</option>
-                                    <option value="Actived" ${param.status == 'Actived' ? "selected" : ""}>Actived</option>
-                                    <option value="Banned" ${param.status == 'Banned' ? "selected" : ""}>Banned</option>
+                                <select class="form-control" id="type" name="status">
+                                    <option value="all" ${param.type == 'all' ? "selected" : ""}>All</option>
+                                    <option value="request" ${param.type == 'request' ? "selected" : ""}>Request</option>
+                                    <option value="shipping" ${param.type == 'shipping' ? "selected" : ""}>Shipping</option>
+                                    <option value="inUse" ${param.type == 'inUse' ? "selected" : ""}>In-Use</option>
+                                    <option value="finished" ${param.type == 'finished' ? "selected" : ""}>Finished</option>
                                 </select>
                             </div>
                             <div class="input-group" class="text-center">
-                                <input type="text" class="form-control" placeholder="Enter name" id="filterName" name="filterName">
+                                <input type="text" class="form-control" id="filterName" placeholder="Enter name" id="filterName" name="filterName">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="submit">
                                         <i class="glyphicon glyphicon-search"></i>
@@ -65,35 +63,49 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Product</th>
-                                        <th>Service</th>
-                                        <th>User</th>
+                                        <th>Product Name</th>
+                                        <th>Service Name</th>
+                                            <c:if test="${sessionScope.account.type == 2}">
+                                            <th>User</th>
+                                            </c:if>
                                         <th>Price</th> 
                                         <th>Quantity</th> 
+                                        <th>Start</th> 
+                                        <th>End</th> 
                                         <th>Status</th> 
                                         <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="myTable"> 
-                                <c:forEach var="acc" items="${listAccount.account}">
-                                    <tr>
-                                        <td>${acc.accountID}</td>
-                                        <td>${acc.accountName}</td>
-                                        <td>${acc.userName}</td>
-                                    <c:if test="${acc.type == '3'}">
-                                        <td>Administrator</td>
-                                    </c:if>
-                                    <c:if test="${acc.type != '3'}">
-                                        <td>${acc.type == '1' ? "Student" : "Provider"}</td>
-                                    </c:if>
-                                    <td style="text-align: center">
-                                        <input type="submit" class="btn btn-default" value="View"></input>
-                                        <input type="submit" class="btn btn-default" value="Reset"></input>
-                                        <input type="submit" class="btn btn-default" value="Ban"></input>
-                                        <input type="submit" class="btn btn-default" value="Delete"></input>
-                                    </td>
-                                    </tr>
-                                </c:forEach>
+                                    <c:forEach var="ord" items="${viewOrder.order}">
+                                        <tr>
+                                            <jsp:setProperty name="viewOrder" property="serviceID" value="${ord.serviceID}"/>
+                                            <jsp:setProperty name="viewOrder" property="productID" value="${ord.productID}"/>
+                                            <td>${viewOrder.productName} </td>
+                                            <td>${viewOrder.serviceName}</td>
+                                            <c:if test="${sessionScope.account.type == 2}">
+                                                <td>${ord.userName}</td>
+                                            </c:if>
+                                            <td>${ord.price}</td>
+                                            <td>${ord.quantity}</td>
+                                            <td>${ord.startDate}</td>
+                                            <td>${ord.endDate}</td>
+                                            <td>${ord.status}</td>
+                                            <td style="text-align: center">
+                                                <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="btn btn-default">
+                                                    Feedback
+                                                </a>
+                                                <c:if test="${ord.status == 'Request'}">
+                                                    <a href="/ServiceforStudentManagement/OrderController?action=cancelOrder" class="btn btn-default">
+                                                        Cancel
+                                                    </a>
+                                                </c:if>
+                                                <a href="/ServiceforStudentManagement/user/ServiceDetail.jsp?serviceID=${ord.serviceID}" class="btn btn-default">
+                                                    Order More
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -101,5 +113,15 @@
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(function () {
+                $("#filterName").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

@@ -26,7 +26,7 @@
     </head>
     <body>
 
-        <jsp:useBean id="profile" class="bean.ProfileBean" scope="page"/>
+        <jsp:useBean id="profile" class="bean.ProfileBean" scope="request"/>
         <jsp:setProperty name="profile" property="username" value="${sessionScope.account.accountName}"/>
 
         <jsp:include page="/header.jsp"/>

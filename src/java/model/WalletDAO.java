@@ -47,7 +47,7 @@ public class WalletDAO {
     }
 
     public void setBalance(int walletid, int newbalance) throws Exception {
-        String query = "update WalletID set Balance=? where WalletID=?";
+        String query = "update Wallet set Balance=? where WalletID=?";
         Connection conn = new DBContext().getConnection();
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setInt(1, newbalance);

@@ -29,7 +29,7 @@
                 <div class="list-group">
                     <!--student-->
                     <c:if test="${sessionScope.account.type == 1}">
-                        <a href="/ServiceforStudentManagement/student/FeedbackService.jsp" class="list-group-item">Feedback Service</a>
+                        <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="list-group-item">Feedback Service</a>
                     </c:if>
 
                     <!--provider-->
@@ -42,7 +42,7 @@
 
                     <!--student and provider-->
                     <c:if test="${sessionScope.account.type < 3}">
-                        <a href="/ServiceforStudentManagement/studentProvider/FeedbackAdmin.jsp" class="list-group-item">Feedback to Admin</a>
+                        <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="list-group-item">Feedback to Admin</a>
                         <a href="/ServiceforStudentManagement/studentProvider/Transaction.jsp" class="list-group-item">Transaction</a>
                         <a href="/ServiceforStudentManagement/studentProvider/Service.jsp" class="list-group-item">View Service</a>
                         <a href="/ServiceforStudentManagement/studentProvider/ViewOrder.jsp" class="list-group-item">View Order</a>

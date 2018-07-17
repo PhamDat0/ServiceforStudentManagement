@@ -48,6 +48,10 @@ public class OrderController extends HttpServlet {
                         newOrder(request, response);
                         break;
                     }
+                    case "cancelOrder": {
+                        cancelOrder(request,response);
+                        break;
+                    }
                 }
             }
         }
@@ -118,7 +122,8 @@ public class OrderController extends HttpServlet {
                 try {
                     if (product.getUnit().equals("piece")) {
                         new ProductDAO().setQuantity(product.getProductID(), product.getQuantity() - amount);
-                    }
+                    } 
+                    new WalletDAO().setBalance(account.getWalletID(), balance - amount * product.getPrice());
                     String providerName = product.getProviderName();
                     int productID = product.getProductID();
                     String username = account.getAccountName();
@@ -135,13 +140,16 @@ public class OrderController extends HttpServlet {
                     new OrderDAO().insertOrder(new Order(serviceID, providerName, productID, username, 
                             price, quantity, startDate, endDate, status));
                     response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?serviceID="+ serviceID);
-                    new WalletDAO().setBalance(account.getWalletID(), balance - amount * product.getPrice());
                 } catch (Exception ex) {
                     Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
 
+    }
+
+    private void cancelOrder(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -47,7 +47,7 @@
                                 </select>
                             </div>
                             <div class="input-group" class="text-center">
-                                <input type="text" class="form-control" placeholder="Enter name">
+                                <input type="text" class="form-control" id="filterName" placeholder="Enter name">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="submit">
                                         <i class="glyphicon glyphicon-search"></i>
@@ -107,6 +107,16 @@
             </div>
 
         </div>
-
+            
+        <script>
+            $(document).ready(function () {
+                $("#filterName").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
