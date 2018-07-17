@@ -90,9 +90,11 @@
                                             </c:if>
                                             <td>${acc.status}</td>
                                             <td style="text-align: center">
-                                                <input type="submit" class="btn btn-default" value="Reset"></input>
-                                                <input type="submit" class="btn btn-default" value="Ban"></input>
-                                                <input type="submit" class="btn btn-default" value="Delete"></input>
+                                                <a href="/ServiceforStudentManagement/AdminController?action=resetPassword&accountName=${acc.accountName}" class="btn btn-default">Reset</a>
+                                                <a href="/ServiceforStudentManagement/AdminController?action=changeStatusAccount&accountName=${acc.accountName}" class="btn btn-default">
+                                                    ${acc.status == 'Banned' ? "Resume" : "Banned"}
+                                                </a>
+                                                <a href="/ServiceforStudentManagement/AdminController?action=deleteAccount&accountName=${acc.accountName}" class="btn btn-default">Delete</a>
                                             </td>
                                         </tr>
                                     </c:forEach>

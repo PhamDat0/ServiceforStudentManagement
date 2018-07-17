@@ -5,12 +5,16 @@
  */
 package controller;
 
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.AccountDAO;
 
 /**
  *
@@ -34,7 +38,19 @@ public class AdminController extends HttpServlet {
             if (request.getParameter("action") != null) {
                 switch (request.getParameter("action")) {
                     case "newAccount": {
-                        newAccount(request,response);
+                        newAccount(request, response);
+                        break;
+                    }
+                    case "changeStatusAccount": {
+                        changeStatusAccount(request, response);
+                        break;
+                    }
+                    case "deleteAccount": {
+                        deleteAccount(request, response);
+                        break;
+                    }
+                    case "resetPassword": {
+                        resetPassword(request, response);
                         break;
                     }
                 }
@@ -83,6 +99,34 @@ public class AdminController extends HttpServlet {
 
     private void newAccount(HttpServletRequest request, HttpServletResponse response) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void changeStatusAccount(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String accountName = request.getParameter("accountName");
+            AccountDAO adao = new AccountDAO();
+            Account acc = adao.selectAccountByName(accountName).get(0);
+            adao.setAccountStatusByName(accountName, acc.getStatus().equals("Banned")? "Actived" : "Banned");
+            response.sendRedirect("/ServiceforStudentManagement/admin/ListAccount.jsp");
+        } catch (Exception ex) {
+        }
+    }
+
+    private void deleteAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String accountName = request.getParameter("accountName");
+        AccountDAO adao = new AccountDAO();
+        adao.deleteAccount(accountName);
+        response.sendRedirect("/ServiceforStudentManagement/admin/ListAccount.jsp");
+    }
+
+    private void resetPassword(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String accountName = request.getParameter("accountName");
+            AccountDAO adao = new AccountDAO();
+            adao.setAccountPasswordByName(accountName, "123456");
+            response.sendRedirect("/ServiceforStudentManagement/admin/ListAccount.jsp");
+        } catch (Exception ex) {
+        }
     }
 
 }
