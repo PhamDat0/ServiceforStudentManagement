@@ -9,6 +9,7 @@ import entity.Account;
 import entity.Wallet;
 import java.io.Serializable;
 import model.AccountDAO;
+import model.WalletDAO;
 
 /**
  *
@@ -37,6 +38,6 @@ public class ProfileBean implements Serializable {
     
     public Wallet getWallet() throws Exception {
         String query = "SELECT * FROM Wallet WHERE WalletID = " + getAccount().getWalletID();
-        return null;
+        return new WalletDAO().selectWallet(query).get(0);
     }
 }

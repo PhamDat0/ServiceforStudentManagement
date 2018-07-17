@@ -18,9 +18,6 @@
                 <div class="list-group">
                     <a href="/ServiceforStudentManagement/user/MyProfile.jsp" class="list-group-item">View My Profile</a>
                     <a href="#pwdModal" data-toggle="modal" class="list-group-item">Change Password</a>
-                    <c:if test="${sessionScope.account.type < 3}">
-                        <a href="#" class="list-group-item">Register Wallet</a>
-                    </c:if>
                 </div>                    
             </div>
 

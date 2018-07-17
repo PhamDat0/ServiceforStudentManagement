@@ -24,74 +24,42 @@
             <div class="col-sm-7">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 style="text-align: center">CREATE NEW ACCOUNT</h3>
+                        <h3 style="text-align: center">CREATE NEW PRODUCT</h3>
                     </div>
                     <div class="panel-body">
-                        <form action="/ServiceforStudentManagement/AdminController" method="POST">
+                        <form action="/ServiceforStudentManagement/ProviderController" method="POST">
                             <div class="form-group">
-                                <label for="fullname">Full Name</label>
-                                <input type="text" class="form-control" id="fullname" placeholder="Enter full name" name="fullname">
-                            </div>
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
-                            </div>
-                            <div class="form-group">
-                                <label for="pwd">Password:</label>
-                                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-                            </div>
-                            <div class="form-group">
-                                <label for="repwd">Re-password:</label>
-                                <input type="password" class="form-control" id="repwd" placeholder="Re-enter password" name="repwd">
-                            </div>
-                            <div class="form-group">
-                                <label for="roleNumber">Role Number:</label>
-                                <input type="text" class="form-control" id="roleNumber" placeholder="Enter role number" name="roleNumber">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone:</label>
-                                <input type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone">
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Address:</label>
-                                <textarea class="form-control" rows="5" id="address"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Gender:</label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">Male
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">Female
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label for="date">Date of birth:</label>
-                                <input type="date" class="form-control" id="date" placeholder="Enter date" name="date">
-                            </div>
-                            <div class="form-group">
-                                <label for="type">Type:</label>
-                                <select class="form-control" id="type">
-                                    <option>Student</option>
-                                    <option>Provider</option>
-                                    <option>Administrator</option>
+                                <label for="serviceName">Service Name: </label>
+                                <select name="drServiceName" class="btn btn-default">
+                                    <option></option>
+                                    <option></option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="wallet">Wallet:</label>
-                                <input type="text" class="form-control" id="wallet" placeholder="Enter wallet ID" name="wallet"/>
-                                <p>Not have wallet ID? Click <a href="#">here</a></p>
+                                <label for="productName">Product Name: </label>
+                                <input type="text" class="form-control" id="productName" placeholder="Enter product name" name="txtProductName">
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity">Quantity: </label>
+                                <input type="number" class="form-control" id="quantity" placeholder="Enter quantity" name="txtQuantity">
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price: </label>
+                                <input type="number" class="form-control" id="price" placeholder="Enter price" name="txtPrice">
+                            </div>
+                            <div class="form-group">
+                                <label for="unit">Unit: </label>
+                                <input type="text" class="form-control" id="unit" placeholder="Enter unit (day, piece,...)" name="txtUnit">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description: </label>
+                                <textarea class="form-control" rows="5" id="description" name="txtDescription"></textarea>
                             </div>
                             <div style="text-align:center">
                                 <button type="submit" class="btn btn-success">Create</button>
                                 <button type="reset" class="btn btn-warning">Clear</button>
                             </div>
-                            <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
-                            <input type="hidden" name="action" value="newAccount"/>
+                            <input type="hidden" name="action" value="newProduct"/>
                         </form>
                     </div>
                 </div>

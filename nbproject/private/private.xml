@@ -3,12 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/GitClone/ServiceforStudentManagement/web/Home.jsp</file>
-            <file>file:/D:/GitClone/ServiceforStudentManagement/web/provider/ListProduct.jsp</file>
-            <file>file:/D:/GitClone/ServiceforStudentManagement/src/java/bean/ServiceBean.java</file>
-            <file>file:/D:/GitClone/ServiceforStudentManagement/web/admin/ListService.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/web/studentProvider/ServiceDetail.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/web/provider/NewProduct.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/web/studentProvider/FeedbackAdmin.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/web/user/MyProfile.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/web/studentProvider/Transaction.jsp</file>
             <file>file:/D:/GitClone/ServiceforStudentManagement/web/header.jsp</file>
-            <file>file:/D:/GitClone/ServiceforStudentManagement/web/user/Transaction.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/web/informationBar.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/web/studentProvider/ViewOrder.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/src/java/model/AccountDAO.java</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/web/admin/ListAccount.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/web/admin/NewAccount.jsp</file>
+            <file>file:/D:/GitClone/ServiceforStudentManagement/src/java/entity/Account.java</file>
         </group>
     </open-files>
 </project-private>

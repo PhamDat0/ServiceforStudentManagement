@@ -16,25 +16,27 @@ public class Product implements Serializable {
     private String productName;
     private int serviceID;
     private String providerName;
+    private String description;
     private int quantity;
     private int price;
-    private int unit;
+    private String unit;
     
 
     public Product() {
     }
 
-    public Product(int productID, String productName, int serviceID, String providerName, int quantity, int price, int unit) {
+    public Product(int productID, String productName, int serviceID, String providerName, String description, int quantity, int price, String unit) {
         this.productID = productID;
         this.productName = productName;
         this.serviceID = serviceID;
         this.providerName = providerName;
+        this.description = description;
         this.quantity = quantity;
         this.price = price;
         this.unit = unit;
     }
 
-    public Product(String productName, int serviceID, String providerName, int quantity, int price, int unit) {
+    public Product(String productName, int serviceID, String providerName, int quantity, int price, String unit) {
         this.productName = productName;
         this.serviceID = serviceID;
         this.providerName = providerName;
@@ -91,15 +93,20 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public int getUnit() {
+    public String getUnit() {
         return unit;
     }
 
-    public void setUnit(int unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
-    
-    
-    
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
     
 }

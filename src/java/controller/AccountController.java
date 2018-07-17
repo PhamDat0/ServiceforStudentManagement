@@ -49,7 +49,7 @@ public class AccountController extends HttpServlet {
                         topUp(request,response);
                         break;
                     }
-                    case "updateInfomation": {
+                    case "updateInformation": {
                         updateInformation(request,response);
                         break;
                     }

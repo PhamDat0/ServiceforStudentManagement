@@ -34,7 +34,7 @@ public class ServiceDAO {
             Date dateCreated=rs.getDate("DateCreated");
             String status=rs.getString("Status");
             String picture=rs.getString("Picture");
-            a.add(new Service(serviceName, providerName, detail, dateCreated, status,picture));
+            a.add(new Service(serviceID, serviceName, providerName, detail, dateCreated, status,picture));
         }
         rs.close();
         conn.close();

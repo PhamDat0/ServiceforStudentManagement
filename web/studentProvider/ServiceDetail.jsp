@@ -22,7 +22,7 @@
         </style>
     </head>
     <body>
-        <jsp:useBean id="service" class="bean.ServiceDetail" scope="request"/>
+        <jsp:useBean id="service" class="bean.ServiceDetail" scope="page"/>
         <jsp:setProperty name="service" property="serviceID" param="serviceID"/>
 
         <jsp:include page="/header.jsp"/>
@@ -45,20 +45,21 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Quantity</th>   
                                             <th>Price</th>
-                                            <th>Duration</th>   
-                                            <th>Action</th>
+                                            <th>Unit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <c:forEach var="product" items="${service.product}">
                                             <tr>
-                                                <td>${product.productID}</td>
                                                 <td>${product.productName}</td>
+                                                <td>${product.description}</td>
+                                                <td>${product.quantity}</td>
                                                 <td>${product.price}</td>
-                                                <td>${product.duration}</td>
+                                                <td>${product.unit}</td>
                                                 <td><button class="btn btn-default">Buy</button></td>
                                             </tr>
                                         </c:forEach>

@@ -47,7 +47,7 @@
                             <table align="center" class="customTable">
                                 <tr>
                                     <td align="right">Balance:</td>
-                                    <td>?????</td>
+                                    <td>${profile.wallet.balance}</td>
                                     <td><a href="Transaction.jsp"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></td>
                                 </tr>
                                 <c:if test="${sessionScope.account.type == 1}">
@@ -56,10 +56,6 @@
                                         <td>${profile.account.roleNumber}</td>
                                     </tr>
                                 </c:if>
-                                <tr>
-                                    <td align="right">Wallet ID:</td>
-                                    <td>${profile.account.walletID}</td>
-                                </tr>
                                 <tr>
                                     <td align="right">Created Date:</td>
                                     <td>${profile.account.dateCreated}</td>
@@ -114,6 +110,7 @@
                                         </td>
                                     </tr>
                                 </table>
+                                <input type="hidden" name="action" value="updateInformation"/>
                             </form>
                         </div>
                     </div>
