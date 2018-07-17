@@ -113,7 +113,7 @@
                     <!--review list-->
                     <c:forEach var="review" items="${service.serviceReview}">
                         <div class="row">
-                            <label>${review.username} - ${review.rating}</label>
+                            <label>${review.userName} - ${review.rating}</label>
                             <div class="well">${review.comment}</div>
                         </div>
                     </c:forEach>
@@ -121,22 +121,33 @@
 
                 <!--add review-->
                 <div class="row">
-                    <form>
+                    <form action="/ServiceforStudentManagement/RatingController" method="POST">
                         <div class="form-group">
                             <label for="comment">
-                                Rating and enter your comment here: <select name="">
-                                    <option>1</option>
-                                    <option>2</option>
+                                Rating and enter your comment here: <select name="rate">
+                                    <option value=1>1</option>
+                                    <option value=2>2</option>
+                                    <option value=3>3</option>
+                                    <option value=4>4</option>
+                                    <option value=5>5</option>
+                                    <option value=6>6</option>
+                                    <option value=7>7</option>
+                                    <option value=8>8</option>
+                                    <option value=9>9</option>
+                                    <option value=10>10</option>
                                 </select>
                             </label>
-                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                            <textarea class="form-control" rows="5" id="comment" name="txtComment"></textarea>
                         </div>
                         <div class="text-center">
                             <input type="submit" class="btn btn-success" value="Submit"/>
                             <input type="reset" class="btn btn-warning" value="Clear"/>
                         </div>
+                        <input type="hidden" name="action" value="rating"/>
+                        <input type="hidden" name="serviceID" value="${param.serviceID}"/>
                     </form>
                 </div>
+                
             </div>
 
         </div>
@@ -147,7 +158,6 @@
                     $('#orderModal').modal('show');
                 });
             </script>
-
 
             <!-- Order Modal -->
             <div id="orderModal" class="modal fade in" role="dialog">
@@ -192,5 +202,6 @@
                 </div>
             </div>
         </c:if>
+            
     </body>
 </html>

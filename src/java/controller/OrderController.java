@@ -135,6 +135,7 @@ public class OrderController extends HttpServlet {
                     new OrderDAO().insertOrder(new Order(serviceID, providerName, productID, username, 
                             price, quantity, startDate, endDate, status));
                     response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?serviceID="+ serviceID);
+                    new WalletDAO().setBalance(account.getWalletID(), balance - amount * product.getPrice());
                 } catch (Exception ex) {
                     Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -49,7 +49,7 @@ public class ServiceReviewDAO {
             ps.setString(2, a.getUserName());
             ps.setInt(3, a.getRating());
             ps.setString(4, a.getComment());
-            ps.setDate(5, (java.sql.Date) a.getDate());
+            ps.setDate(5, new java.sql.Date(a.getDate().getTime()));
             ps.setString(6, a.getStatus());
             ps.executeUpdate();
             conn.close();
