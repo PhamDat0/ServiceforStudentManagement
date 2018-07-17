@@ -67,4 +67,10 @@ public class ProductDAO {
         ps.executeUpdate();
         conn.close();
     }
+
+    public void setQuantity(int productID, int i) throws Exception {
+        String query = "UPDATE Product SET Quantity = " + i + " WHERE ProductID = " + productID;
+        Connection conn = new DBContext().getConnection();
+        conn.prepareStatement(query).executeUpdate();
+    }
 }

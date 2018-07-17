@@ -10,6 +10,7 @@ import entity.ServiceReview;
 import java.io.Serializable;
 import java.util.List;
 import model.ProductDAO;
+import model.ServiceReviewDAO;
 
 /**
  *
@@ -31,8 +32,8 @@ public class ServiceDetail implements Serializable {
         this.serviceID = serviceID;
     }
     
-    public List<ServiceReview> getServiceReview() {
-        return null;
+    public List<ServiceReview> getServiceReview() throws Exception {
+        return new ServiceReviewDAO().selectServiceReviewByServiceID(serviceID);
     }
     
     public List<Product> getProduct() throws Exception {

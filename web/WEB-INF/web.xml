@@ -12,14 +12,6 @@
         <filter-name>ProviderFilter</filter-name>
         <filter-class>filter.ProviderFilter</filter-class>
     </filter>
-    <filter>
-        <filter-name>StudentFilter</filter-name>
-        <filter-class>filter.StudentFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>StudentFilter</filter-name>
-        <url-pattern>/student/*</url-pattern>
-    </filter-mapping>
     <filter-mapping>
         <filter-name>ProviderFilter</filter-name>
         <url-pattern>/provider/*</url-pattern>
@@ -48,6 +40,10 @@
         <servlet-name>AdminController</servlet-name>
         <servlet-class>controller.AdminController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderController</servlet-name>
+        <servlet-class>controller.OrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HeaderController</servlet-name>
         <url-pattern>/HeaderController</url-pattern>
@@ -63,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/AdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderController</servlet-name>
+        <url-pattern>/OrderController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

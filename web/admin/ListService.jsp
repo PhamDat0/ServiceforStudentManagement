@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,6 +16,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <jsp:useBean id="serviceBean" class="bean.ViewServiceBean" scope="page"/>
+        <jsp:setProperty name="serviceBean" property="selectType" value="allSer"/>
+
         <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
@@ -53,7 +57,7 @@
                         </form>
                     </div>
                 </div>
-                
+
                 <!--Table data-->
                 <div class="row">
                     <div class="panel panel-primary">
@@ -64,39 +68,37 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Number</th>
                                         <th>Service Name</th>
                                         <th>Provider Name</th>
-                                        <th>Fee</th> 
-                                        <th>Status</th> 
+                                        <th>Date Created</th>
+                                        <th>Detail</th>
+                                        <th>Status</th>
                                         <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Dump the trash</td>
-                                        <td>Hi hi</td>
-                                        <td>10000</td>
-                                        <td>Actived</td>
-                                        <td style="text-align: center">
-                                            <input type="submit" class="btn btn-success" value="View"></input>
-                                            <input type="submit" class="btn btn-warning" value="Ban"></input>
-                                            <input type="submit" class="btn btn-danger" value="Delete"></input>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Library Management</td>
-                                        <td>Ha ha</td>
-                                        <td>100000</td>
-                                        <td>Banned</td>
-                                        <td style="text-align: center">
-                                            <input type="submit" class="btn btn-success" value="View"></input>
-                                            <input type="submit" class="btn btn-warning" value="Active"></input>
-                                            <input type="submit" class="btn btn-danger" value="Delete"></input>
-                                        </td>
-                                    </tr>
+                                    <c:forEach var="ser" items="${serviceBean.service}">
+                                        <tr>
+                                            <td>${ser.serviceName}</td>
+                                            <td>${ser.providerName}</td>
+                                            <td>${ser.dateCreated}</td>
+                                            <td>${ser.detail}</td>
+                                            <td>${ser.status}</td>
+                                            <td style="text-align: center">
+                                                <c:if test="${ser.status != 'Register'}">
+                                                    <a href="/ServiceforStudentManagement/ServiceDetail.jsp?serviceID=${ser.serviceID}">
+                                                        <button type="button" class="btn btn-default">View</button>
+                                                    </a>
+                                                    <input type="submit" class="btn btn-default" name="btnChangeStatus" value="${ser.status == 'Actived'? "Banned" : "Actived"}"/>
+                                                    <input type="submit" class="btn btn-default" name="btnDelete" value="Delete"/>
+                                                </c:if>
+                                                <c:if test="${ser.status == 'Register'}">
+                                                    <input type="submit" class="btn btn-default" name="btnAccept" value="Accept"/>
+                                                    <input type="submit" class="btn btn-default" name="btnReject" value="Reject"/>
+                                                </c:if>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>

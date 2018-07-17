@@ -54,14 +54,26 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach var="product" items="${service.product}">
-                                            <tr>
-                                                <td>${product.productName}</td>
-                                                <td>${product.description}</td>
-                                                <td>${product.quantity}</td>
-                                                <td>${product.price}</td>
-                                                <td>${product.unit}</td>
-                                                <td><button class="btn btn-default">Buy</button></td>
-                                            </tr>
+                                            <c:if test="${product.quantity > 0}">
+                                                <tr>
+                                                    <td>${product.productName}</td>
+                                                    <td>${product.description}</td>
+                                                    <td>${product.quantity}</td>
+                                                    <td>${product.price}</td>
+                                                    <td>${product.unit}</td>
+                                                    <td>
+                                                        <c:url var="order" value="/user/ServiceDetail.jsp">
+                                                            <c:param name="productID" value="${product.productID}"></c:param>
+                                                            <c:param name="productName" value="${product.productName}"></c:param>
+                                                            <c:param name="productUnit" value="${product.unit}"></c:param>
+                                                            <c:param name="productPrice" value="${product.price}"></c:param>
+                                                            <c:param name="serviceID" value="${param.serviceID}"></c:param>
+                                                            <c:param name="action" value="selectProduct"></c:param>
+                                                        </c:url>
+                                                        <a href="${order}" data-toggle="modal"><button class="btn btn-default">Buy</button></a>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
                                         </c:forEach>
                                     </tbody>
                                 </table>
@@ -97,15 +109,15 @@
 
                 </div>
 
-                <!--review list-->
-                <div class="row">
-                    <label>username - Rating</label>
-                    <div class="well">Review here</div>
-                </div>
-                <div class="row">
-                    <label>username - Rating</label>
-                    <div class="well">Review here</div>
-                </div>
+                <c:if test="${not empty service.serviceReview}">
+                    <!--review list-->
+                    <c:forEach var="review" items="${service.serviceReview}">
+                        <div class="row">
+                            <label>${review.username} - ${review.rating}</label>
+                            <div class="well">${review.comment}</div>
+                        </div>
+                    </c:forEach>
+                </c:if>
 
                 <!--add review-->
                 <div class="row">
@@ -128,5 +140,57 @@
             </div>
 
         </div>
+
+        <c:if test="${param.action == 'selectProduct'}">
+            <script type="text/javascript">
+                $(window).on('load', function () {
+                    $('#orderModal').modal('show');
+                });
+            </script>
+
+
+            <!-- Order Modal -->
+            <div id="orderModal" class="modal fade in" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>You want to buy this?</h3>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/ServiceforStudentManagement/OrderController" method="POST">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th>Price</th>
+                                            <th>Unit</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>${param.productName}</td>
+                                            <td>${param.productPrice}</td>
+                                            <td>${param.productUnit}</td>
+                                            <td><input type="number" name="txtAmount" value="1" /></td>
+                                        </tr>
+                                    </tbody>
+                                    <input type="hidden" name="action" value="newOrder"/>
+                                    <input type="hidden" name="serviceID" value="${param.serviceID}"/>
+                                    <input type="hidden" name="productID" value="${param.productID}"/>
+                                    <input type="hidden" name="productUnit" value="${param.productUnit}"/>
+                                    <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
+                                </table>
+                                <div style="text-align:center">
+                                    <button type="submit" class="btn btn-success">Yes</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:if>
     </body>
 </html>

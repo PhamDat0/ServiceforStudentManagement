@@ -46,6 +46,8 @@ public class ViewServiceBean implements Serializable {
                     + " ON o.ServiceID = s.ServiceID"
                     + " WHERE o.UserName LIKE '" + accountName + "'"
                     + " AND o.Status LIKE 'In Use'";
+        } else if (selectType.equals("actSer")) {
+            query = "SELECT * FROM Service WHERE Status LIKE 'Actived'";
         }
         return new ServiceDAO().selectService(query);
     }

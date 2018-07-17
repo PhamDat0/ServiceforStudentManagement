@@ -35,7 +35,7 @@
                                 <label for="type">Filter: </label>
                                 <select class="form-control" id="type" name="type" onchange="document.forms[4].submit()">
                                     <option value="mySer" ${param.type == 'mySer' ? "selected" : ""}>My Service</option>
-                                    <option value="allSer" ${param.type == 'allSer' ? "selected" : ""}>Available Service</option>
+                                    <option value="actSer" ${param.type == 'actSer' ? "selected" : ""}>Available Service</option>
                                 </select>
                             </div>
                             <div class="input-group" class="text-center">
@@ -55,8 +55,8 @@
                     <!--heading-->
                     <div class="panel-heading">
                         <h3 style="text-align: center">
-                            <c:if test="${param.type == 'allSer'}">AVAILABLE SERVICE</c:if>
-                            <c:if test="${param.type == 'mySer'}">MY SERVICE</c:if>
+                            <c:if test="${param.type == 'actSer'}">AVAILABLE SERVICE</c:if>
+                            <c:if test="${param.type != 'actSer'}">MY SERVICE</c:if>
                             </h3>
                         </div>
                         <!--body-->
@@ -77,14 +77,14 @@
                                         <td>${ser.providerName}</td>
                                         <td>${ser.detail}</td>
                                         <td style="text-align: center">
-                                            <a href="/ServiceforStudentManagement/studentProvider/ServiceDetail.jsp?serviceID=${ser.serviceID}">
+                                            <a href="/ServiceforStudentManagement/user/ServiceDetail.jsp?serviceID=${ser.serviceID}">
                                                 <button type="button" class="btn btn-default">View</button>
                                             </a>
                                             <input type="submit" class="btn btn-default" value="Feedback"></input>
-                                            <c:if test="${param.type == 'allSer'}">
+                                            <c:if test="${param.type == 'actSer'}">
                                                 <input type="submit" class="btn btn-default" value="Order"></input>
                                             </c:if>
-                                            <c:if test="${param.type == 'mySer'}">
+                                            <c:if test="${param.type != 'actSer'}">
                                                 <input type="submit" class="btn btn-default" value="Rating"></input>
                                                 <input type="submit" class="btn btn-default" value="Stop Using"></input>
                                             </c:if>
