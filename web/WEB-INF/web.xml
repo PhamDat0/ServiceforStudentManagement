@@ -48,6 +48,10 @@
         <servlet-name>RatingController</servlet-name>
         <servlet-class>controller.RatingController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BillController</servlet-name>
+        <servlet-class>controller.BillController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HeaderController</servlet-name>
         <url-pattern>/HeaderController</url-pattern>
@@ -75,6 +79,10 @@
     <welcome-file-list>
         <welcome-file>Home.jsp</welcome-file>
     </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>BillController</servlet-name>
+        <url-pattern>/BillController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

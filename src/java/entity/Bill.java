@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author ADMIN
  */
-public class Bill  implements Serializable{
+public class Bill implements Serializable{
     private int billID;
     private int serviceID;
     private String providerName;
