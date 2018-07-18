@@ -139,21 +139,6 @@ public class AccountDAO {
         conn.close();
     }
 
-    public void setAccountProfileByName(String accname, String email, String fullname, String rolenumber, String address, String phone, Date dob) throws Exception {
-        String query = "update Account set Email=?,FullName=?,RoleNumber=?,Address=?,Phone=?,dob=? where AccountName=?";
-        Connection conn = new DBContext().getConnection();
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setString(1, email);
-        ps.setString(2, fullname);
-        ps.setString(3, rolenumber);
-        ps.setString(4, address);
-        ps.setString(5, phone);
-        ps.setDate(6, (java.sql.Date) dob);
-        ps.setString(7, accname);
-        ps.executeUpdate();
-        conn.close();
-    }
-
     public void deleteAccount(String aName) {
         try {
             DBContext context = new DBContext();
@@ -169,4 +154,22 @@ public class AccountDAO {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void setAccountProfileByName(String email, String fullname, String address, String phone, Date dob, String accname) throws Exception {
+        String query = "update Account set Email=?,FullName=?,Address=?,Phone=?,BOD=? where AccountName=?";
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, email);
+        ps.setString(2, fullname);
+        ps.setString(3, address);
+        ps.setString(4, phone);
+        java.sql.Date date = new java.sql.Date(dob.getTime());
+        ps.setDate(5, date);
+        ps.setString(6, accname);
+
+        ps.executeUpdate();
+
+        conn.close();
+    }
+
 }

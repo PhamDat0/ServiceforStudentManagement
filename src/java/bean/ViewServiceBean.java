@@ -5,6 +5,7 @@
  */
 package bean;
 
+import entity.Account;
 import entity.Service;
 import java.io.Serializable;
 import java.util.List;
@@ -16,8 +17,8 @@ import model.ServiceDAO;
  */
 public class ViewServiceBean implements Serializable {
     
-    private String selectType;
-    private String accountName;
+    private String selectType = null;
+    private Account account;
     
     public ViewServiceBean() {
         this.selectType = "";
@@ -31,21 +32,25 @@ public class ViewServiceBean implements Serializable {
         this.selectType = selectType;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setAccount(Account account) {
+        this.account = account;
     }
-    
+
     public List<Service> getService() throws Exception {
         String query = "SELECT * FROM Service";
         if (selectType == null || selectType.equals("") || selectType.equals("mySer")) {
-            query = "SELECT s.* FROM [Order] o LEFT JOIN [Service] s"
+            if (account.getType() == 2) {
+                query = "SELECT * FROM [Service] WHERE ProviderName LIKE '" + account.getAccountName() + "'";
+            } else {
+                query = "SELECT s.* FROM [Order] o LEFT JOIN [Service] s"
                     + " ON o.ServiceID = s.ServiceID"
-                    + " WHERE o.UserName LIKE '" + accountName + "'"
-                    + " AND o.Status LIKE 'In Use'";
+                    + " WHERE o.UserName LIKE '" + account.getAccountName() + "'"
+                    + " AND o.Status LIKE 'In-Use'";
+            }
         } else if (selectType.equals("actSer")) {
             query = "SELECT * FROM Service WHERE Status LIKE 'Actived'";
         }

@@ -37,7 +37,7 @@
                         <a href="/ServiceforStudentManagement/provider/ListProduct.jsp" class="list-group-item">List Product</a>
                         <a href="/ServiceforStudentManagement/provider/RegisterService.jsp" class="list-group-item">Register Service</a>
                         <a href="#" class="list-group-item">Make Bill</a>
-                        <a href="/ServiceforStudentManagement/provider/ServiceUser.jsp" class="list-group-item">List Service's Users</a>
+                        <a href="/ServiceforStudentManagement/provider/ListServiceUser.jsp" class="list-group-item">List Service's Users</a>
                     </c:if>
 
                     <!--student and provider-->

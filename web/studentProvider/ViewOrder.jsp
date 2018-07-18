@@ -92,17 +92,27 @@
                                             <td>${ord.endDate}</td>
                                             <td>${ord.status}</td>
                                             <td style="text-align: center">
-                                                <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="btn btn-default">
-                                                    Feedback
-                                                </a>
-                                                <c:if test="${ord.status == 'Request'}">
-                                                    <a href="/ServiceforStudentManagement/OrderController?action=cancelOrder" class="btn btn-default">
+                                                <c:if test="${sessionScope.account.type == 1}">
+                                                    <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="btn btn-default">
+                                                        Feedback
+                                                    </a>
+                                                    <a href="/ServiceforStudentManagement/user/ServiceDetail.jsp?serviceID=${ord.serviceID}" class="btn btn-default">
+                                                        View
+                                                    </a>
+                                                </c:if>
+                                                <c:if test="${sessionScope.account.type == 2 and ord.status == 'Request'}">
+                                                    <a href="/ServiceforStudentManagement/OrderController?action=acceptOrder&orderID=${ord.serviceID}" class="btn btn-default">
+                                                        Accept
+                                                    </a>
+                                                    <a href="/ServiceforStudentManagement/OrderController?action=cancelOrder&orderID=${ord.serviceID}" class="btn btn-default">
                                                         Cancel
                                                     </a>
                                                 </c:if>
-                                                <a href="/ServiceforStudentManagement/user/ServiceDetail.jsp?serviceID=${ord.serviceID}" class="btn btn-default">
-                                                    Order More
-                                                </a>
+                                                <c:if test="${sessionScope.account.type == 2 and ord.status == 'Shipping'}">
+                                                    <a href="/ServiceforStudentManagement/OrderController?action=finishOrder&orderID=${ord.serviceID}" class="btn btn-default">
+                                                        Finish
+                                                    </a>
+                                                </c:if>
                                             </td>
                                         </tr>
                                     </c:forEach>

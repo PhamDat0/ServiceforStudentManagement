@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,6 +16,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <jsp:useBean id="listProduct" class="bean.ListProductBean" scope="page"/>
+        <jsp:setProperty name="listProduct" property="providerName" value="${sessionScope.account.accountName}"/>
+        <jsp:setProperty name="listProduct" property="serviceID" value="${param.serviceID}"/>
+
         <jsp:include page="/header.jsp"/>
         <div class="container-fluid row">
 
@@ -28,11 +33,11 @@
                         <form class="form-inline">
                             <div class="form-group">
                                 <label for="service">Service: </label>
-                                <select class="form-control" id="service">
-                                    <option>All</option>
-                                    <option>Actived</option>
-                                    <option>Banned</option>
-                                    <option>Register</option>
+                                <select class="form-control" id="service" name="serviceID">
+                                    <c:forEach var="ser" items="${listProduct.service}">
+                                        <option value="${ser.serviceID}" ${ser.serviceID == param.serviceID ? "selected" : "" }>
+                                            ${ser.serviceName}</option>
+                                        </c:forEach>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -56,45 +61,34 @@
                 <div class="row">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 h3 style="text-align: center">Product List</h3>
+                            <h3 h3 style="text-align: center">PRODUCT LIST</h3>
                         </div>
                         <div class="panel-body">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Number</th>
-                                        <th>Service Name</th>
-                                        <th>Provider Name</th>
-                                        <th>Fee</th> 
-                                        <th>Status</th> 
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th>Unit</th>
+                                        <th>Price</th> 
+                                        <th>Description</th> 
                                         <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Dump the trash</td>
-                                        <td>Hi hi</td>
-                                        <td>10000</td>
-                                        <td>Actived</td>
-                                        <td style="text-align: center">
-                                            <input type="submit" class="btn btn-success" value="View"></input>
-                                            <input type="submit" class="btn btn-warning" value="Ban"></input>
-                                            <input type="submit" class="btn btn-danger" value="Delete"></input>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Library Management</td>
-                                        <td>Ha ha</td>
-                                        <td>100000</td>
-                                        <td>Banned</td>
-                                        <td style="text-align: center">
-                                            <input type="submit" class="btn btn-success" value="View"></input>
-                                            <input type="submit" class="btn btn-warning" value="Active"></input>
-                                            <input type="submit" class="btn btn-danger" value="Delete"></input>
-                                        </td>
-                                    </tr>
+                                    <c:forEach var="pro" items="${listProduct.product}">
+                                        <tr>
+                                            <td>${pro.productName}</td>
+                                            <td>${pro.quantity}</td>
+                                            <td>${pro.unit}</td>
+                                            <td>${pro.price}</td>
+                                            <td>${pro.description}</td>
+                                            <td style="text-align: center">
+                                                <a class="btn btn-default">Update</a>
+                                                <a class="btn btn-default">Delete</a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -104,47 +98,34 @@
 
         </div>
 
+        <!-- Login Modal -->
         <div id="newProductModal" class="modal fade in" role="dialog">
             <div class="modal-dialog">
-                <div class="modal-header">
-                    <h3 style="text-align: center">ADD NEW PRODUCT</h3>
-                </div>
+                <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-body">
-                        <div class="panel panel-primary">
-                            <form action="/ServiceforStudentManagement/ProviderController" method="POST">
-                                <div class="form-group">
-                                    <label for="service">Service:</label>
-                                    <select class="form-control" id="service">
-                                        <option>Student</option>
-                                        <option>Provider</option>
-                                        <option>Administrator</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="productName">Product name:</label>
-                                    <input type="text" class="form-control" id="productName" placeholder="Enter product name" name="productName">
-                                </div>
-                                <div class="form-group">
-                                    <label for="price">Price:</label>
-                                    <input type="text" class="form-control" id="price" placeholder="Enter price" name="price">
-                                </div>
-                                <div class="form-group">
-                                    <label for="duration">Duration (days):</label>
-                                    <input type="text" class="form-control" id="duration" placeholder="Enter duration" name="duration">
-                                </div>
-                                <div style="text-align: center">
-                                    <button type="submit" class="btn btn-success">Add</button>
-                                    <button type="reset" class="btn btn-warning">Clear</button>
-                                </div>
-                                <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
-                                <input type="hidden" name="action" value="newProvider"/>
-                            </form>
-                        </div>
+                        <form action="/ServiceforStudentManagement/ProductController" method="POST">
+                            <div class="form-group">
+                                <label for="username">Product Name</label>
+                                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Password:</label>
+                                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                            </div>
+                            <div style="text-align:center">
+                                <button type="submit" class="btn btn-success">Login</button>
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#forgotModal" data-dismiss="modal">Forgot Password</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                            <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
+                            <input type="hidden" name="action" value="newProduct"/>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+
         <script>
             $(document).ready(function () {
                 $("#filterName").on("keyup", function () {

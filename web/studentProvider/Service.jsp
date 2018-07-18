@@ -18,7 +18,7 @@
     <body>
         <jsp:useBean id="serviceBean" class="bean.ViewServiceBean" scope="page"/>
         <jsp:setProperty name="serviceBean" property="selectType" param="type"/>
-        <jsp:setProperty name="serviceBean" property="accountName" value="${sessionScope.account.accountName}"/>
+        <jsp:setProperty name="serviceBean" property="account" value="${sessionScope.account}"/>
 
         <jsp:include page="/header.jsp"/>
 
@@ -67,26 +67,39 @@
                                         <th>Service Name</th>
                                         <th>Provider Name</th>
                                         <th>Detail</th>
-                                        <th style="text-align: center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                        <c:if test="${sessionScope.account.type == 2
+                                              and param.type == 'mySer'}">
+                                        <th>Status</th>
+                                        </c:if>
+                                    <th style="text-align: center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <c:forEach var="ser" items="${serviceBean.service}">
                                     <tr>
                                         <td>${ser.serviceName}</td>
                                         <td>${ser.providerName}</td>
                                         <td>${ser.detail}</td>
+                                        <c:if test="${sessionScope.account.type == 2
+                                              and param.type == 'mySer'}">
+                                            <td>${ser.status}</td>
+                                        </c:if>
                                         <td style="text-align: center">
                                             <a href="/ServiceforStudentManagement/user/ServiceDetail.jsp?serviceID=${ser.serviceID}">
                                                 <button type="button" class="btn btn-default">View</button>
                                             </a>
-                                            <input type="submit" class="btn btn-default" value="Feedback"></input>
-                                            <c:if test="${param.type == 'actSer'}">
-                                                <input type="submit" class="btn btn-default" value="Order"></input>
+                                            <c:if test="${sessionScope.account.type == 1}">
+                                                <input type="submit" class="btn btn-default" value="Feedback"></input>
+                                                <c:if test="${param.type != 'actSer'}">
+                                                    <input type="submit" class="btn btn-default" value="Rating"></input>
+                                                    <input type="submit" class="btn btn-default" value="Stop Using"></input>
+                                                </c:if>
                                             </c:if>
-                                            <c:if test="${param.type != 'actSer'}">
-                                                <input type="submit" class="btn btn-default" value="Rating"></input>
-                                                <input type="submit" class="btn btn-default" value="Stop Using"></input>
+                                            <c:if test="${sessionScope.account.type == 2
+                                                          and sessionScope.account.accountName == ser.providerName}">
+                                                <input type="submit" class="btn btn-default" value="List User"></input>
+                                                <input type="submit" class="btn btn-default" value="List Product"></input>
+                                                <input type="submit" class="btn btn-default" value="Stop"></input>
                                             </c:if>
                                         </td>
                                     </tr>
@@ -99,7 +112,7 @@
             </div>
 
         </div>
-                            
+
         <script>
             $(document).ready(function () {
                 $("#filterName").on("keyup", function () {

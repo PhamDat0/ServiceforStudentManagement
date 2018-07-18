@@ -9,7 +9,12 @@ import entity.Account;
 import model.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -129,7 +134,20 @@ public class AccountController extends HttpServlet {
     }
 
     private void updateInformation(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String accountName = ((Account)request.getSession().getAttribute("account")).getAccountName();
+            String fullname = request.getParameter("txtName");
+            String email = request.getParameter("txtEmail");
+            Date date = new SimpleDateFormat("yyyy-dd-MM").parse(request.getParameter("txtDOB"));
+            String address = request.getParameter("txtAddress");
+            String phone = request.getParameter("txtPhone");
+            new AccountDAO().setAccountProfileByName(email, fullname, address, phone, date, accountName);
+            response.sendRedirect("/ServiceforStudentManagement/user/MyProfile.jsp");
+        } catch (ParseException ex) {
+            Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void payment(HttpServletRequest request, HttpServletResponse response) {
