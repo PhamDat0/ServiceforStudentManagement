@@ -129,6 +129,7 @@ public class OrderController extends HttpServlet {
                     String username = account.getAccountName();
                     int price = product.getPrice();
                     int quantity = amount;
+                    String destination = request.getParameter("txtDestination");
                     Calendar cal = Calendar.getInstance();
                     Date startDate = cal.getTime();
                     Date endDate = cal.getTime();
@@ -137,7 +138,7 @@ public class OrderController extends HttpServlet {
                         cal.add(Calendar.DATE, product.getQuantity());
                         endDate = cal.getTime();
                     }
-                    new OrderDAO().insertOrder(new Order(serviceID, providerName, productID, username, 
+                    new OrderDAO().insertOrder(new Order(serviceID, providerName, productID, username, destination,
                             price, quantity, startDate, endDate, status));
                     response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?serviceID="+ serviceID);
                 } catch (Exception ex) {

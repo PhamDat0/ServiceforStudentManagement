@@ -20,9 +20,10 @@
                         <c:if test="${not empty sessionScope.account}">
                         <li><a href="#">Notification<span class="badge">5</span></a></li>
                         <li><a href="/ServiceforStudentManagement/user/MyProfile.jsp">Profile</a></li>
-                        <li><a href="/ServiceforStudentManagement/studentProvider/Service.jsp">Service</a></li>
+                            <c:if test="${sessionScope.account.type != 3}">
+                            <li><a href="/ServiceforStudentManagement/studentProvider/Service.jsp">Service</a></li>
+                            </c:if>
                         </c:if>
-
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <c:if test="${empty sessionScope.account}">
@@ -163,6 +164,6 @@
                 </div>
             </div>
         </div>
-        
+
     </body>
 </html>

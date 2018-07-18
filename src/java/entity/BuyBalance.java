@@ -16,6 +16,7 @@ public class BuyBalance implements Serializable {
     private int id;
     private String accountName;
     private int walletID;
+    private String purpose;
     private int value;
     private Date date;
 
@@ -30,9 +31,10 @@ public class BuyBalance implements Serializable {
         this.date = date;
     }
 
-    public BuyBalance(String accountName, int walletID, int value, Date date) {
+    public BuyBalance(String accountName, int walletID, String purpose, int value, Date date) {
         this.accountName = accountName;
         this.walletID = walletID;
+        this.purpose = purpose;
         this.value = value;
         this.date = date;
     }
@@ -53,7 +55,13 @@ public class BuyBalance implements Serializable {
         return accountName;
     }
 
-    
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
 
     public int getWalletID() {
         return walletID;

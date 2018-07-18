@@ -30,12 +30,13 @@ public class OrderDAO {
             String providerName = rs.getString("ProviderName");
             int productID = rs.getInt("ProductID");
             String username = rs.getString("UserName");
+            String destination = rs.getString("Destination");
             int price = rs.getInt("Price");
             int quantity = rs.getInt("Quantity");
             Date startDate = rs.getDate("StartDate");
             Date endDate = rs.getDate("EndDate");
             String status = rs.getString("Status");
-            a.add(new Order(serviceID, providerName, productID, username, price, quantity, startDate, endDate, status));
+            a.add(new Order(serviceID, providerName, productID, username, destination, price, quantity, startDate, endDate, status));
         }
         rs.close();
         conn.close();
@@ -67,18 +68,19 @@ public class OrderDAO {
     }
 
     public void insertOrder(Order a) throws Exception {
-        String query = "insert into [Order] values(?,?,?,?,?,?,?,?,?)";
+        String query = "insert into [Order] values(?,?,?,?,?,?,?,?,?,?)";
         Connection conn = new DBContext().getConnection();
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setInt(1, a.getServiceID());
         ps.setString(2, a.getProviderName());
         ps.setInt(3, a.getProductID());
         ps.setString(4, (a.getUserName()));
-        ps.setInt(5, a.getPrice());
-        ps.setInt(6, a.getQuantity());
-        ps.setDate(7, new java.sql.Date(a.getStartDate().getTime()));
-        ps.setDate(8, new java.sql.Date(a.getEndDate().getTime()));
-        ps.setString(9, a.getStatus());
+        ps.setString(5, (a.getDestination()));
+        ps.setInt(6, a.getPrice());
+        ps.setInt(7, a.getQuantity());
+        ps.setDate(8, new java.sql.Date(a.getStartDate().getTime()));
+        ps.setDate(9, new java.sql.Date(a.getEndDate().getTime()));
+        ps.setString(10, a.getStatus());
         ps.executeUpdate();
         conn.close();
     }

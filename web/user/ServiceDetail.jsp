@@ -147,7 +147,7 @@
                         <input type="hidden" name="serviceID" value="${param.serviceID}"/>
                     </form>
                 </div>
-                
+
             </div>
 
         </div>
@@ -192,6 +192,10 @@
                                     <input type="hidden" name="productUnit" value="${param.productUnit}"/>
                                     <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
                                 </table>
+                                <div class="form-group">
+                                    <label for="des">Destination:</label>
+                                    <input type="text" class="form-control" id="des" name="txtDestination">
+                                </div>
                                 <div style="text-align:center">
                                     <button type="submit" class="btn btn-success">Yes</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -202,6 +206,6 @@
                 </div>
             </div>
         </c:if>
-            
+
     </body>
 </html>

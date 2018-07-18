@@ -24,16 +24,9 @@
             <div class="col-sm-10">
                 <!--Filter-->
                 <div class="row">
-                    <div class="navbar col-sm-5 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
+                    <div class="navbar col-sm-4 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
                         <form class="form-inline">
-                            <div class="form-group">
-                                <label for="type">Filter: </label>
-                                <select class="form-control" id="type">
-                                    <option>All</option>
-                                    <option>Feedback</option>
-                                    <option>Report</option>
-                                </select>
-                            </div>
+                            <label for="type">Filter: </label>
                             <div class="input-group" class="text-center">
                                 <input type="text" class="form-control" id="filterName" placeholder="Enter account here">
                                 <div class="input-group-btn">
