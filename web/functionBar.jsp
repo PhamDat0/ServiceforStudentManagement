@@ -27,27 +27,27 @@
                     <h4 style="text-align: center">User Function</h4>
                 </div>
                 <div class="list-group">
-                    <!--student-->
-                    <c:if test="${sessionScope.account.type == 1}">
-                        <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="list-group-item">Feedback Service</a>
-                    </c:if>
-
                     <!--provider-->
                     <c:if test="${sessionScope.account.type == 2}">
                         <a href="/ServiceforStudentManagement/provider/ListProduct.jsp" class="list-group-item">List Product</a>
                         <a href="/ServiceforStudentManagement/provider/RegisterService.jsp" class="list-group-item">Register Service</a>
-                        <a href="#" class="list-group-item">Make Bill</a>
                         <a href="/ServiceforStudentManagement/provider/ListServiceUser.jsp" class="list-group-item">List Service's Users</a>
                     </c:if>
 
                     <!--student and provider-->
                     <c:if test="${sessionScope.account.type < 3}">
-                        <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="list-group-item">Feedback to Admin</a>
-                        <a href="/ServiceforStudentManagement/studentProvider/Transaction.jsp" class="list-group-item">Transaction</a>
-                        <a href="/ServiceforStudentManagement/studentProvider/Service.jsp" class="list-group-item">View Service</a>
                         <a href="/ServiceforStudentManagement/studentProvider/ViewOrder.jsp" class="list-group-item">View Order</a>
+                        <a href="/ServiceforStudentManagement/studentProvider/Service.jsp" class="list-group-item">View Service</a>
+                        <a href="/ServiceforStudentManagement/studentProvider/ViewBill.jsp" class="list-group-item">View Bill</a>
+                        <a href="/ServiceforStudentManagement/studentProvider/Transaction.jsp" class="list-group-item">Transaction</a>
+                        <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="list-group-item">Feedback to Admin</a>
                     </c:if>
 
+                    <!--student-->
+                    <c:if test="${sessionScope.account.type == 1}">
+                        <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="list-group-item">Feedback Service</a>
+                    </c:if>
+                        
                     <!--provider and administrator-->
                     <c:if test="${sessionScope.account.type > 1}">
                         <a href="/ServiceforStudentManagement/providerAdmin/ListFeedBack.jsp" class="list-group-item">List Feedback</a>
@@ -109,6 +109,6 @@
                 </div>
             </div>
         </div>
-                            
+
     </body>
 </html>

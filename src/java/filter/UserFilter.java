@@ -5,6 +5,7 @@
  */
 package filter;
 
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -154,7 +156,14 @@ public class UserFilter implements Filter {
         Throwable problem = null;
         
         try {
-            chain.doFilter(wrappedRequest, wrappedResponse);
+            HttpServletRequest httpRequest = (HttpServletRequest) request;
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            HttpSession session = httpRequest.getSession();
+            Account acc = (Account) session.getAttribute("account");
+            if (acc == null) {
+                httpResponse.sendRedirect("/ServiceforStudentManagement/Home.jsp");
+            }
+            chain.doFilter(request, response);
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then

@@ -31,9 +31,6 @@
                     </label>
                     <input type="email" name="usermail" id="usermail" placeholder="I promise I hate spam too!" required="required" />
                 </p>
-
-
-
                 <p>
                     <label for="subject" class="icon-bullhorn"> Subject</label>
                     <input type="text" name="subject" id="subject" placeholder="What would you like to talk about?" />

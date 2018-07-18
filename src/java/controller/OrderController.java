@@ -48,8 +48,8 @@ public class OrderController extends HttpServlet {
                         newOrder(request, response);
                         break;
                     }
-                    case "cancelOrder": {
-                        cancelOrder(request,response);
+                    case "changeStatusOrder": {
+                        changeStatusOrder(request, response);
                         break;
                     }
                 }
@@ -103,11 +103,11 @@ public class OrderController extends HttpServlet {
         try {
             product = new ProductDAO().selectProduct(query).get(0);
         } catch (Exception ex) {
-            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?serviceID="+ serviceID +"&error=productIDError");
+            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?serviceID=" + serviceID + "&error=productIDError");
         }
         int amount = Integer.valueOf(request.getParameter("txtAmount"));
         if (product.getUnit().equals("piece") && amount > product.getQuantity()) {
-            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?serviceID="+ serviceID +"&error=amountError");
+            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?serviceID=" + serviceID + "&error=amountError");
         } else {
             Account account = (Account) request.getSession().getAttribute("account");
             int balance = 0;
@@ -117,12 +117,12 @@ public class OrderController extends HttpServlet {
                 response.sendRedirect("/ServiceforStudentManagement/Home.jsp");
             }
             if (balance < amount * product.getPrice()) {
-                response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?serviceID="+ serviceID +"&error=balanceError");
+                response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?serviceID=" + serviceID + "&error=balanceError");
             } else {
                 try {
                     if (product.getUnit().equals("piece")) {
                         new ProductDAO().setQuantity(product.getProductID(), product.getQuantity() - amount);
-                    } 
+                    }
                     new WalletDAO().setBalance(account.getWalletID(), balance - amount * product.getPrice());
                     String providerName = product.getProviderName();
                     int productID = product.getProductID();
@@ -133,14 +133,14 @@ public class OrderController extends HttpServlet {
                     Calendar cal = Calendar.getInstance();
                     Date startDate = cal.getTime();
                     Date endDate = cal.getTime();
-                    String status = "Shipping";
+                    String status = "Request";
                     if (product.getUnit().equals("day")) {
                         cal.add(Calendar.DATE, product.getQuantity());
                         endDate = cal.getTime();
                     }
                     new OrderDAO().insertOrder(new Order(serviceID, providerName, productID, username, destination,
                             price, quantity, startDate, endDate, status));
-                    response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?serviceID="+ serviceID);
+                    response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?serviceID=" + serviceID);
                 } catch (Exception ex) {
                     Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -149,8 +149,33 @@ public class OrderController extends HttpServlet {
 
     }
 
-    private void cancelOrder(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void changeStatusOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            switch (request.getParameter("status")) {
+                case "accept": {
+                    System.out.println(Integer.valueOf(request.getParameter("orderID")));
+                    Order o = new OrderDAO().selectOrder("SELECT * FROM [Order] WHERE OrderID = "+Integer.valueOf(request.getParameter("orderID"))).get(0);
+                    if (o.getStartDate() == o.getEndDate()) {
+                        new OrderDAO().setOrderStatus(Integer.valueOf(request.getParameter("orderID")), "In-Use");
+                    } else {
+                        new OrderDAO().setOrderStatus(Integer.valueOf(request.getParameter("orderID")), "Shipping");
+                    }
+                    break;
+                }
+                case "cancel": {
+                    new OrderDAO().setOrderStatus(Integer.valueOf(request.getParameter("orderID")), "Cancel");
+                    break;
+                }
+                case "finish": {
+                    new OrderDAO().setOrderStatus(Integer.valueOf(request.getParameter("orderID")), "Finished");
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            response.sendRedirect("/ServiceforStudentManagement/studentProvider/ViewOrder.jsp?error=changeStatusError");
+            return;
+        }
+        response.sendRedirect("/ServiceforStudentManagement/studentProvider/ViewOrder.jsp");
     }
 
 }

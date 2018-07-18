@@ -5,6 +5,7 @@
  */
 package filter;
 
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -15,6 +16,9 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -106,6 +110,13 @@ public class ProviderFilter implements Filter {
         
         Throwable problem = null;
         try {
+            HttpServletRequest httpRequest = (HttpServletRequest) request;
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            HttpSession session = httpRequest.getSession();
+            Account acc = (Account) session.getAttribute("account");
+            if (acc == null || acc.getType() != 2) {
+                httpResponse.sendRedirect("/ServiceforStudentManagement/Home.jsp");
+            }
             chain.doFilter(request, response);
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,

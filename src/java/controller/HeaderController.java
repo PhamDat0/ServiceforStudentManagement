@@ -57,7 +57,7 @@ public class HeaderController extends HttpServlet {
             } else {
 //                log out
                 HttpSession session = request.getSession();
-                session.setAttribute("account", "");
+                session.setAttribute("account", null);
                 response.sendRedirect("/ServiceforStudentManagement/Home.jsp");
             }
 
@@ -88,7 +88,6 @@ public class HeaderController extends HttpServlet {
             throws ServletException, IOException {
         try {
             //get data
-            System.out.println(request.getParameter("link"));
             String username = request.getParameter("username");
             String password = request.getParameter("pwd");
             List<Account> list = new AccountDAO().selectAccountByName(username);
@@ -101,10 +100,12 @@ public class HeaderController extends HttpServlet {
                     session.setAttribute("account", acc);
                     //redirect current page
                     response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1]); 
+                    return;
                 }
             }
             //redirect current link with param error
             response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=loginError"); 
+            return;
         } catch (Exception ex) {
             Logger.getLogger(HeaderController.class.getName()).log(Level.SEVERE, null, ex);
         }

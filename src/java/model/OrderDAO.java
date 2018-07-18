@@ -26,6 +26,7 @@ public class OrderDAO {
         List<Order> a = new ArrayList<>();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
+            int orderID = rs.getInt("OrderID");
             int serviceID = rs.getInt("ServiceID");
             String providerName = rs.getString("ProviderName");
             int productID = rs.getInt("ProductID");
@@ -36,7 +37,7 @@ public class OrderDAO {
             Date startDate = rs.getDate("StartDate");
             Date endDate = rs.getDate("EndDate");
             String status = rs.getString("Status");
-            a.add(new Order(serviceID, providerName, productID, username, destination, price, quantity, startDate, endDate, status));
+            a.add(new Order(orderID,serviceID, providerName, productID, username, destination, price, quantity, startDate, endDate, status));
         }
         rs.close();
         conn.close();
@@ -61,6 +62,7 @@ public class OrderDAO {
         String query = "update [Order] set Status=? where OrderID=?";
         Connection conn = new DBContext().getConnection();
         PreparedStatement ps = conn.prepareStatement(query);
+        System.out.println("hihi");
         ps.setString(1, status);
         ps.setInt(2, oid);
         ps.executeUpdate();

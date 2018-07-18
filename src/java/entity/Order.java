@@ -28,12 +28,13 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(int orderID, int serviceID, String providerName, int productID, String userName, int price, int quantity, Date startDate, Date endDate, String status) {
+    public Order (int orderID, int serviceID, String providerName, int productID, String userName, String destination, int price, int quantity, Date startDate, Date endDate, String status) {
         this.orderID = orderID;
         this.serviceID = serviceID;
         this.providerName = providerName;
         this.productID = productID;
         this.userName = userName;
+        this.destination = destination;
         this.price = price;
         this.quantity = quantity;
         this.startDate = startDate;

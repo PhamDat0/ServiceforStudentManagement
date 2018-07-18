@@ -33,7 +33,7 @@
                         <form class="form-inline">
                             <div class="form-group">
                                 <label for="type">Filter: </label>
-                                <select class="form-control" id="type" name="status">
+                                <select class="form-control" id="type" name="type" onchange="document.forms[4].submit()">
                                     <option value="all" ${param.type == 'all' ? "selected" : ""}>All</option>
                                     <option value="request" ${param.type == 'request' ? "selected" : ""}>Request</option>
                                     <option value="shipping" ${param.type == 'shipping' ? "selected" : ""}>Shipping</option>
@@ -68,6 +68,7 @@
                                             <c:if test="${sessionScope.account.type == 2}">
                                             <th>User</th>
                                             </c:if>
+                                        <th>Destination</th> 
                                         <th>Price</th> 
                                         <th>Quantity</th> 
                                         <th>Start</th> 
@@ -86,6 +87,7 @@
                                             <c:if test="${sessionScope.account.type == 2}">
                                                 <td>${ord.userName}</td>
                                             </c:if>
+                                            <td>${ord.destination}</td>
                                             <td>${ord.price}</td>
                                             <td>${ord.quantity}</td>
                                             <td>${ord.startDate}</td>
@@ -101,15 +103,15 @@
                                                     </a>
                                                 </c:if>
                                                 <c:if test="${sessionScope.account.type == 2 and ord.status == 'Request'}">
-                                                    <a href="/ServiceforStudentManagement/OrderController?action=acceptOrder&orderID=${ord.serviceID}" class="btn btn-default">
+                                                    <a href="/ServiceforStudentManagement/OrderController?action=changeStatusOrder&status=accept&orderID=${ord.orderID}" class="btn btn-default">
                                                         Accept
                                                     </a>
-                                                    <a href="/ServiceforStudentManagement/OrderController?action=cancelOrder&orderID=${ord.serviceID}" class="btn btn-default">
-                                                        Cancel
+                                                    <a href="/ServiceforStudentManagement/OrderController?action=cancelOrder&status=reject&orderID=${ord.orderID}" class="btn btn-default">
+                                                        Reject
                                                     </a>
                                                 </c:if>
                                                 <c:if test="${sessionScope.account.type == 2 and ord.status == 'Shipping'}">
-                                                    <a href="/ServiceforStudentManagement/OrderController?action=finishOrder&orderID=${ord.serviceID}" class="btn btn-default">
+                                                    <a href="/ServiceforStudentManagement/OrderController?action=changeStatusOrder&status=finish&orderID=${ord.orderID}" class="btn btn-default">
                                                         Finish
                                                     </a>
                                                 </c:if>
