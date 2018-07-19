@@ -13,6 +13,7 @@ import java.util.Date;
  * @author ADMIN
  */
 public class BuyBalance implements Serializable {
+
     private int id;
     private String accountName;
     private int walletID;
@@ -37,6 +38,13 @@ public class BuyBalance implements Serializable {
         this.purpose = purpose;
         this.value = value;
         this.date = date;
+    }
+
+    public BuyBalance(String accountName, int walletID, String purpose, int value) {
+        this.accountName = accountName;
+        this.walletID = walletID;
+        this.purpose = purpose;
+        this.value = value;
     }
 
     public int getId() {
@@ -86,6 +94,5 @@ public class BuyBalance implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
-    
-    
+
 }

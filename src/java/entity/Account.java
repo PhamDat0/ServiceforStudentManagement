@@ -141,13 +141,5 @@ public class Account implements Serializable{
     public void setType(int type) {
         this.type = type;
     }
-
-   
-
-    
-
-
-    
-    
     
 }

@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -19,14 +20,13 @@ import java.util.List;
  * @author ADMIN
  */
 public class BuyBalanceDAO {
-    
-    public List<BuyBalance> selectBuyBalance(String query) throws Exception{
-        Connection conn= new DBContext().getConnection();
+
+    public List<BuyBalance> selectBuyBalance(String query) throws Exception {
+        Connection conn = new DBContext().getConnection();
         PreparedStatement ps = conn.prepareStatement(query);
-        List<BuyBalance> a= new ArrayList<>();       
-        ResultSet rs= ps.executeQuery();
-        while(rs.next())
-        {
+        List<BuyBalance> a = new ArrayList<>();
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
             int walletid = rs.getInt("WalletID");
             String accName = rs.getString("AccountName");
             String purpose = rs.getString("Purpose");
@@ -38,21 +38,24 @@ public class BuyBalanceDAO {
         conn.close();
         return a;
     }
-    public List<BuyBalance> selectBuyBalanceByName(String accName) throws Exception{
-        String query="select * from BuyBalance where AccountName="+accName;
+
+    public List<BuyBalance> selectBuyBalanceByName(String accName) throws Exception {
+        String query = "select * from BuyBalance where AccountName=" + accName;
         return selectBuyBalance(query);
     }
-    
-    public void insertBuyBalance(BuyBalance bb) throws Exception
-    {
-            String query="insert into BuyBalance values(?,?,?,?)";
-            Connection conn=new DBContext().getConnection();
-            PreparedStatement ps=conn.prepareStatement(query);
-            ps.setString(1, bb.getAccountName());
-            ps.setInt(2, bb.getWalletID());
-            ps.setInt(3, bb.getValue());
-            ps.setDate(4, (java.sql.Date) bb.getDate());
-            ps.executeUpdate();
-            conn.close();
+
+    public void insertBuyBalance(String name, int id, String purpose, int value) throws Exception {
+        Calendar calendar = Calendar.getInstance();
+        java.sql.Date currentdate = new java.sql.Date(calendar.getTime().getTime());
+        String query = "insert into BuyBalance values(?,?,?,?,?)";
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, name);
+        ps.setInt(2, id);
+        ps.setString(3, purpose);
+        ps.setInt(4, value);
+        ps.setDate(5, currentdate);
+        ps.executeUpdate();
+        conn.close();
     }
 }

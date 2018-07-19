@@ -60,6 +60,10 @@ public class AdminController extends HttpServlet {
                         acceptService(request, response);
                         break;
                     }
+                    case "clear":{
+                        clear(request, response);
+                        break;
+                    }
                 }
             }
         }

@@ -52,18 +52,19 @@
                             <div class="tab-content">
                                 <!--top-up-->
                                 <div role="tabpanel" class="tab-pane active" id="topUp">
-                                    <form action="/ServiceforStudentManagement/AccountController" method="POST">
+                                    <form action="/ServiceforStudentManagement/AccountController" method="POST" data-toggle="validator"> 
                                         <div class="form-group">
                                             <label for="amount">Amount:</label>
-                                            <input type="text" class="form-control" id="amount" placeholder="Enter amount" name="amount">
+                                            <input type="number" class="form-control" id="amount" placeholder="Enter amount" name="amount" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="pwd">Password:</label>
-                                            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                                            <label for="pwdTop">Password:</label>
+                                            <input type="password" class="form-control" id="pwdTop" placeholder="Enter password" name="pwd" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="rePwd">Re-password:</label>
-                                            <input type="password" class="form-control" id="rePwd" placeholder="Re-enter password" name="rePwd">
+                                            <label for="rePwdTop">Re-password:</label>
+                                            <input type="password" class="form-control" id="rePwdTop" data-match="pwdTop" data-match-error="Doesn't match" placeholder="Re-enter password" name="rePwd" required>
+                                            <div class="help-block with-errors"></div>
                                         </div>
                                         <div style="text-align: center">
                                             <button type="submit" class="btn-success">Top-up</button>
@@ -75,26 +76,27 @@
                                 </div>
                                 <!--trade-->
                                 <div role="tabpanel" class="tab-pane" id="trade">
-                                    <form action="/ServiceforStudentManagement/AccountController" method="POST">
+                                    <form action="/ServiceforStudentManagement/AccountController" method="POST" data-toggle="validator">
                                         <div class="form-group">
                                             <label for="receiver">Receiver:</label>
-                                            <input type="text" class="form-control" id="receiver" placeholder="Enter receiver name" name="receiver">
+                                            <input type="text" class="form-control" id="receiver" placeholder="Enter receiver name" name="receiver" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="amount">Amount:</label>
-                                            <input type="text" class="form-control" id="amount" placeholder="Enter amount" name="amount">
+                                            <input type="number" class="form-control" id="amount" placeholder="Enter amount" name="amount" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="content">Content:</label>
-                                            <input type="text" class="form-control" id="content" placeholder="Enter content" name="content">
+                                            <input type="text" class="form-control" id="content" placeholder="Enter content" name="content" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="pwd">Password:</label>
-                                            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                                            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="rePwd">Re-password:</label>
-                                            <input type="password" class="form-control" id="rePwd" placeholder="Re-enter password" name="rePwd">
+                                            <input type="password" class="form-control" id="rePwd" data-match="#pwd" data-match-error="Doesn't match" placeholder="Re-enter password" name="rePwd" required>
+                                            <div class="help-block with-errors"></div>
                                         </div>
                                         <div style="text-align: center">
                                             <button type="submit" class="btn-success">Send</button>
