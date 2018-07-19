@@ -16,6 +16,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.ProductDAO;
 import model.ServiceDAO;
 
 /**
@@ -45,6 +47,10 @@ public class ProviderController extends HttpServlet {
                     }
                     case "registerService": {
                         registerService(request, response);
+                        break;
+                    }
+                    case "clear": {
+                        clear(request, response);
                         break;
                     }
                 }
@@ -92,7 +98,55 @@ public class ProviderController extends HttpServlet {
     }// </editor-fold>
 
     private void newProduct(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            HttpSession session = request.getSession();
+            session.removeAttribute("priceerror");
+            session.removeAttribute("quantityerror");
+            session.removeAttribute("uniterror");
+            session.removeAttribute("productnameerror");
+            session.removeAttribute("deserror");
+            ServiceDAO sdao = new ServiceDAO();
+            String productname = request.getParameter("txtProductName");
+            String quantity = request.getParameter("txtQuantity");
+            String price = request.getParameter("txtPrice");
+            String unit = request.getParameter("txtUnit");
+            String des = request.getParameter("txtDescription");
+            String serviceid = request.getParameter("drServiceName");
+            String providername = sdao.getProviderNameByServiceID(Integer.valueOf(serviceid));
+            if (validnumber(quantity) && validnumber(price)
+                    && validString(productname) && validString(unit) && validString(des)) {
+                session.removeAttribute("proname");
+                session.removeAttribute("proprice");
+                session.removeAttribute("prounit");
+                session.removeAttribute("proquantity");
+                ProductDAO pdao = new ProductDAO();
+                pdao.insertProduct(productname, Integer.valueOf(serviceid), providername, des, Integer.valueOf(quantity), Integer.valueOf(price), unit);
+                response.sendRedirect("/ServiceforStudentManagement/provider/ListProduct.jsp");
+            } else {
+                if (!validnumber(price)) {
+                    session.setAttribute("priceerror", "Giá tiền không hợp lệ");
+                }
+                if (!validnumber(quantity)) {
+                    session.setAttribute("quantityerror", "Số lượng không hợp lệ");
+                }
+                if (!validString(unit)) {
+                    session.setAttribute("uniterror", "Số lượng không hợp lệ");
+                }
+                if (!validString(productname)) {
+                    session.setAttribute("productnameerror", "Tên sản phẩm không hợp lệ");
+                }
+                if (!validString(des)) {
+                    session.setAttribute("deserror", "Chi tiết không hợp lệ");
+                }
+                session.setAttribute("proname", productname);
+                session.setAttribute("proprice", price);
+                session.setAttribute("prounit", unit);
+                session.setAttribute("proquantity", quantity);
+                response.sendRedirect("/ServiceforStudentManagement/provider/NewProduct.jsp");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ProviderController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void registerService(HttpServletRequest request, HttpServletResponse response) {
@@ -111,4 +165,40 @@ public class ProviderController extends HttpServlet {
         }
     }
 
+    private boolean validnumber(String s) {
+        if (s.equals("") || s.equals(null)) {
+            return false;
+        }
+        try {
+            int i = Integer.valueOf(s);
+            if (i > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean validString(String s) {
+        if (s.equals("") || s.equals(null)) {
+            return false;
+        }
+        return true;
+    }
+
+    private void clear(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        session.removeAttribute("priceerror");
+        session.removeAttribute("quantityerror");
+        session.removeAttribute("uniterror");
+        session.removeAttribute("productnameerror");
+        session.removeAttribute("deserror");
+        session.removeAttribute("proname");
+        session.removeAttribute("proprice");
+        session.removeAttribute("prounit");
+        session.removeAttribute("proquantity");
+        response.sendRedirect("/ServiceforStudentManagement/provider/NewProduct.jsp");
+    }
 }

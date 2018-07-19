@@ -106,7 +106,7 @@
                                                     <a href="/ServiceforStudentManagement/OrderController?action=changeStatusOrder&status=accept&orderID=${ord.orderID}" class="btn btn-default">
                                                         Accept
                                                     </a>
-                                                    <a href="/ServiceforStudentManagement/OrderController?action=cancelOrder&status=reject&orderID=${ord.orderID}" class="btn btn-default">
+                                                    <a href="/ServiceforStudentManagement/OrderController?action=changeStatusOrder&status=reject&orderID=${ord.orderID}" class="btn btn-default">
                                                         Reject
                                                     </a>
                                                 </c:if>

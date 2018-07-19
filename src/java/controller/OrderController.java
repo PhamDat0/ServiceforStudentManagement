@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.AccountDAO;
 import model.OrderDAO;
 import model.ProductDAO;
 import model.WalletDAO;
@@ -123,7 +124,7 @@ public class OrderController extends HttpServlet {
                     if (product.getUnit().equals("piece")) {
                         new ProductDAO().setQuantity(product.getProductID(), product.getQuantity() - amount);
                     }
-                    new WalletDAO().setBalance(account.getWalletID(), balance - amount * product.getPrice());
+
                     String providerName = product.getProviderName();
                     int productID = product.getProductID();
                     String username = account.getAccountName();
@@ -153,13 +154,24 @@ public class OrderController extends HttpServlet {
         try {
             switch (request.getParameter("status")) {
                 case "accept": {
-                    System.out.println(Integer.valueOf(request.getParameter("orderID")));
-                    Order o = new OrderDAO().selectOrder("SELECT * FROM [Order] WHERE OrderID = "+Integer.valueOf(request.getParameter("orderID"))).get(0);
-                    if (o.getStartDate() == o.getEndDate()) {
-                        new OrderDAO().setOrderStatus(Integer.valueOf(request.getParameter("orderID")), "In-Use");
-                    } else {
+                    Order o = new OrderDAO().selectOrder("SELECT * FROM [Order] WHERE OrderID = " + Integer.valueOf(request.getParameter("orderID"))).get(0);
+                    if (o.getStartDate().equals(o.getEndDate())) {
                         new OrderDAO().setOrderStatus(Integer.valueOf(request.getParameter("orderID")), "Shipping");
+                    } else {
+                        new OrderDAO().setOrderStatus(Integer.valueOf(request.getParameter("orderID")), "In-Use");
+                        Account customer = new AccountDAO().selectAccountByName(o.getUserName()).get(0);
+                        Account provider = new AccountDAO().selectAccountByName(o.getUserName()).get(0);
+                        new WalletDAO().setBalance(customer.getWalletID(),
+                                new WalletDAO().selectWalletByID(customer.getWalletID()).get(0).getBalance()
+                                - o.getQuantity() * o.getPrice());
+                        new WalletDAO().setBalance(provider.getWalletID(),
+                                new WalletDAO().selectWalletByID(provider.getWalletID()).get(0).getBalance()
+                                + o.getQuantity() * o.getPrice());
                     }
+                    break;
+                }
+                case "reject": {
+                    new OrderDAO().setOrderStatus(Integer.valueOf(request.getParameter("orderID")), "Rejected");
                     break;
                 }
                 case "cancel": {

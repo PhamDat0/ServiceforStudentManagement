@@ -40,11 +40,11 @@ public class ServiceDAO {
         return a;
     }
 
-    public List<Service> selectServiceByName(String name) throws Exception { 
+    public List<Service> selectServiceByName(String name) throws Exception {
         String query = "SELECT * FROM Service WHERE ServiceName LIKE '" + name + "'";
         return selectService(query);
     }
-    
+
     public List<Service> selectAllService() throws Exception {
         String query = "select * from Service";
         return selectService(query);
@@ -89,5 +89,18 @@ public class ServiceDAO {
         ps.setString(6, a.getPicture());
         ps.executeUpdate();
         conn.close();
+    }
+
+    public String getProviderNameByServiceID(int id) throws Exception {
+        String res = "";
+        String query = "select * from Service where ServiceID=" + id;
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            res = rs.getString("ProviderName");
+        }
+        conn.close();
+        return res;
     }
 }

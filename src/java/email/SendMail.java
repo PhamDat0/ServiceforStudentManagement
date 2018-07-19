@@ -21,8 +21,8 @@ import javax.mail.internet.MimeMessage;
 public class SendMail {
 
     public void sendMailChangePassword(String to, String newPassword) {
-        final String username = "phongttse05711@fpt.edu.vn";
-        final String password = "123@123w";
+        final String username = "serviceforstudentmanagement@gmail.com";
+        final String password = "123@123a";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -44,7 +44,7 @@ public class SendMail {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
             message.setSubject("Change Password");
-            message.setText("This is your new password: " + newPassword);
+            message.setText("This is your password: " + newPassword);
 
             Transport.send(message);
 
@@ -56,6 +56,6 @@ public class SendMail {
     }
 
     public static void main(String[] args) {
-        new SendMail().sendMailChangePassword("", "123456");
+        new SendMail().sendMailChangePassword("trantuanphong.ttt@gmail.com", "123456");
     }
 }

@@ -86,34 +86,4 @@ public class OrderDAO {
         ps.executeUpdate();
         conn.close();
     }
-
-    public List<Order> selectOrderInUseByProviderName(String pname) throws Exception {
-        String query = "select * from [Order] where ProviderName='" + pname + "' and Status='In use'";
-        return selectOrder(query);
-    }
-
-    public List<Order> selectOrderUsedByProviderName(String pname) throws Exception {
-        String query = "select * from [Order] where ProviderName='" + pname + "' and Status='Used'";
-        return selectOrder(query);
-    }
-
-    public List<Order> selectOrderInWaitByProviderName(String pname) throws Exception {
-        String query = "select * from [Order] where ProviderName='" + pname + "' and Status='In wait'";
-        return selectOrder(query);
-    }
-
-    public List<Order> selectOrderUsedByServiceID(int sid) throws Exception {
-        String query = "select * from [Order] where ServiceID=" + sid + " and Status='Used'";
-        return selectOrder(query);
-    }
-
-    public List<Order> selectOrderInUseByServiceID(int sid) throws Exception {
-        String query = "select * from [Order] where ServiceID=" + sid + " and Status='In use'";
-        return selectOrder(query);
-    }
-
-    public List<Order> selectOrderInWaitByServiceID(int sid) throws Exception {
-        String query = "select * from [Order] where ServiceID=" + sid + " and Status='In wait'";
-        return selectOrder(query);
-    }
 }

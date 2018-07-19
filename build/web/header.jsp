@@ -147,22 +147,20 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-body">
-                            <form action="">
+                            <form action="/ServiceforStudentManagement/HeaderController" method="POST" data-toggle="validator">
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="username" placeholder="Enter username" name="username">
+                                    <label for="username">Username: </label>
+                                    <input type="text" class="form-control" id="username" placeholder="Enter username" name="txtUsernameForgot" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="pwd">Password:</label>
-                                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-                                </div>
-                                <div class="form-group">
-                                    <label for="repwd">Re-password:</label>
-                                    <input type="password" class="form-control" id="repwd" placeholder="Re-enter password" name="repwd">
+                                    <label for="email">Email: </label>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="txtEmailForgot" required>
                                 </div>
                                 <div style="text-align:center">
-                                    <button type="submit" class="btn btn-success">Reset Password</button>
+                                    <input type="submit" class="btn btn-success" value="Get Password"/>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                    <input type="hidden" name="action" value="forgotPassword"/>
+                                    <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
                                 </div>
                             </form>
                         </div>

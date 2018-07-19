@@ -34,8 +34,8 @@
                             <div class="form-group">
                                 <label for="type">Filter: </label>
                                 <select class="form-control" id="type" name="type" onchange="document.forms['filterForm'].submit()">
-                                    <option value="mySer" ${param.type == 'mySer' ? "selected" : ""}>My Service</option>
                                     <option value="actSer" ${param.type == 'actSer' ? "selected" : ""}>Available Service</option>
+                                    <option value="mySer" ${param.type == 'mySer' ? "selected" : ""}>My Service</option>
                                 </select>
                             </div>
                             <div class="input-group" class="text-center">

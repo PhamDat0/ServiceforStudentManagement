@@ -4,6 +4,7 @@
     Author     : Phong
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,10 @@
     </head>
     <body>
         <jsp:include page="/header.jsp"/>
-
+        <jsp:useBean id="listService" class="bean.RegisterProduct" scope="page"/>
+        <jsp:setProperty name="listService" property="providerName" value="${sessionScope.account.accountName}"/>
+        
+        
         <div class="container-fluid row">
 
             <jsp:include page="/functionBar.jsp"/>
@@ -31,33 +35,49 @@
                             <div class="form-group">
                                 <label for="serviceName">Service Name: </label>
                                 <select name="drServiceName" class="btn btn-default">
-                                    <option></option>
-                                    <option></option>
+                                    <c:forEach var="a" items="${listService.service}">
+                                        <option value="${a.serviceID}">${a.serviceName}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="productName">Product Name: </label>
-                                <input type="text" class="form-control" id="productName" placeholder="Enter product name" name="txtProductName">
+                                <input value="${sessionScope.proname}" type="text" class="form-control" id="productName" placeholder="Enter product name" name="txtProductName">
+                            </div>
+                            <p style="color:red;font-style: italic;">
+                                ${sessionScope.productnameerror}
+                            </p>
+                            <div class="form-group">
+                                <label for="price">Price: </label>
+                                <input value="${sessionScope.proprice}" type="text" class="form-control" id="price" placeholder="Enter price" name="txtPrice">
+                                <p style="color:red;font-style: italic;">
+                                ${sessionScope.priceerror}
+                            </p>
                             </div>
                             <div class="form-group">
                                 <label for="quantity">Quantity: </label>
-                                <input type="number" class="form-control" id="quantity" placeholder="Enter quantity" name="txtQuantity">
-                            </div>
-                            <div class="form-group">
-                                <label for="price">Price: </label>
-                                <input type="number" class="form-control" id="price" placeholder="Enter price" name="txtPrice">
+                                <input value="${sessionScope.proquantity}" type="text" class="form-control" id="price" placeholder="Enter quantity" name="txtQuantity">
+                            <p style="color:red;font-style: italic;">
+                            ${sessionScope.quantityerror}
+                            </p>
                             </div>
                             <div class="form-group">
                                 <label for="unit">Unit: </label>
-                                <input type="text" class="form-control" id="unit" placeholder="Enter unit (day, piece,...)" name="txtUnit">
+                                <input value="${sessionScope.prounit}" type="text" class="form-control" id="unit" placeholder="Enter unit (day, piece,...)" name="txtUnit">
                             </div>
+                            <p style="color:red;font-style: italic;">
+                            ${sessionScope.uniterror}
+                            </p>
                             <div class="form-group">
                                 <label for="description">Description: </label>
                                 <textarea class="form-control" rows="5" id="description" name="txtDescription"></textarea>
                             </div>
+                            <p style="color:red;font-style: italic;">
+                                ${sessionScope.deserror}
+                            </p>
                             <div style="text-align:center">
                                 <button type="submit" class="btn btn-success">Create</button>
-                                <button type="reset" class="btn btn-warning">Clear</button>
+                                <button type="submit" value="clear" name="action" class="btn btn-warning">Clear</button>
                             </div>
                             <input type="hidden" name="action" value="newProduct"/>
                         </form>

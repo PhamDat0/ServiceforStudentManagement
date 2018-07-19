@@ -24,6 +24,7 @@
     <body>
         <jsp:useBean id="service" class="bean.ServiceDetail" scope="page"/>
         <jsp:setProperty name="service" property="serviceID" param="serviceID"/>
+        <jsp:setProperty name="service" property="username" value="${sessionScope.account.accountName}"/>
 
         <jsp:include page="/header.jsp"/>
 
@@ -38,7 +39,7 @@
                     <div class="col-sm-7">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h3>Service Name - Provider name - Rating</h3>
+                                <h3>${service.serviceInfor} - Rating</h3>
                             </div>
                             <!--product list-->
                             <div class="panel-body">
@@ -111,44 +112,44 @@
 
                 </div>
 
-                <c:if test="${not empty service.serviceReview}">
-                    <!--review list-->
-                    <c:forEach var="review" items="${service.serviceReview}">
-                        <div class="row">
-                            <label>${review.userName} - ${review.rating}</label>
-                            <div class="well">${review.comment}</div>
-                        </div>
-                    </c:forEach>
-                </c:if>
+                <!--review list-->
+                <c:forEach var="review" items="${service.serviceReview}">
+                    <div class="row">
+                        <label>${review.userName} - ${review.rating}</label>
+                        <div class="well">${review.comment}</div>
+                    </div>
+                </c:forEach>
 
-                <!--add review-->
-                <div class="row">
-                    <form action="/ServiceforStudentManagement/RatingController" method="POST">
-                        <div class="form-group">
-                            <label for="comment">
-                                Rating and enter your comment here: <select name="rate">
-                                    <option value=1>1</option>
-                                    <option value=2>2</option>
-                                    <option value=3>3</option>
-                                    <option value=4>4</option>
-                                    <option value=5>5</option>
-                                    <option value=6>6</option>
-                                    <option value=7>7</option>
-                                    <option value=8>8</option>
-                                    <option value=9>9</option>
-                                    <option value=10>10</option>
-                                </select>
-                            </label>
-                            <textarea class="form-control" rows="5" id="comment" name="txtComment"></textarea>
-                        </div>
-                        <div class="text-center">
-                            <input type="submit" class="btn btn-success" value="Submit"/>
-                            <input type="reset" class="btn btn-warning" value="Clear"/>
-                        </div>
-                        <input type="hidden" name="action" value="rating"/>
-                        <input type="hidden" name="serviceID" value="${param.serviceID}"/>
-                    </form>
-                </div>
+                <c:if test="${sessionScope.account.type == 1}">
+                    <!--add review-->
+                    <div class="row">
+                        <form action="/ServiceforStudentManagement/RatingController" method="POST">
+                            <div class="form-group">
+                                <label for="comment">
+                                    Rating and enter your comment here: <select name="rate">
+                                        <option value=1>1</option>
+                                        <option value=2>2</option>
+                                        <option value=3>3</option>
+                                        <option value=4>4</option>
+                                        <option value=5>5</option>
+                                        <option value=6>6</option>
+                                        <option value=7>7</option>
+                                        <option value=8>8</option>
+                                        <option value=9>9</option>
+                                        <option value=10>10</option>
+                                    </select>
+                                </label>
+                                <textarea class="form-control" rows="5" id="comment" name="txtComment"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-success" value="Submit"/>
+                                <input type="reset" class="btn btn-warning" value="Clear"/>
+                            </div>
+                            <input type="hidden" name="action" value="rating"/>
+                            <input type="hidden" name="serviceID" value="${param.serviceID}"/>
+                        </form>
+                    </div>
+                </c:if>
 
             </div>
 

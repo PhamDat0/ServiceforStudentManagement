@@ -39,11 +39,12 @@ public class ProductDAO {
         conn.close();
         return a;
     }
-    
+
     public List<Product> selectProductByServiceID(int id) throws Exception {
         String query = "select * from Product where ServiceID =" + id;
         return selectProduct(query);
     }
+
     public List<Product> selectProductByProviderName(String pName) throws Exception {
         String query = "select * from Product where ProviderName=" + pName;
         return selectProduct(query);
@@ -64,6 +65,22 @@ public class ProductDAO {
         ps.setInt(4, a.getQuantity());
         ps.setInt(5, a.getPrice());
         ps.setString(6, a.getUnit());
+        ps.executeUpdate();
+        conn.close();
+    }
+
+    public void insertProduct(String productname, int sid, String providername, String des, int quantity, int price, String unit) throws Exception {
+        String query = "insert into Product values(?,?,?,?,?,?,?,?)";
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, productname);
+        ps.setInt(2, sid);
+        ps.setString(3, providername);
+        ps.setString(4, des);
+        ps.setInt(5, quantity);
+        ps.setInt(6, price);
+        ps.setString(7, unit);
+        ps.setString(8, "");
         ps.executeUpdate();
         conn.close();
     }

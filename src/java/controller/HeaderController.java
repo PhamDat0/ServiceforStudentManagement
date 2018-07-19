@@ -68,9 +68,17 @@ public class HeaderController extends HttpServlet {
     }
 
     void forgotPassword(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String email = ((Account)request.getSession().getAttribute("account")).getEmail();
-        new SendMail().sendMailChangePassword(email, "123456");
+            throws ServletException, IOException, Exception {
+        String mail = request.getParameter("txtEmailForgot");
+        String username = request.getParameter("txtUsernameForgot");
+        Account acc = new AccountDAO().selectAccountByName(username).get(0);
+        if (acc.getEmail().equals(mail)) {
+            new SendMail().sendMailChangePassword(mail, acc.getPassword());
+            response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=successGetPassword"); 
+        } else {
+            response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=forgotError"); 
+        }
+        
     }
     
     void register(HttpServletRequest request, HttpServletResponse response)

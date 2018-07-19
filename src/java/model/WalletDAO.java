@@ -36,6 +36,11 @@ public class WalletDAO {
         conn.close();
         return list;
     }
+    
+    public List<Wallet> selectWalletByID(int id) throws Exception {
+        String query = "SELECT * FROM Wallet WHERE BalanceID = " + id;
+        return selectWallet(query);
+    }
 
     public void insertWallet(Wallet a) throws Exception {
         String query = "insert into Wallet values(?,?)";

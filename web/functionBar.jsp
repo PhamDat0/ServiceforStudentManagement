@@ -29,6 +29,7 @@
                 <div class="list-group">
                     <!--provider-->
                     <c:if test="${sessionScope.account.type == 2}">
+                        <a href="/ServiceforStudentManagement/provider/NewProduct.jsp" class="list-group-item">New Product</a>
                         <a href="/ServiceforStudentManagement/provider/ListProduct.jsp" class="list-group-item">List Product</a>
                         <a href="#registerService" data-toggle="modal" class="list-group-item">Register Service</a>
                         <a href="/ServiceforStudentManagement/provider/ListServiceUser.jsp" class="list-group-item">List Service's Users</a>
