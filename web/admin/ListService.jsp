@@ -89,8 +89,9 @@
                                                     <a href="/ServiceforStudentManagement/user/ServiceDetail.jsp?serviceID=${ser.serviceID}">
                                                         <button type="button" class="btn btn-default">View</button>
                                                     </a>
-                                                    <input type="submit" class="btn btn-default" name="btnChangeStatus" value="${ser.status == 'Actived'? "Banned" : "Actived"}"/>
-                                                    <input type="submit" class="btn btn-default" name="btnDelete" value="Delete"/>
+                                                    <a href="/ServiceforStudentManagement/AdminController?action=changeStatusService&serviceID=${ser.serviceID}" class="btn btn-default">
+                                                        ${ser.status == 'Banned' ? "Resume" : "Banned"}
+                                                    </a>
                                                 </c:if>
                                                 <c:if test="${ser.status == 'Register'}">
                                                     <a href="/ServiceforStudentManagement/AdminController?action=acceptService&serviceID=${ser.serviceID}">

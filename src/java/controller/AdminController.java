@@ -6,6 +6,7 @@
 package controller;
 
 import entity.Account;
+import entity.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -60,8 +61,12 @@ public class AdminController extends HttpServlet {
                         acceptService(request, response);
                         break;
                     }
-                    case "clear":{
+                    case "clear": {
                         clear(request, response);
+                        break;
+                    }
+                    case "changeStatusService": {
+                        changeStatusService(request, response);
                         break;
                     }
                 }
@@ -107,6 +112,17 @@ public class AdminController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void changeStatusService(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String serviceID = request.getParameter("serviceID");
+            ServiceDAO sdao = new ServiceDAO();
+            Service ser = sdao.selectServiceByID(Integer.parseInt(serviceID)).get(0);
+            sdao.setServiceStatus(Integer.parseInt(serviceID), ser.getStatus().equals("Banned") ? "Actived" : "Banned");
+            response.sendRedirect("/ServiceforStudentManagement/admin/ListService.jsp");
+        } catch (Exception ex) {
+        }
+    }
 
     private void changeStatusAccount(HttpServletRequest request, HttpServletResponse response) {
         try {

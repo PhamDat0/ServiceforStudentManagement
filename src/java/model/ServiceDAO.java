@@ -5,8 +5,8 @@
  */
 package model;
 
-import entity.Service;
 import com.DBContext;
+import entity.Service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author ADMIN
+ * @author Phong
  */
 public class ServiceDAO {
 
@@ -102,5 +102,26 @@ public class ServiceDAO {
         }
         conn.close();
         return res;
+    }
+
+    public List<Service> selectServiceByID(int ID) throws Exception {
+        List<Service> s;
+        try (Connection conn = new DBContext().getConnection()) {
+            String query = "select * from Service where ServiceID LIKE '" + ID + "'";
+            System.out.println(query);
+            PreparedStatement ps = conn.prepareStatement(query);
+            s = new ArrayList<>();
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    String sName = rs.getString("ServiceName");
+                    String pName = rs.getString("ProviderName");
+                    String detail = rs.getString("Detail");
+                    Date date = rs.getDate("DateCreated");
+                    String status = rs.getString("Status");
+                    s.add(new Service(sName, pName, detail, date, status));
+                }
+            }
+        }
+        return s;
     }
 }

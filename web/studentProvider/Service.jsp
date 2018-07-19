@@ -55,8 +55,8 @@
                     <!--heading-->
                     <div class="panel-heading">
                         <h3 style="text-align: center">
-                            <c:if test="${param.type == 'actSer'}">AVAILABLE SERVICE</c:if>
-                            <c:if test="${param.type != 'actSer'}">MY SERVICE</c:if>
+                            <c:if test="${param.type != 'mySer'}">AVAILABLE SERVICE</c:if>
+                            <c:if test="${param.type == 'mySer'}">MY SERVICE</c:if>
                             </h3>
                         </div>
                         <!--body-->
