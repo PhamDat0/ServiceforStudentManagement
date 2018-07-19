@@ -40,7 +40,7 @@ public class BuyBalanceDAO {
     }
 
     public List<BuyBalance> selectBuyBalanceByName(String accName) throws Exception {
-        String query = "select * from BuyBalance where AccountName=" + accName;
+        String query = "select * from BuyBalance where AccountName= '" + accName + "'";
         return selectBuyBalance(query);
     }
 

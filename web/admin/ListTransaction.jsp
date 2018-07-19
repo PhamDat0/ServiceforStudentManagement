@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,8 +14,14 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+            th, td {
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
+        <jsp:useBean id="tranBean" class="bean.TransactionBean" scope="page"/>
         <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
@@ -55,52 +62,28 @@
                 <!--Table data-->
                 <div class="row">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 style="text-align: center">TRANSACTION HISTORY</h3>
+                        <div class="panel-heading text-center">
+                            <h3>HISTORY</h3>
                         </div>
                         <div class="panel-body">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Number</th>
-                                        <th>Order ID</th>
-                                        <th>Service ID</th>
-                                        <th>Provider ID</th>  
-                                        <th>User ID</th>  
-                                        <th>Price</th>  
-                                        <th>Status</th>                   
+                                        <th>Account Name</th>
+                                        <th>Purpose</th>
+                                        <th>Value</th>
+                                        <th>Date</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody>        
+                                <c:forEach var="pro" items="${tranBean.allHistory}">
                                     <tr>
-                                        <td>1</td>
-                                        <td>O1</td>
-                                        <td>S1</td>
-                                        <td>PV1</td>
-                                        <td>U1</td>
-                                        <td>50000</td>
-                                        <td>Finished</td>                                   
+                                        <td>${pro.accountName}</td>
+                                        <td>${pro.purpose}</td>
+                                        <td>${pro.value}</td>
+                                        <td>${pro.date}</td>                                       
                                     </tr>
-                                    <tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>O2</td>
-                                        <td>S2</td>
-                                        <td>PV2</td>
-                                        <td>U2</td>
-                                        <td>500000</td>
-                                        <td>In Use</td>                                   
-                                    </tr>
-                                    <tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>O3</td>
-                                        <td>S3</td>
-                                        <td>PV3</td>
-                                        <td>U3</td>
-                                        <td>5000000</td>
-                                        <td>Waiting</td>                                   
-                                    </tr>           
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

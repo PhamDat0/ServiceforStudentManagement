@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,6 +25,9 @@
         </style>
     </head>
     <body >
+        <jsp:useBean id="tranBean" class="bean.TransactionBean" scope="page"/>
+        <jsp:setProperty name="tranBean" property="accountName" value="${sessionScope.account.accountName}"/>
+        
         <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
@@ -63,7 +67,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="rePwdTop">Re-password:</label>
-                                            <input type="password" class="form-control" id="rePwdTop" data-match="pwdTop" data-match-error="Doesn't match" placeholder="Re-enter password" name="rePwd" required>
+                                            <input type="password" class="form-control" id="rePwdTop" data-match="#pwdTop" data-match-error="Doesn't match" placeholder="Re-enter password" name="rePwd" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div style="text-align: center">
@@ -91,11 +95,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="pwd">Password:</label>
-                                            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" required>
+                                            <input type="password" class="form-control" id="pwdTrade" placeholder="Enter password" name="pwd" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="rePwd">Re-password:</label>
-                                            <input type="password" class="form-control" id="rePwd" data-match="#pwd" data-match-error="Doesn't match" placeholder="Re-enter password" name="rePwd" required>
+                                            <input type="password" class="form-control" id="rePwd" data-match="#pwdTrade" data-match-error="Doesn't match" placeholder="Re-enter password" name="rePwd" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div style="text-align: center">
@@ -123,19 +127,21 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Number</th>
-                                        <th>Amount</th>
+                                        <th>Account Name</th>
                                         <th>Purpose</th>
+                                        <th>Value</th>
                                         <th>Date</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody>        
+                                <c:forEach var="pro" items="${tranBean.history}">
                                     <tr>
-                                        <td>1</td>
-                                        <td>1000</td>
-                                        <td>Top-up</td>
-                                        <td>20/10/2010</td>
+                                        <td>${pro.accountName}</td>
+                                        <td>${pro.purpose}</td>
+                                        <td>${pro.value}</td>
+                                        <td>${pro.date}</td>                                       
                                     </tr>
+                                 </c:forEach>
                                 </tbody>
                             </table>
                         </div>

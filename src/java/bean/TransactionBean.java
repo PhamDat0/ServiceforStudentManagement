@@ -30,4 +30,7 @@ public class TransactionBean implements Serializable {
         return new BuyBalanceDAO().selectBuyBalanceByName(accountName);
     }
     
+    public List<BuyBalance> getAllHistory() throws Exception {
+        return new BuyBalanceDAO().selectBuyBalance("SELECT * FROM BuyBalance");
+    }
 }
