@@ -30,10 +30,10 @@
                 <!--Filter-->
                 <div class="row">
                     <div class="navbar col-sm-6 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
-                        <form class="form-inline">
+                        <form class="form-inline" id="filterForm">
                             <div class="form-group">
                                 <label for="type">Filter: </label>
-                                <select class="form-control" id="type" name="type">
+                                <select class="form-control" id="type" name="type" onchange="document.forms['filterForm'].submit()">
                                     <option value="0" ${param.type == '0' ? "selected" : ""}>All</option>
                                     <option value="1" ${param.type == '1' ? "selected" : ""}>Student</option>
                                     <option value="2" ${param.type == '2' ? "selected" : ""}>Provider</option>
@@ -41,7 +41,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="form-control" id="status" name="status">
+                                <select class="form-control" id="status" name="status" onchange="document.forms['filterForm'].submit()">
                                     <option value="All" ${param.status == 'All' ? "selected" : ""}>All</option>
                                     <option value="Actived" ${param.status == 'Actived' ? "selected" : ""}>Actived</option>
                                     <option value="Banned" ${param.status == 'Banned' ? "selected" : ""}>Banned</option>

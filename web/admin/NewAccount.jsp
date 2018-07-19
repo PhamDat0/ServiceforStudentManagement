@@ -40,58 +40,69 @@
                         </form>
                         <form action="/ServiceforStudentManagement/AdminController" method="POST">
                             <div class="form-group">
-                                <label for="fullname">Full Name</label>
-                                <input type="text" class="form-control" id="fullname" placeholder="Enter full name" name="fullname">
+                                <label for="username">Username</label>
+                                <input value="${sessionScope.un}" type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+                                <p style="color:red;font-style: italic;">
+                                    ${sessionScope.usernameerror}
+                                </p>
                             </div>
                             <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+                                <label for="fullname">Full Name</label>
+                                <input value="${sessionScope.fn}" type="text" class="form-control" id="fullname" placeholder="Enter full name" name="fullname">
                             </div>
+
                             <div class="form-group">
                                 <label for="pwd">Password:</label>
                                 <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                                <p style="color:red;font-style: italic;">
+                                    ${sessionScope.passworderror}
+                                </p>
                             </div>
                             <div class="form-group">
                                 <label for="repwd">Re-password:</label>
                                 <input type="password" class="form-control" id="repwd" placeholder="Re-enter password" name="repwd">
+                                <p style="color:red;font-style: italic;">
+                                    ${sessionScope.repassworderror}
+                                </p>
                             </div>
                             <c:if test="${param.type == 'student'}">
                                 <div class="form-group">
                                     <label for="roleNumber">Role Number:</label>
-                                    <input type="text" class="form-control" id="roleNumber" placeholder="Enter role number" name="roleNumber">
+                                    <input value="${sessionScope.rn}" type="text" class="form-control" id="roleNumber" placeholder="Enter role number" name="roleNumber">
                                 </div>
                             </c:if>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                                <input value="${sessionScope.em}" type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                                <p style="color:red;font-style: italic;">
+                                    ${sessionScope.emailerror}
+                                </p>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone:</label>
-                                <input type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone">
+                                <input value="${sessionScope.ph}" type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone">
+                                <p style="color:red;font-style: italic;">
+                                    ${sessionScope.phoneerror}
+                                </p>
                             </div>
                             <div class="form-group">
                                 <label for="address">Address:</label>
-                                <textarea class="form-control" rows="5" id="address"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Gender:</label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">Male
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">Female
-                                </label>
+                                <input value="${sessionScope.add}"  type="text" class="form-control" id="address" placeholder="Enter your address" name="address">
+                                <p style="color:red;font-style: italic;">
+                                    ${sessionScope.addresserror}
+                                </p>
                             </div>
                             <div class="form-group">
                                 <label for="date">Date of birth:</label>
-                                <input type="date" class="form-control" id="date" placeholder="Enter date" name="date">
+                                <input value="${sessionScope.da}" type="date" class="form-control" id="date" name="date">
                             </div>
                             <div style="text-align:center">
                                 <button type="submit" class="btn btn-success">Create</button>
-                                <button type="reset" class="btn btn-warning">Clear</button>
+                                <button type="submit" class="btn btn-warning" value="clear" name="action" >Clear</button>
                             </div>
                             <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
                             <input type="hidden" name="action" value="newAccount"/>
+                            <input type="hidden" name="type" value="${param.type}"/>
                         </form>
                     </div>
                 </div>

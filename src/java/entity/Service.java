@@ -34,13 +34,12 @@ public class Service implements Serializable {
         this.picture = picture;
     }
 
-    public Service(String serviceName, String providerName, String detail, Date dateCreated, String status, String picture) {
+    public Service(String serviceName, String providerName, String detail, Date dateCreated, String status) {
         this.serviceName = serviceName;
         this.providerName = providerName;
         this.detail = detail;
         this.dateCreated = dateCreated;
         this.status = status;
-        this.picture = picture;
     }
 
     public String getPicture() {

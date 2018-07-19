@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -172,4 +173,29 @@ public class AccountDAO {
         conn.close();
     }
 
+    public void insertAccount(String accname,String pwd,String email,String fname,String rnum,String add,String phone,String dob,int type) throws Exception {
+        WalletDAO wd=new WalletDAO();
+        wd.insertWallet();
+        int id=wd.getNextWalletID();        
+        Calendar calendar = Calendar.getInstance();
+        java.sql.Date currentdate = new java.sql.Date(calendar.getTime().getTime());
+//        setAccountStatusByName("aaaaa", currentdate+"");
+        String query = "insert into Account values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, accname);
+        ps.setString(2, pwd);
+        ps.setString(3, email);
+        ps.setString(4, fname);
+        ps.setString(5, rnum);
+        ps.setString(6, add);
+        ps.setString(7, phone);
+        ps.setString(8, dob);
+        ps.setInt(9, id);
+        ps.setString(10, currentdate+"");
+        ps.setString(11, "Actived");
+        ps.setInt(12, type);       
+        ps.executeUpdate();
+        conn.close();
+    }
 }

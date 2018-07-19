@@ -5,12 +5,18 @@
  */
 package controller;
 
+import entity.Account;
+import entity.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.ServiceDAO;
 
 /**
  *
@@ -34,11 +40,11 @@ public class ProviderController extends HttpServlet {
             if (request.getParameter("action") != null) {
                 switch (request.getParameter("action")) {
                     case "newProduct": {
-                        newProduct(request,response);
+                        newProduct(request, response);
                         break;
                     }
                     case "registerService": {
-                        registerService(request,response);
+                        registerService(request, response);
                         break;
                     }
                 }
@@ -90,7 +96,19 @@ public class ProviderController extends HttpServlet {
     }
 
     private void registerService(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String serviceName = request.getParameter("txtServiceName");
+            String description = request.getParameter("txtServiceDescription");
+            if (new ServiceDAO().selectServiceByName(serviceName).size() > 0) {
+                response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=registerError");
+            } else {
+                String providerName = ((Account) request.getSession().getAttribute("account")).getAccountName();
+                new ServiceDAO().insertService(new Service(serviceName, providerName, description, new Date(), "Register"));
+                response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1]);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ProviderController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

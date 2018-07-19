@@ -30,10 +30,10 @@
                 <!--Filter-->
                 <div class="row">
                     <div class="navbar col-sm-6 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
-                        <form class="form-inline">
+                        <form class="form-inline" id="filterForm">
                             <div class="form-group">
                                 <label for="type">Filter: </label>
-                                <select class="form-control" id="type" name="type" onchange="document.forms[4].submit()">
+                                <select class="form-control" id="type" name="type" onchange="document.forms['filterForm'].submit()">
                                     <option value="mySer" ${param.type == 'mySer' ? "selected" : ""}>My Service</option>
                                     <option value="actSer" ${param.type == 'actSer' ? "selected" : ""}>Available Service</option>
                                 </select>
@@ -68,7 +68,7 @@
                                         <th>Provider Name</th>
                                         <th>Detail</th>
                                         <c:if test="${sessionScope.account.type == 2
-                                              and param.type == 'mySer'}">
+                                                      and param.type == 'mySer'}">
                                         <th>Status</th>
                                         </c:if>
                                     <th style="text-align: center">Action</th>
@@ -81,8 +81,8 @@
                                         <td>${ser.providerName}</td>
                                         <td>${ser.detail}</td>
                                         <c:if test="${sessionScope.account.type == 2
-                                              and param.type == 'mySer'}">
-                                            <td>${ser.status}</td>
+                                                      and param.type == 'mySer'}">
+                                              <td>${ser.status}</td>
                                         </c:if>
                                         <td style="text-align: center">
                                             <a href="/ServiceforStudentManagement/user/ServiceDetail.jsp?serviceID=${ser.serviceID}">
@@ -97,9 +97,11 @@
                                             </c:if>
                                             <c:if test="${sessionScope.account.type == 2
                                                           and sessionScope.account.accountName == ser.providerName}">
-                                                <input type="submit" class="btn btn-default" value="List User"></input>
-                                                <input type="submit" class="btn btn-default" value="List Product"></input>
-                                                <input type="submit" class="btn btn-default" value="Stop"></input>
+                                                  <input type="submit" class="btn btn-default" value="List User"></input>
+                                                  <a href="/ServiceforStudentManagement/provider/ListProduct.jsp?serviceID=${ser.serviceID}">
+                                                      <button type="button" class="btn btn-default">List Product</button>
+                                                  </a>
+                                                  <input type="submit" class="btn btn-default" value="Stop"></input>
                                             </c:if>
                                         </td>
                                     </tr>

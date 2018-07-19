@@ -40,71 +40,20 @@ public class ServiceDAO {
         return a;
     }
 
+    public List<Service> selectServiceByName(String name) throws Exception { 
+        String query = "SELECT * FROM Service WHERE ServiceName LIKE '" + name + "'";
+        return selectService(query);
+    }
+    
     public List<Service> selectAllService() throws Exception {
-        Connection conn = new DBContext().getConnection();
         String query = "select * from Service";
-        PreparedStatement ps = conn.prepareStatement(query);
-        List<Service> a = new ArrayList<>();
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            int serviceID = rs.getInt("ServiceID");
-            String serviceName = rs.getString("ServiceName");
-            String providerName = rs.getString("ProviderName");
-            String detail = rs.getString("Detail");
-            Date dateCreated = rs.getDate("DateCreated");
-            String status = rs.getString("Status");
-            String picture = rs.getString("Picture");
-            a.add(new Service(serviceName, providerName, detail, dateCreated, status, picture));
-        }
-        rs.close();
-        conn.close();
-        return a;
+        return selectService(query);
     }
 
     public List<Service> selectInUseService(String username) throws Exception {
-        Connection conn = new DBContext().getConnection();
         String query = "select a.ServiceID,a.ServiceName,a.ProviderName,a.Detail,a.DateCreated,b.Status"
-                + " from Service a,[Order] b where a.ServiceID=b.ServiceID and b.UserName=? and b.Status='In use'";
-        PreparedStatement ps = conn.prepareStatement(query);
-        List<Service> a = new ArrayList<>();
-        ps.setString(1, username);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            int serviceID = rs.getInt("ServiceID");
-            String serviceName = rs.getString("ServiceName");
-            String providerName = rs.getString("ProviderName");
-            String detail = rs.getString("Detail");
-            Date dateCreated = rs.getDate("DateCreated");
-            String status = rs.getString("Status");
-            String picture = rs.getString("Picture");
-            a.add(new Service(serviceName, providerName, detail, dateCreated, status, picture));
-        }
-        rs.close();
-        conn.close();
-        return a;
-    }
-
-    public List<Service> selectNotUseService(String username) throws Exception {
-        Connection conn = new DBContext().getConnection();
-        String query = "select a.ServiceID,a.ServiceName,a.ProviderID,a.Detail,a.DateCreated,b.Status"
-                + " from Service a,[Order] b where a.ServiceID=b.ServiceID and b.UserName=? and b.Status='Not use'";
-        PreparedStatement ps = conn.prepareStatement(query);
-        List<Service> a = new ArrayList<>();
-        ps.setString(1, username);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            int serviceID = rs.getInt("ServiceID");
-            String serviceName = rs.getString("ServiceName");
-            String providerName = rs.getString("ProviderName");
-            String detail = rs.getString("Detail");
-            Date dateCreated = rs.getDate("DateCreated");
-            String status = rs.getString("Status");
-            String picture = rs.getString("Picture");
-            a.add(new Service(serviceName, providerName, detail, dateCreated, status, picture));
-        }
-        rs.close();
-        conn.close();
-        return a;
+                + " from Service a,[Order] b where a.ServiceID=b.ServiceID and b.UserName=? and b.Status='In-Use'";
+        return selectService(query);
     }
 
     public void setServiceProfile(int sid, String servicename, String detail) throws Exception {
@@ -135,7 +84,7 @@ public class ServiceDAO {
         ps.setString(1, a.getServiceName());
         ps.setString(2, a.getProviderName());
         ps.setString(3, a.getDetail());
-        ps.setDate(4, (java.sql.Date) a.getDateCreated());
+        ps.setDate(4, new java.sql.Date(a.getDateCreated().getTime()));
         ps.setString(5, a.getStatus());
         ps.setString(6, a.getPicture());
         ps.executeUpdate();

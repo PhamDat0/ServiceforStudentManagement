@@ -18,7 +18,6 @@
     <body>
         <jsp:useBean id="billList" class="bean.BillBean" scope="page"/>
         <jsp:setProperty name="billList" property="account" value="${sessionScope.account}"/>
-        <jsp:setProperty name="billList" property="serviceID" param="serviceID"/>
 
         <jsp:include page="/header.jsp"/>
 
@@ -34,11 +33,6 @@
                         <form class="form-inline">
                             <div class="form-group">
                                 <label for="type">Filter: </label>
-                                <select class="form-control" name="serviceID" onchange="document.forms[4].submit()">
-                                    <c:forEach var="ser" items="${billList.serviceList}">
-                                        <option value="${ser.serviceID}" ${param.serviceID == ser.serviceID ? "selected" : ""}}>${ser.serviceName}</option>
-                                    </c:forEach>
-                                </select>
                                 <select class="form-control" id="type" name="type" onchange="document.forms[4].submit()">
                                     <option value="all" ${param.type == 'all' ? "selected" : ""}>All</option>
                                     <option value="request" ${param.type == 'request' ? "selected" : ""}>Request</option>
@@ -115,6 +109,7 @@
                 </div>
             </div>
         </div>
+                                
         <script>
             $(document).ready(function () {
                 $("#filterName").on("keyup", function () {

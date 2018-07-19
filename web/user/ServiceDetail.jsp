@@ -61,17 +61,19 @@
                                                     <td>${product.quantity}</td>
                                                     <td>${product.price}</td>
                                                     <td>${product.unit}</td>
-                                                    <td>
-                                                        <c:url var="order" value="/user/ServiceDetail.jsp">
-                                                            <c:param name="productID" value="${product.productID}"></c:param>
-                                                            <c:param name="productName" value="${product.productName}"></c:param>
-                                                            <c:param name="productUnit" value="${product.unit}"></c:param>
-                                                            <c:param name="productPrice" value="${product.price}"></c:param>
-                                                            <c:param name="serviceID" value="${param.serviceID}"></c:param>
-                                                            <c:param name="action" value="selectProduct"></c:param>
-                                                        </c:url>
-                                                        <a href="${order}" data-toggle="modal"><button class="btn btn-default">Buy</button></a>
-                                                    </td>
+                                                    <c:if test="${sessionScope.account.type == 1}">
+                                                        <td>
+                                                            <c:url var="order" value="/user/ServiceDetail.jsp">
+                                                                <c:param name="productID" value="${product.productID}"></c:param>
+                                                                <c:param name="productName" value="${product.productName}"></c:param>
+                                                                <c:param name="productUnit" value="${product.unit}"></c:param>
+                                                                <c:param name="productPrice" value="${product.price}"></c:param>
+                                                                <c:param name="serviceID" value="${param.serviceID}"></c:param>
+                                                                <c:param name="action" value="selectProduct"></c:param>
+                                                            </c:url>
+                                                            <a href="${order}" data-toggle="modal"><button class="btn btn-default">Buy</button></a>
+                                                        </td>
+                                                    </c:if>
                                                 </tr>
                                             </c:if>
                                         </c:forEach>
@@ -168,7 +170,7 @@
                             <h3>You want to buy this?</h3>
                         </div>
                         <div class="modal-body">
-                            <form action="/ServiceforStudentManagement/OrderController" method="POST">
+                            <form action="/ServiceforStudentManagement/OrderController" method="POST" data-toggle="validator">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
@@ -183,7 +185,7 @@
                                             <td>${param.productName}</td>
                                             <td>${param.productPrice}</td>
                                             <td>${param.productUnit}</td>
-                                            <td><input type="number" name="txtAmount" value="1" /></td>
+                                            <td><input type="number" name="txtAmount" value="1" required /></td>
                                         </tr>
                                     </tbody>
                                     <input type="hidden" name="action" value="newOrder"/>
@@ -194,7 +196,7 @@
                                 </table>
                                 <div class="form-group">
                                     <label for="des">Destination:</label>
-                                    <input type="text" class="form-control" id="des" name="txtDestination">
+                                    <input type="text" class="form-control" id="des" name="txtDestination" required>
                                 </div>
                                 <div style="text-align:center">
                                     <button type="submit" class="btn btn-success">Yes</button>

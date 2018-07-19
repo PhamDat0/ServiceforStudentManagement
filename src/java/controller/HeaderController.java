@@ -5,6 +5,7 @@
  */
 package controller;
 
+import email.SendMail;
 import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -68,7 +69,8 @@ public class HeaderController extends HttpServlet {
 
     void forgotPassword(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String email = ((Account)request.getSession().getAttribute("account")).getEmail();
+        new SendMail().sendMailChangePassword(email, "123456");
     }
     
     void register(HttpServletRequest request, HttpServletResponse response)

@@ -93,7 +93,9 @@
                                                     <input type="submit" class="btn btn-default" name="btnDelete" value="Delete"/>
                                                 </c:if>
                                                 <c:if test="${ser.status == 'Register'}">
-                                                    <input type="submit" class="btn btn-default" name="btnAccept" value="Accept"/>
+                                                    <a href="/ServiceforStudentManagement/AdminController?action=acceptService&serviceID=${ser.serviceID}">
+                                                        <button type="button" class="btn btn-default">Accept</button>
+                                                    </a>
                                                     <input type="submit" class="btn btn-default" name="btnReject" value="Reject"/>
                                                 </c:if>
                                             </td>
@@ -107,7 +109,7 @@
             </div>
 
         </div>
-            
+
         <script>
             $(document).ready(function () {
                 $("#filterName").on("keyup", function () {

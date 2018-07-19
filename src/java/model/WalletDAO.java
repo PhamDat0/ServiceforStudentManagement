@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -23,8 +24,8 @@ public class WalletDAO {
     public List<Wallet> selectWallet(String query) throws Exception {
         Connection conn = new DBContext().getConnection();
         PreparedStatement ps = conn.prepareStatement(query);
-        List<Wallet> list = new ArrayList<>();       
-        ResultSet rs= ps.executeQuery();
+        List<Wallet> list = new ArrayList<>();
+        ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             int walletID = rs.getInt("WalletID");
             int balance = rs.getInt("Balance");
@@ -35,7 +36,7 @@ public class WalletDAO {
         conn.close();
         return list;
     }
-    
+
     public void insertWallet(Wallet a) throws Exception {
         String query = "insert into Wallet values(?,?)";
         Connection conn = new DBContext().getConnection();
@@ -54,5 +55,31 @@ public class WalletDAO {
         ps.setInt(2, walletid);
         ps.executeUpdate();
         conn.close();
+    }
+
+    public void insertWallet() throws Exception {
+        String query = "insert into Wallet values(?,?)";
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setInt(1, 0);
+        Calendar calendar = Calendar.getInstance();
+        java.sql.Date currentdate = new java.sql.Date(calendar.getTime().getTime());
+        ps.setString(2, currentdate.toString());
+        ps.executeUpdate();
+        conn.close();
+
+    }
+
+    public int getNextWalletID() throws Exception {
+        String query = "select MAX(Wallet.WalletID) as 'WalletID' from Wallet ";
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        int id = 1;
+        while (rs.next()) {
+            id = rs.getInt("WalletID");
+        }
+        conn.close();
+        return id;
     }
 }
