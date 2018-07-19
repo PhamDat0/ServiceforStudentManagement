@@ -86,7 +86,7 @@
                                             <td>${ser.status}</td>
                                             <td style="text-align: center">
                                                 <c:if test="${ser.status != 'Register'}">
-                                                    <a href="/ServiceforStudentManagement/ServiceDetail.jsp?serviceID=${ser.serviceID}">
+                                                    <a href="/ServiceforStudentManagement/user/ServiceDetail.jsp?serviceID=${ser.serviceID}">
                                                         <button type="button" class="btn btn-default">View</button>
                                                     </a>
                                                     <input type="submit" class="btn btn-default" name="btnChangeStatus" value="${ser.status == 'Actived'? "Banned" : "Actived"}"/>

@@ -159,15 +159,15 @@ public class OrderController extends HttpServlet {
                         new OrderDAO().setOrderStatus(Integer.valueOf(request.getParameter("orderID")), "Shipping");
                     } else {
                         new OrderDAO().setOrderStatus(Integer.valueOf(request.getParameter("orderID")), "In-Use");
-                        Account customer = new AccountDAO().selectAccountByName(o.getUserName()).get(0);
-                        Account provider = new AccountDAO().selectAccountByName(o.getUserName()).get(0);
-                        new WalletDAO().setBalance(customer.getWalletID(),
-                                new WalletDAO().selectWalletByID(customer.getWalletID()).get(0).getBalance()
-                                - o.getQuantity() * o.getPrice());
-                        new WalletDAO().setBalance(provider.getWalletID(),
-                                new WalletDAO().selectWalletByID(provider.getWalletID()).get(0).getBalance()
-                                + o.getQuantity() * o.getPrice());
                     }
+                    Account customer = new AccountDAO().selectAccountByName(o.getUserName()).get(0);
+                    Account provider = new AccountDAO().selectAccountByName(o.getUserName()).get(0);
+                    new WalletDAO().setBalance(customer.getWalletID(),
+                            new WalletDAO().selectWalletByID(customer.getWalletID()).get(0).getBalance()
+                            - o.getQuantity() * o.getPrice());
+                    new WalletDAO().setBalance(provider.getWalletID(),
+                            new WalletDAO().selectWalletByID(provider.getWalletID()).get(0).getBalance()
+                            + o.getQuantity() * o.getPrice());
                     break;
                 }
                 case "reject": {

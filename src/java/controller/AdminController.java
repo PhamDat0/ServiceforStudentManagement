@@ -246,7 +246,7 @@ public class AdminController extends HttpServlet {
                 session.removeAttribute("ph");
                 session.removeAttribute("da");
                 session.removeAttribute("add");
-                response.sendRedirect("/ServiceforStudentManagement/admin/NewAccount.jsp");
+                response.sendRedirect("/ServiceforStudentManagement/admin/ListAccount.jsp");
             } else {
                 if (!validusername(accname)) {
                     session.setAttribute("usernameerror", "User name không khả dụng");

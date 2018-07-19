@@ -28,10 +28,10 @@
                         <h3 style="text-align: center">CREATE NEW ACCOUNT</h3>
                     </div>
                     <div class="panel-body">
-                        <form>
+                        <form id="filter">
                             <div class="form-group">
                                 <label for="type">Type:</label>
-                                <select class="form-control" id="type" name="type" onchange="document.forms[4].submit()">
+                                <select class="form-control" id="type" name="type" onchange="document.forms['filter'].submit()">
                                     <option value="provider" ${param.type == 'provider' ? "selected" : ""}>Provider</option>
                                     <option value="student" ${param.type == 'student' ? "selected" : ""}>Student</option>
                                     <option value="admin" ${param.type == 'admin' ? "selected" : ""}>Administrator</option>
