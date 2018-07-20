@@ -28,7 +28,8 @@ public class RegisterProduct {
     
     public List<Service> getService() throws Exception {
         if (serviceList == null) {
-            String query = "SELECT * FROM Service WHERE ProviderName LIKE '" + providerName + "'";
+            String query = "SELECT * FROM Service WHERE ProviderName LIKE '" + providerName + "'"
+                    + " AND Status LIKE 'Actived'";
             serviceList = new ServiceDAO().selectService(query);
         }
         return serviceList;

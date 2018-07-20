@@ -51,7 +51,8 @@ public class OrderBean implements Serializable {
     }
     
     public String getServiceName() throws Exception {
-        String query = "SELECT * FROM Service WHERE ServiceID = " + serviceID;
+        String query = "SELECT * FROM Service WHERE ServiceID = " + serviceID 
+                + " AND Status LIKE 'Actived'";
         return new ServiceDAO().selectService(query).get(0).getServiceName();
     }
     

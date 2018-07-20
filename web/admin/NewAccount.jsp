@@ -38,7 +38,7 @@
                                 </select>
                             </div>
                         </form>
-                        <form action="/ServiceforStudentManagement/AdminController" method="POST">
+                        <form action="/ServiceforStudentManagement/AdminController" method="POST" data-toggle="validator">
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input value="${sessionScope.un}" type="text" class="form-control" id="username" placeholder="Enter username" name="username">
@@ -80,7 +80,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone:</label>
-                                <input value="${sessionScope.ph}" type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone">
+                                <input value="${sessionScope.ph}" type="number" data-minlength="9" data-maxlength="10" class="form-control" id="phone" placeholder="Enter phone" name="phone">
                                 <p style="color:red;font-style: italic;">
                                     ${sessionScope.phoneerror}
                                 </p>

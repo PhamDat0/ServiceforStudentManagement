@@ -10,6 +10,7 @@ import entity.Service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -123,5 +124,12 @@ public class ServiceDAO {
             }
         }
         return s;
+    }
+    
+    public void deleteService(int id) throws Exception {
+        Connection conn = new DBContext().getConnection();
+        String query = "DELETE * FROM Service WHERE ServiceID = " + id;
+        conn.createStatement().executeUpdate(query);
+        conn.close();
     }
 }

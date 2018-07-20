@@ -69,6 +69,10 @@ public class AdminController extends HttpServlet {
                         changeStatusService(request, response);
                         break;
                     }
+                    case "rejectService": {
+                        rejectService(request, response);
+                        break;
+                    }
                 }
             }
         }
@@ -296,6 +300,16 @@ public class AdminController extends HttpServlet {
                 response.sendRedirect("/ServiceforStudentManagement/admin/NewAccount.jsp");
             }
         } catch (Exception e) {
+        }
+    }
+
+    private void rejectService(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            int serviceID = Integer.valueOf(request.getParameter("serviceID"));
+            new ServiceDAO().deleteService(serviceID);
+            response.sendRedirect("/ServiceforStudentManagement/admin/ListService.jsp");
+        } catch (Exception ex) {
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

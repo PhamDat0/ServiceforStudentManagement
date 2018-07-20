@@ -74,26 +74,39 @@ public class HeaderController extends HttpServlet {
         Account acc = new AccountDAO().selectAccountByName(username).get(0);
         if (acc.getEmail().equals(mail)) {
             new SendMail().sendMailChangePassword(mail, acc.getPassword());
-            response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=successGetPassword"); 
+            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=successGetPassword");
         } else {
-            response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=forgotError"); 
+            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=forgotError");
         }
-        
+
     }
-    
+
     void register(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //get data
-        
-        //validate
-        
-        //insert into Account table
-        
-        //login - init session
-        
-        //redirect
+        try {
+            //get data
+            String username = request.getParameter("txtAccountNameRegis");
+            if (new AccountDAO().selectAccountByName(username).size() == 0) {
+                String roleNumber = request.getParameter("rolenumber");
+                if (new AccountDAO().selectAccount("SELECT * FROM Account WHERE RoleNumber LIKE '" + roleNumber + "'").size() == 0) {
+                    String password = request.getParameter("pwdRegis");
+                    String fullname = request.getParameter("txtNameRegis");
+                    String phone = request.getParameter("phoneRegis");
+                    String date = request.getParameter("txtDateRegis");
+                    String mail = request.getParameter("txtEmailRegis");
+                    String address = request.getParameter("txtAddress");
+                    new AccountDAO().insertAccount(username, password, mail, fullname, roleNumber, address, phone, date, 1);
+                    response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=successRegis");
+                    return;
+                }
+            }
+        } catch (Exception ex) {
+            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=regisError");
+            return;
+        }
+        response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=regisError");
     }
-    
+
     void login(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -104,17 +117,18 @@ public class HeaderController extends HttpServlet {
             //validate
             if (!list.isEmpty()) {
                 Account acc = list.get(0);
-                if (acc.getPassword().equals(password)) {
+                if (acc.getPassword().equals(password)
+                        && acc.getStatus().equals("Actived")) {
                     //init session
                     HttpSession session = request.getSession();
                     session.setAttribute("account", acc);
                     //redirect current page
-                    response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1]); 
+                    response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1]);
                     return;
                 }
             }
             //redirect current link with param error
-            response.sendRedirect("/ServiceforStudentManagement"+request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=loginError"); 
+            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=loginError");
             return;
         } catch (Exception ex) {
             Logger.getLogger(HeaderController.class.getName()).log(Level.SEVERE, null, ex);

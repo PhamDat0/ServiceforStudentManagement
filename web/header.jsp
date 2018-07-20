@@ -88,15 +88,15 @@
             </div>
 
             <!-- Sign up Modal -->
-            <div id="signupModal" class="modal fade in" role="dialog" >
+            <div id="signupModal" class="modal fade in" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-body">
-                            <form data-toggle="validator" role="form">
+                            <form action="/ServiceforStudentManagement/HeaderController" data-toggle="validator" role="form">
                                 <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
+                                    <label for="username">Username: </label>
+                                    <input type="text" class="form-control" id="username" placeholder="Enter username" name="txtAccountNameRegis" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="pwdRegis">Password:</label>
@@ -109,32 +109,38 @@
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="fullName">Full Name: </label>
+                                    <input type="text" class="form-control" id="username" placeholder="Enter your full name" name="txtNameRegis" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="roleNumber">Role Number:</label>
                                     <input type="text" class="form-control" id="roleNumber" placeholder="Enter role number" name="roleNumber" required>
+                                    <div class="help-block">Your role number you had</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email: </label>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="txtEmailRegis" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Phone:</label>
-                                    <input type="number" data-minlength="9" data-maxlength="10" class="form-control" id="phone" placeholder="Enter phone" name="phone" required>
+                                    <input type="number" data-minlength="9" data-maxlength="10" class="form-control" data-error="Phone length not valid" id="phone" placeholder="Enter phone" name="phoneRegis" required>
+                                    <div class="help-block with-errors"></div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Gender:</label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="optradio">Male
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="optradio">Female
-                                    </label>
-                                </div>
-
                                 <div class="form-group">
                                     <label for="date">Date:</label>
-                                    <input type="date" class="form-control" id="date" placeholder="Enter date" name="date" required>
+                                    <input type="date" class="form-control" id="date" placeholder="Enter date" name="txtDateRegis" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address </label>
+                                    <textarea class="form-control" rows="5" id="address" name="txtAddress" required></textarea>
                                 </div>
                                 <div style="text-align:center">
                                     <button type="submit" class="btn btn-success">Register</button>
                                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#forgotModal" data-dismiss="modal">Forgot Password</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                 </div>
+                                <input type="hidden" name="action" value="register"/>
+                                <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
                             </form>
                         </div>
                     </div>

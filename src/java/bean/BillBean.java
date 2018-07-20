@@ -63,7 +63,8 @@ public class BillBean implements Serializable {
         if (serviceID == 0) {
             serviceID = getServiceList().get(0).getServiceID();
         }
-        String query = "SELECT * FROM Service WHERE ServiceID = " + serviceID;
+        String query = "SELECT * FROM Service WHERE ServiceID = " + serviceID 
+                + " AND Status LIKE 'Actived'";
         return new ServiceDAO().selectService(query).get(0).getServiceName();
     }
 }

@@ -27,13 +27,13 @@ public class InformationBarBean implements Serializable {
     
     public List<Account> getNewAccount() throws Exception {
         String query = "SELECT TOP(5) * FROM Account "
-                + "WHERE Type < 3"
-                + "ORDER BY DateCreated DESC";
+                + " WHERE Type < 3 AND Status LIKE 'Actived'"
+                + " ORDER BY DateCreated DESC";
         return new AccountDAO().selectAccount(query);
     }
     
     public List<Service> getNewService() throws Exception {
-        String query = "SELECT TOP(5) * FROM Service ORDER BY DateCreated DESC";
+        String query = "SELECT TOP(5) * FROM Service WHERE Status LIKE 'Actived' ORDER BY DateCreated DESC";
         return new ServiceDAO().selectService(query);
     }
 }

@@ -19,8 +19,8 @@
         <jsp:include page="/header.jsp"/>
         <jsp:useBean id="listService" class="bean.RegisterProduct" scope="page"/>
         <jsp:setProperty name="listService" property="providerName" value="${sessionScope.account.accountName}"/>
-        
-        
+
+
         <div class="container-fluid row">
 
             <jsp:include page="/functionBar.jsp"/>
@@ -31,7 +31,7 @@
                         <h3 style="text-align: center">CREATE NEW PRODUCT</h3>
                     </div>
                     <div class="panel-body">
-                        <form action="/ServiceforStudentManagement/ProviderController" method="POST">
+                        <form action="/ServiceforStudentManagement/ProviderController" method="POST" data-toggle="validator">
                             <div class="form-group">
                                 <label for="serviceName">Service Name: </label>
                                 <select name="drServiceName" class="btn btn-default">
@@ -42,35 +42,36 @@
                             </div>
                             <div class="form-group">
                                 <label for="productName">Product Name: </label>
-                                <input value="${sessionScope.proname}" type="text" class="form-control" id="productName" placeholder="Enter product name" name="txtProductName">
+                                <input value="${sessionScope.proname}" type="text" class="form-control" id="productName" placeholder="Enter product name" name="txtProductName" required>
                             </div>
                             <p style="color:red;font-style: italic;">
                                 ${sessionScope.productnameerror}
                             </p>
                             <div class="form-group">
                                 <label for="price">Price: </label>
-                                <input value="${sessionScope.proprice}" type="text" class="form-control" id="price" placeholder="Enter price" name="txtPrice">
+                                <input value="${sessionScope.proprice}" type="number" class="form-control" id="price" placeholder="Enter price" name="txtPrice" required>
                                 <p style="color:red;font-style: italic;">
-                                ${sessionScope.priceerror}
-                            </p>
+                                    ${sessionScope.priceerror}
+                                </p>
                             </div>
                             <div class="form-group">
                                 <label for="quantity">Quantity: </label>
-                                <input value="${sessionScope.proquantity}" type="text" class="form-control" id="price" placeholder="Enter quantity" name="txtQuantity">
-                            <p style="color:red;font-style: italic;">
-                            ${sessionScope.quantityerror}
-                            </p>
+                                <input value="${sessionScope.proquantity}" type="number" class="form-control" id="price" placeholder="Enter quantity" name="txtQuantity"required>
+                                <p style="color:red;font-style: italic;">
+                                    ${sessionScope.quantityerror}
+                                </p>
                             </div>
                             <div class="form-group">
                                 <label for="unit">Unit: </label>
-                                <input value="${sessionScope.prounit}" type="text" class="form-control" id="unit" placeholder="Enter unit (day, piece,...)" name="txtUnit">
+                                <label class="radio-inline"><input type="radio" name="unit" value="piece" required>Piece</label>
+                                <label class="radio-inline"><input type="radio" name="unit" value="day" required>Day</label>
                             </div>
                             <p style="color:red;font-style: italic;">
-                            ${sessionScope.uniterror}
+                                ${sessionScope.uniterror}
                             </p>
                             <div class="form-group">
                                 <label for="description">Description: </label>
-                                <textarea class="form-control" rows="5" id="description" name="txtDescription"></textarea>
+                                <textarea class="form-control" rows="5" id="description" name="txtDescription" required></textarea>
                             </div>
                             <p style="color:red;font-style: italic;">
                                 ${sessionScope.deserror}
