@@ -210,6 +210,30 @@
                 </div>
             </div>
         </c:if>
-
+            
+        <c:if test="${param.error == 'amountError'
+              or param.error == 'balanceError'}">
+            <script type="text/javascript">
+                $(window).on('load', function () {
+                    $('#noticeTransModal').modal('show');
+                });
+            </script>
+            <div class="modal fade" id="noticeTransModal" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Notice</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Order fail!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:if>
     </body>
 </html>
