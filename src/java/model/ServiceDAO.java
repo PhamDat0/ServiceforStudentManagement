@@ -108,7 +108,7 @@ public class ServiceDAO {
     public List<Service> selectServiceByID(int ID) throws Exception {
         List<Service> s;
         try (Connection conn = new DBContext().getConnection()) {
-            String query = "select * from Service where ServiceID LIKE '" + ID + "'";
+            String query = "select * from Service where ServiceID = " + ID + "";
             System.out.println(query);
             PreparedStatement ps = conn.prepareStatement(query);
             s = new ArrayList<>();

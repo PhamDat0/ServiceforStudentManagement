@@ -17,7 +17,16 @@ import model.BuyBalanceDAO;
 public class TransactionBean implements Serializable {
     
     private String accountName;
+    private String selectType = "All";
 
+    public String getSelectType() {
+        return selectType;
+    }
+
+    public void setSelectType(String selectType) {
+        this.selectType = selectType;
+    }
+    
     public String getAccountName() {
         return accountName;
     }
@@ -31,6 +40,15 @@ public class TransactionBean implements Serializable {
     }
     
     public List<BuyBalance> getAllHistory() throws Exception {
-        return new BuyBalanceDAO().selectBuyBalance("SELECT * FROM BuyBalance");
+        String query = "SELECT * FROM BuyBalance";
+        if (!selectType.equals("All")) {
+            if (selectType.equals("Topup")) {
+                query += " WHERE Purpose LIKE 'Topup'";
+            } else {
+                query += " WHERE Purpose NOT LIKE 'Topup'";
+            }
+        }
+        System.out.println(query);
+        return new BuyBalanceDAO().selectBuyBalance(query);
     }
 }

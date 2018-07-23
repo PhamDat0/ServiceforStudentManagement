@@ -56,4 +56,13 @@ public class ViewServiceBean implements Serializable {
         }
         return new ServiceDAO().selectService(query);
     }
+    
+    public List<Service> getAllService() throws Exception {
+        String query = "SELECT * FROM Service";
+        if (!selectType.equals("") && !selectType.equals("All")) {
+            query += " WHERE Status LIKE '" + selectType + "'";
+        }
+        System.out.println(query);
+        return new ServiceDAO().selectService(query);
+    }
 }

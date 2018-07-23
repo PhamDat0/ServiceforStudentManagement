@@ -10,8 +10,6 @@ import entity.ServiceReview;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +38,7 @@ public class RatingController extends HttpServlet {
             if (request.getParameter("action") != null) {
                 switch (request.getParameter("action")) {
                     case "rating": {
-                        rating(request,response);
+                        rating(request, response);
                         break;
                     }
                 }
@@ -87,16 +85,20 @@ public class RatingController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void rating(HttpServletRequest request, HttpServletResponse response) {
+    private void rating(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             int serviceID = Integer.valueOf(request.getParameter("serviceID"));
             int rate = Integer.valueOf(request.getParameter("rate"));
-            String name = ((Account)request.getSession().getAttribute("account")).getAccountName();
+            String name = ((Account) request.getSession().getAttribute("account")).getAccountName();
             String comment = request.getParameter("txtComment");
-            new ServiceReviewDAO().insertServiceReview(new ServiceReview(serviceID, name, rate, comment, new Date(), "Actived"));
-            response.sendRedirect("/ServiceforStudentManagement/user/ServiceDetail.jsp?serviceID="+serviceID);
+            if (new ServiceReviewDAO().selectServiceReviewByServiceIDAndUser(serviceID, name).size() > 0) {
+                new ServiceReviewDAO().updateReview(new ServiceReview(serviceID, name, rate, comment, new Date(), "Actived"));
+            } else {
+                new ServiceReviewDAO().insertServiceReview(new ServiceReview(serviceID, name, rate, comment, new Date(), "Actived"));
+            }
+            response.sendRedirect("/ServiceforStudentManagement/user/ServiceDetail.jsp?serviceID=" + serviceID);
         } catch (Exception ex) {
-            Logger.getLogger(RatingController.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("/ServiceforStudentManagement/Home.jsp");
         }
     }
 

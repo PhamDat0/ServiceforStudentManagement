@@ -39,19 +39,15 @@ public class ServiceReviewDAO {
         return a;
     }
     
-    public List<ServiceReview> selectServiceReviewRating(String query) throws Exception {
+    public List<ServiceReview> selectServiceReviewTop(String query) throws Exception {
         Connection conn = new DBContext().getConnection();
         PreparedStatement ps = conn.prepareStatement(query);
         List<ServiceReview> a = new ArrayList<>();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             int serviceID = rs.getInt("ServiceID");
-            String username = rs.getString("UserName");
             int rating = rs.getInt("Rating");
-            String comment = rs.getString("Comment");
-            Date date = rs.getDate("Date");
-            String status = rs.getString("Status");
-            a.add(new ServiceReview(serviceID, username, rating, comment, date, status));
+            a.add(new ServiceReview(serviceID, rating));
         }
         rs.close();
         conn.close();
@@ -92,5 +88,14 @@ public class ServiceReviewDAO {
         ps.executeUpdate();
         conn.close();
     }
-
+    
+    public void updateReview(ServiceReview serviceReview) throws Exception {
+        String query = "UPDATE ServiceReview SET Rating = " + serviceReview.getRating() 
+                + " , Comment = '" + serviceReview.getComment() +"' WHERE ServiceID = " 
+                + serviceReview.getServiceID() + " AND UserName LIKE '" + serviceReview.getUserName() +"'";
+        System.out.println(query);
+        Connection conn = new DBContext().getConnection();
+        conn.createStatement().executeUpdate(query);
+        conn.close();
+    }
 }

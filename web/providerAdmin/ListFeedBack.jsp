@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,6 +16,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <jsp:useBean id="feedbackBean" class="bean.FeedbackBean" scope="page"/>
+        <jsp:setProperty name="feedbackBean" property="account" value="${sessionScope.account}"/>
+        <jsp:setProperty name="feedbackBean" property="selectType" param="selectType"/>
+        
         <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
@@ -24,9 +29,16 @@
             <div class="col-sm-10">
                 <!--Filter-->
                 <div class="row">
-                    <div class="navbar col-sm-4 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
-                        <form class="form-inline">
-                            <label for="type">Filter: </label>
+                    <div class="navbar col-sm-5 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
+                        <form class="form-inline" id="filterForm">
+                            <label for="selectType">Filter: </label>
+                            <div class="form-group">
+                                <select class="form-control" id="selectType" name="selectType" onchange="document.forms['filterForm'].submit()">
+                                    <option value="All" ${param.selectType == 'All' ? "selected" : ""}>All</option>
+                                    <option value="Seen" ${param.selectType == 'Seen' ? "selected" : ""}>Seen</option>
+                                    <option value="Not Seen" ${param.selectType == 'Not Seen' ? "selected" : ""}>Not Seen</option>
+                                </select>
+                            </div>
                             <div class="input-group" class="text-center">
                                 <input type="text" class="form-control" id="filterName" placeholder="Enter account here">
                                 <div class="input-group-btn">
@@ -42,40 +54,36 @@
                 <div class="row">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 style="text-align: center">FEEDBACK/REPORT LIST</h3>
+                            <h3 style="text-align: center">FEEDBACK LIST</h3>
                         </div>
                         <div class="panel-body">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Number</th>
-                                        <th>Report ID</th>
-                                        <th>Account ID</th>
-                                        <th>Detail</th>                 
+                                        <th>Sender</th>
+                                        <th>Title</th>
+                                        <th>Detail</th>
+                                        <th>Date</th>                 
+                                        <th>Status</th>                 
                                         <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>R1</td>
-                                        <td>AC1</td>
-                                        <td>Thai do phuc vu cua nhan vien qua te</td>
-                                        <td style="text-align: center">
-                                            <input type="submit" class="btn btn-success" value="Send"></input>
-                                            <input type="submit" class="btn btn-danger" value="Delete"></input>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>R2</td>
-                                        <td>AC2</td>
-                                        <td>Gia ca qua cao</td>
-                                        <td style="text-align: center">
-                                            <input type="submit" class="btn btn-success" value="Send"></input>
-                                            <input type="submit" class="btn btn-danger" value="Delete"></input>
-                                        </td>
-                                    </tr>               
+                                    <c:forEach var="feedback" items="${feedbackBean.feedbackList}">
+                                        <tr>
+                                            <td>${feedback.senderName}</td>
+                                            <td>${feedback.title}</td>
+                                            <td>${feedback.detail}</td>
+                                            <td>${feedback.date}</td>
+                                            <td>${feedback.status}</td>
+                                            <td style="text-align: center">
+                                                <c:if test="${feedback.status != 'Seen'}">
+                                                    <a href="/ServiceforStudentManagement/FeedbackController?action=seenFeedback&feedbackID=${feedback.id}" class="btn btn-default">Seen</a>
+                                                </c:if>
+                                                <a href="/ServiceforStudentManagement/FeedbackController?action=deleteFeedback&feedbackID=${feedback.id}" class="btn btn-default">Delete</a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>

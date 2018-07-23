@@ -44,7 +44,7 @@
 
                         <select class="form-control" id="service" name="receiver">
                             <c:forEach var="ser" items="${service.serviceList}">
-                                <option value="${ser.providerName}">${ser.serviceName}</option>
+                                <option value="${ser.providerName}" ${param.serviceName == ser.serviceName ? "selected" : ""}>${ser.serviceName}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -67,8 +67,8 @@
                         <button type="button" class="btn btn-default">Cancel</button>
                     </a>
                     <input type="hidden" name="sender" value="${sessionScope.account.accountName}"/>
+                    <input type="hidden" name="action" value="newFeedback"/>
             </form>
-
         </div>
     </body>
 </html>

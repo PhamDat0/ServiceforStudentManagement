@@ -18,12 +18,21 @@ import model.ServiceDAO;
  * @author Phong
  */
 public class OrderBean implements Serializable {
-    
+
     private Account account;
     private int productID, serviceID;
+    private String selectType = "all";
 
     public Account getAccount() {
         return account;
+    }
+
+    public String getSelectType() {
+        return selectType;
+    }
+
+    public void setSelectType(String selectType) {
+        this.selectType = selectType;
     }
 
     public void setAccount(Account account) {
@@ -45,23 +54,28 @@ public class OrderBean implements Serializable {
     public void setServiceID(int serviceID) {
         this.serviceID = serviceID;
     }
-    
+
     public String getProductName() throws Exception {
         return new ProductDAO().selectProductByProductID(productID).get(0).getProductName();
     }
-    
+
     public String getServiceName() throws Exception {
-        String query = "SELECT * FROM Service WHERE ServiceID = " + serviceID 
+        String query = "SELECT * FROM Service WHERE ServiceID = " + serviceID
                 + " AND Status LIKE 'Actived'";
         return new ServiceDAO().selectService(query).get(0).getServiceName();
     }
-    
+
     public List<Order> getOrder() throws Exception {
+        String query;
         if (account.getType() == 2) {
-            return new OrderDAO().selectOrderByProviderName(account.getAccountName());
+            query = "select * from [Order] where ProviderName = '" + account.getAccountName() + "'";
         } else {
-            return new OrderDAO().selectOrderByUserName(account.getAccountName());
+            query = "select * from [Order] where UserName = '" + account.getAccountName() + "'";
         }
+        if (!selectType.equals("all")) {
+            query += " AND Status LIKE '" + selectType + "'";
+        }
+        return new OrderDAO().selectOrder(query);
     }
 
 }

@@ -121,7 +121,7 @@ public class OrderController extends HttpServlet {
                 response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?serviceID=" + serviceID + "&error=balanceError");
             } else {
                 try {
-                    if (product.getUnit().equals("piece")) {
+                    if (product.getUnit().equalsIgnoreCase("piece")) {
                         new ProductDAO().setQuantity(product.getProductID(), product.getQuantity() - amount);
                     }
 
@@ -135,7 +135,7 @@ public class OrderController extends HttpServlet {
                     Date startDate = cal.getTime();
                     Date endDate = cal.getTime();
                     String status = "Request";
-                    if (product.getUnit().equals("day")) {
+                    if (product.getUnit().equalsIgnoreCase("day")) {
                         cal.add(Calendar.DATE, product.getQuantity());
                         endDate = cal.getTime();
                     }
@@ -161,7 +161,7 @@ public class OrderController extends HttpServlet {
                         new OrderDAO().setOrderStatus(Integer.valueOf(request.getParameter("orderID")), "In-Use");
                     }
                     Account customer = new AccountDAO().selectAccountByName(o.getUserName()).get(0);
-                    Account provider = new AccountDAO().selectAccountByName(o.getUserName()).get(0);
+                    Account provider = new AccountDAO().selectAccountByName(o.getProviderName()).get(0);
                     new WalletDAO().setBalance(customer.getWalletID(),
                             new WalletDAO().selectWalletByID(customer.getWalletID()).get(0).getBalance()
                             - o.getQuantity() * o.getPrice());

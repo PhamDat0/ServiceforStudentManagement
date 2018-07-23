@@ -17,7 +17,7 @@
     </head>
     <body>
         <jsp:useBean id="serviceBean" class="bean.ViewServiceBean" scope="page"/>
-        <jsp:setProperty name="serviceBean" property="selectType" value="allSer"/>
+        <jsp:setProperty name="serviceBean" property="selectType" param="selectType"/>
 
         <jsp:include page="/header.jsp"/>
 
@@ -29,21 +29,14 @@
                 <!--Filter-->
                 <div class="row">
                     <div class="navbar col-sm-6 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
-                        <form class="form-inline">
+                        <form class="form-inline" id="filterForm">
                             <div class="form-group">
                                 <label for="type">Filter: </label>
-                                <select class="form-control" id="type">
-                                    <option>All</option>
-                                    <option>Actived</option>
-                                    <option>Banned</option>
-                                    <option>Register</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control" id="type">
-                                    <option>All</option>
-                                    <option>Service</option>
-                                    <option>Provider</option>
+                                <select class="form-control" id="type" name="selectType" onchange="document.forms['filterForm'].submit()">
+                                    <option value="All" ${param.selectType == 'All' ? "selected" : ""}>All</option>
+                                    <option value="Actived" ${param.selectType == 'Actived' ? "selected" : ""}>Actived</option>
+                                    <option value="Banned" ${param.selectType == 'Banned' ? "selected" : ""}>Banned</option>
+                                    <option value="Register" ${param.selectType == 'Register' ? "selected" : ""}>Register</option>
                                 </select>
                             </div>
                             <div class="input-group" class="text-center">
@@ -77,7 +70,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="ser" items="${serviceBean.service}">
+                                    <c:forEach var="ser" items="${serviceBean.allService}">
                                         <tr>
                                             <td>${ser.serviceName}</td>
                                             <td>${ser.providerName}</td>
@@ -97,7 +90,9 @@
                                                     <a href="/ServiceforStudentManagement/AdminController?action=acceptService&serviceID=${ser.serviceID}">
                                                         <button type="button" class="btn btn-default">Accept</button>
                                                     </a>
-                                                    <input type="submit" class="btn btn-default" name="btnReject" value="Reject"/>
+                                                    <a href="/ServiceforStudentManagement/AdminController?action=rejectService&serviceID=${ser.serviceID}">
+                                                        <button type="button" class="btn btn-default">Reject</button>
+                                                    </a>
                                                 </c:if>
                                             </td>
                                         </tr>

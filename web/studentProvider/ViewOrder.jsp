@@ -18,6 +18,7 @@
     <body>
         <jsp:useBean id="viewOrder" class="bean.OrderBean" scope="page"/>
         <jsp:setProperty name="viewOrder" property="account" value="${sessionScope.account}"/>
+        <jsp:setProperty name="viewOrder" property="selectType" param="type"/>
 
         <jsp:include page="/header.jsp"/>
 
@@ -30,15 +31,15 @@
                 <!--Filter-->
                 <div class="row">
                     <div class="navbar col-sm-6 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
-                        <form class="form-inline">
+                        <form class="form-inline" id="filter">
                             <div class="form-group">
                                 <label for="type">Filter: </label>
-                                <select class="form-control" id="type" name="type" onchange="document.forms[4].submit()">
+                                <select class="form-control" id="type" name="type" onchange="document.forms['filter'].submit()">
                                     <option value="all" ${param.type == 'all' ? "selected" : ""}>All</option>
-                                    <option value="request" ${param.type == 'request' ? "selected" : ""}>Request</option>
-                                    <option value="shipping" ${param.type == 'shipping' ? "selected" : ""}>Shipping</option>
-                                    <option value="inUse" ${param.type == 'inUse' ? "selected" : ""}>In-Use</option>
-                                    <option value="finished" ${param.type == 'finished' ? "selected" : ""}>Finished</option>
+                                    <option value="Request" ${param.type == 'Request' ? "selected" : ""}>Request</option>
+                                    <option value="Shipping" ${param.type == 'Shipping' ? "selected" : ""}>Shipping</option>
+                                    <option value="In-Use" ${param.type == 'In-Use' ? "selected" : ""}>In-Use</option>
+                                    <option value="Finished" ${param.type == 'Finished' ? "selected" : ""}>Finished</option>
                                 </select>
                             </div>
                             <div class="input-group" class="text-center">

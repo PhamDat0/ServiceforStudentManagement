@@ -90,7 +90,7 @@
                                             </a>
                                             <c:if test="${sessionScope.account.type == 1}">
                                                 <input type="submit" class="btn btn-default" value="Feedback"></input>
-                                                <c:if test="${param.type != 'actSer'}">
+                                                <c:if test="${param.type == 'mySer'}">
                                                     <input type="submit" class="btn btn-default" value="Rating"></input>
                                                     <input type="submit" class="btn btn-default" value="Stop Using"></input>
                                                 </c:if>

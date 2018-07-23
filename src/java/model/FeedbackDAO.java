@@ -20,28 +20,13 @@ import java.util.List;
  */
 public class FeedbackDAO {
 
-    public List<Feedback> selectAllReport() throws Exception {
-        Connection conn = new DBContext().getConnection();
+    public List<Feedback> selectAllFeedback() throws Exception {
         String query = "select * from Feedback";
-        PreparedStatement ps = conn.prepareStatement(query);
-        List<Feedback> a = new ArrayList<>();
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            String receiverName = rs.getString("ReceiverName");
-            String senderName = rs.getString("SenderName");
-            String title = rs.getString("Title");
-            String detail = rs.getString("Detail");
-            Date date = rs.getDate("Date");
-            String status = rs.getString("Status");
-            a.add(new Feedback(receiverName,senderName, title, detail, date, status));
-        }
-        rs.close();
-        conn.close();
-        return a;
+        return selectFeedback(query);
     }
 
     public void setReportStatus(int rid, String status) throws Exception {
-        String query = "update Feedback set Status=? where ReportID=?";
+        String query = "update Feedback set Status=? where FeedbackID=?";
         Connection conn = new DBContext().getConnection();
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1, status);
@@ -61,6 +46,33 @@ public class FeedbackDAO {
         ps.setDate(5, new java.sql.Date(a.getDate().getTime()));
         ps.setString(6, a.getStatus());
         ps.executeUpdate();
+        conn.close();
+    }
+
+    public List<Feedback> selectFeedback(String query) throws Exception {
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+        List<Feedback> a = new ArrayList<>();
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("FeedbackID");
+            String receiverName = rs.getString("Receiver");
+            String senderName = rs.getString("SenderName");
+            String title = rs.getString("Title");
+            String detail = rs.getString("Detail");
+            Date date = rs.getDate("Date");
+            String status = rs.getString("Status");
+            a.add(new Feedback(id,receiverName, senderName, title, detail, date, status));
+        }
+        rs.close();
+        conn.close();
+        return a;
+    }
+
+    public void deleteFeedback(int feedbackID) throws Exception {
+        Connection conn = new DBContext().getConnection();
+        String query = "DELETE FROM Feedback WHERE FeedbackID = " + feedbackID;
+        conn.createStatement().executeUpdate(query);
         conn.close();
     }
 }

@@ -21,7 +21,7 @@
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Contact Us</a></li>
                         <c:if test="${not empty sessionScope.account}">
-                        <li><a href="#">Notification<span class="badge">5</span></a></li>
+                        <!--<li><a href="#">Notification<span class="badge">5</span></a></li>-->
                         <li><a href="/ServiceforStudentManagement/user/MyProfile.jsp">Profile</a></li>
                             <c:if test="${sessionScope.account.type != 3}">
                             <li><a href="/ServiceforStudentManagement/studentProvider/Service.jsp">Service</a></li>
@@ -57,6 +57,14 @@
                     });
                 </script>
             </c:if>
+                
+            <c:if test="${param.error == 'forgotError'}">
+                <script type="text/javascript">
+                    $(window).on('load', function () {
+                        $('#signupModal').modal('show');
+                    });
+                </script>
+            </c:if>
 
 
             <!-- Login Modal -->
@@ -79,6 +87,9 @@
                                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#forgotModal" data-dismiss="modal">Forgot Password</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                 </div>
+                                <c:if test="${param.error == 'loginError'}">
+                                    <h5 style="color: red">LOGIN FALSE!</h5> 
+                                </c:if>
                                 <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
                                 <input type="hidden" name="action" value="login"/>
                             </form>
@@ -97,6 +108,7 @@
                                 <div class="form-group">
                                     <label for="username">Username: </label>
                                     <input type="text" class="form-control" id="username" placeholder="Enter username" name="txtAccountNameRegis" required>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="pwdRegis">Password:</label>
@@ -141,6 +153,9 @@
                                 </div>
                                 <input type="hidden" name="action" value="register"/>
                                 <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
+                                <c:if test="${param.error == 'signupError'}">
+                                    <h5 style="color: red">SIGN UP FALSE!</h5> 
+                                </c:if>
                             </form>
                         </div>
                     </div>
@@ -148,7 +163,7 @@
             </div>
 
             <!-- Forgot Modal -->
-            <div id="forgotModal" class="modal fade" role="dialog">
+            <div id="forgotModal" class="modal fade in" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content">
@@ -168,6 +183,9 @@
                                     <input type="hidden" name="action" value="forgotPassword"/>
                                     <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
                                 </div>
+                                <c:if test="${param.error == 'forgotError'}">
+                                    <h5 style="color: red">GET PASSWORD FALSE!</h5> 
+                                </c:if>
                             </form>
                         </div>
                     </div>

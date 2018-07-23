@@ -187,7 +187,7 @@ public class AccountController extends HttpServlet {
             List<Account> b = new AccountDAO().selectAccount("select * from Account where AccountName = '" + receiveName + "'");
             if (!a.get(0).getPassword().equals(password)
                     || b.isEmpty()) {
-                response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=PasswordError");
+                response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=passwordError");
             } 
             new BuyBalanceDAO().insertBuyBalance(a.get(0).getAccountName(), a.get(0).getWalletID(), purpose, Integer.parseInt(amount));
             List<Wallet> w = new WalletDAO().selectWallet("select * from Wallet where WalletID = " + a.get(0).getWalletID());

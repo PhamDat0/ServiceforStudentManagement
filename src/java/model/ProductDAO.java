@@ -90,4 +90,12 @@ public class ProductDAO {
         Connection conn = new DBContext().getConnection();
         conn.prepareStatement(query).executeUpdate();
     }
+
+    public void updateProduct(int id, String name, int price, int quantity, String description) throws Exception {
+        String query = "UPDATE Product SET ProductName = '" + name + "' , Price = " + price + " , Quantity = " + quantity + " , Description = '" + description + "' WHERE ProductID = " + id;
+        System.out.println(query);
+        Connection conn = new DBContext().getConnection();
+        conn.prepareStatement(query).executeUpdate();
+        conn.close();
+    }
 }

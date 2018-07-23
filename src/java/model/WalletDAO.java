@@ -38,7 +38,7 @@ public class WalletDAO {
     }
     
     public List<Wallet> selectWalletByID(int id) throws Exception {
-        String query = "SELECT * FROM Wallet WHERE BalanceID = " + id;
+        String query = "SELECT * FROM Wallet WHERE WalletID = " + id;
         return selectWallet(query);
     }
 
@@ -55,7 +55,9 @@ public class WalletDAO {
     public void setBalance(int walletid, int newbalance) throws Exception {
         String query = "update Wallet set Balance=? where WalletID=?";
         Connection conn = new DBContext().getConnection();
+        System.out.println(walletid);
         PreparedStatement ps = conn.prepareStatement(query);
+        System.out.println(newbalance);
         ps.setInt(1, newbalance);
         ps.setInt(2, walletid);
         ps.executeUpdate();

@@ -21,7 +21,9 @@ public class ServiceReview  implements Serializable{
     private Date date;
     private String status;
 
-    public ServiceReview() {
+    public ServiceReview(int serviceID, int rating) {
+        this.serviceID = serviceID;
+        this.rating = rating;
     }
 
     public ServiceReview(int id, int serviceID, String userName, int rating, String comment, Date date, String status) {

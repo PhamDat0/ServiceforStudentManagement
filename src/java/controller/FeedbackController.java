@@ -36,13 +36,23 @@ public class FeedbackController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String receiver = request.getParameter("receiver");
-            if (receiver == null) receiver = "pscruby0";
-            String sender = request.getParameter("sender");
-            String subject = request.getParameter("subject");
-            String detail = request.getParameter("detail");
-            new FeedbackDAO().insertFeedback(new Feedback(receiver, sender, subject, detail, Calendar.getInstance().getTime(), "Not Seen"));
-            response.sendRedirect("/ServiceforStudentManagement/Home.jsp");
+            if (request.getParameter("action") != null) {
+                switch (request.getParameter("action")) {
+                    case "newFeedback": {
+                        newFeedback(request, response);
+                        break;
+                    }
+                    case "deleteFeedback": {
+                        deleteFeedback(request, response);
+                        break;
+                    }
+                    case "seenFeedback": {
+                        seenFeedback(request, response);
+                        break;
+                    }
+                }
+            }
+
         } catch (Exception ex) {
             Logger.getLogger(FeedbackController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -86,5 +96,41 @@ public class FeedbackController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void newFeedback(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String receiver = request.getParameter("receiver");
+            if (receiver == null) {
+                receiver = "pscruby0";
+            }
+            String sender = request.getParameter("sender");
+            String subject = request.getParameter("subject");
+            String detail = request.getParameter("detail");
+            new FeedbackDAO().insertFeedback(new Feedback(receiver, sender, subject, detail, Calendar.getInstance().getTime(), "Not Seen"));
+            response.sendRedirect("/ServiceforStudentManagement/Home.jsp");
+        } catch (Exception ex) {
+            Logger.getLogger(FeedbackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void deleteFeedback(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            int feedbackID = Integer.valueOf(request.getParameter("feedbackID"));
+            new FeedbackDAO().deleteFeedback(feedbackID);
+            response.sendRedirect("/ServiceforStudentManagement/providerAdmin/ListFeedBack.jsp");
+        } catch (Exception ex) {
+            Logger.getLogger(FeedbackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void seenFeedback(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            int feedbackID = Integer.valueOf(request.getParameter("feedbackID"));
+            new FeedbackDAO().setReportStatus(feedbackID, "Seen");
+            response.sendRedirect("/ServiceforStudentManagement/providerAdmin/ListFeedBack.jsp");
+        } catch (Exception ex) {
+            Logger.getLogger(FeedbackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

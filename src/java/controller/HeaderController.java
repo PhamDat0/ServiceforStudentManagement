@@ -131,7 +131,7 @@ public class HeaderController extends HttpServlet {
             response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=loginError");
             return;
         } catch (Exception ex) {
-            Logger.getLogger(HeaderController.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=loginError");
         }
     }
 

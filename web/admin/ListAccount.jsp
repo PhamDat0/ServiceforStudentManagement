@@ -100,9 +100,25 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
+                
+                <div class="row text-center">
+                    <ul class="pagination">
+                        <!-- Show paging navigator -->
+                        <c:forEach begin="1" end="${listAccount.numberOfPage}" step="1" var="i">
+                            <c:url var="next" value="/admin/ListAccount.jsp">
+                                <c:param name="page">${i}</c:param>
+                                <c:param name="type">${param.type}</c:param>
+                                <c:param name="status">${param.status}</c:param>
+                            </c:url>
+                            <li ${i == param.page ? "class='active'" : ""}><a href="${next}">${i}</a></li>
+                            </c:forEach>
+                    </ul>
+                </div>
+
             </div>
         </div>
 

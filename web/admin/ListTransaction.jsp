@@ -22,6 +22,7 @@
     </head>
     <body>
         <jsp:useBean id="tranBean" class="bean.TransactionBean" scope="page"/>
+        <jsp:setProperty name="tranBean" param="type" property="selectType"/> 
         <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
@@ -32,20 +33,13 @@
                 <!--Filter-->
                 <div class="row">
                     <div class="navbar col-sm-6 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
-                        <form class="form-inline">
+                        <form class="form-inline" id="filterForm">
                             <div class="form-group">
                                 <label for="type">Filter: </label>
-                                <select class="form-control" id="type">
-                                    <option>All</option>
-                                    <option>Top-up</option>
-                                    <option>Payment</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control" id="type">
-                                    <option>All</option>
-                                    <option>Student</option>
-                                    <option>Provider</option>
+                                <select class="form-control" id="type" name="type" onchange="document.forms['filterForm'].submit()"> 
+                                    <option value="All" ${param.type == 'All' ? "selected" : ""}>All</option>
+                                    <option value="Topup" ${param.type == 'Topup' ? "selected" : ""}>Top-Up</option>
+                                    <option value="Payment" ${param.type == 'Payment' ? "selected" : ""}>Payment</option>
                                 </select>
                             </div>
                             <div class="input-group" class="text-center">

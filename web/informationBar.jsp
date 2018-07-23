@@ -20,12 +20,20 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Rank</th>
                                 <th>Service Name</th>
+                                <th>Provider Name</th>
                                 <th>Rate</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <c:forEach var="ser" items="${infor.topService}">
+                                <tr>
+                                    <jsp:setProperty name="infor" property="serviceID" value="${ser.serviceID}"/>
+                                    <td>${infor.serviceProviderName.serviceName}</td>
+                                    <td>${infor.serviceProviderName.providerName}</td>
+                                    <td>${ser.rating}</td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>

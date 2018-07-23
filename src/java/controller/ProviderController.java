@@ -53,6 +53,10 @@ public class ProviderController extends HttpServlet {
                         clear(request, response);
                         break;
                     }
+                    case "updateProduct": {
+                        update(request, response);
+                        break;
+                    }
                 }
             }
         }
@@ -200,5 +204,20 @@ public class ProviderController extends HttpServlet {
         session.removeAttribute("prounit");
         session.removeAttribute("proquantity");
         response.sendRedirect("/ServiceforStudentManagement/provider/NewProduct.jsp");
+    }
+
+    private void update(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            String productName = request.getParameter("productName");
+            String description = request.getParameter("description");
+            int productID = Integer.valueOf(request.getParameter("productID"));
+            int quantity = Integer.valueOf(request.getParameter("quantity"));
+            int price = Integer.valueOf(request.getParameter("price"));
+            new ProductDAO().updateProduct(productID, productName, price, quantity, description);
+            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1]);
+        } catch (Exception ex) {
+            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=updateError");
+        }
+
     }
 }

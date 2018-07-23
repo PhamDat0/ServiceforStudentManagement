@@ -29,22 +29,22 @@
                 <!--Filter-->
                 <div class="row">
 
-                    <div class="navbar col-sm-8 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
-                        <form class="form-inline">
+                    <div class="navbar col-sm-5 navbar-right text-center" style="padding-top: 7px;margin-right: 5px; background-color: #337ab7; color: white">
+                        <form class="form-inline" id="filterForm">
                             <div class="form-group">
                                 <label for="service">Service: </label>
-                                <select class="form-control" id="service" name="serviceID">
+                                <select class="form-control" id="service" name="serviceID" onchange="document.forms['filterForm'].submit()">
                                     <c:forEach var="ser" items="${listProduct.service}">
                                         <option value="${ser.serviceID}" ${ser.serviceID == param.serviceID ? "selected" : "" }>
                                             ${ser.serviceName}</option>
                                         </c:forEach>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="type">Order By: </label>
-                                <label class="radio-inline"><input type="radio" name="optradio">High Price</label>
-                                <label class="radio-inline"><input type="radio" name="optradio">Low Price</label>
-                            </div>
+                            <!--                            <div class="form-group">
+                                                            <label for="type">Order By: </label>
+                                                            <label class="radio-inline"><input type="radio" name="optradio">High Price</label>
+                                                            <label class="radio-inline"><input type="radio" name="optradio">Low Price</label>
+                                                        </div>-->
                             <div class="input-group" class="text-center">
                                 <input type="text" class="form-control" id="filterName" placeholder="Enter name">
                                 <div class="input-group-btn">
@@ -84,8 +84,15 @@
                                             <td>${pro.price}</td>
                                             <td>${pro.description}</td>
                                             <td style="text-align: center">
-                                                <a class="btn btn-default">Update</a>
-                                                <a class="btn btn-default">Delete</a>
+                                                <c:url var="up" value="/provider/ListProduct.jsp">
+                                                    <c:param name="action" value="update"/>
+                                                    <c:param name="productID" value="${pro.productID}"/>
+                                                    <c:param name="productName" value="${pro.productName}"/>
+                                                    <c:param name="quantity" value="${pro.quantity}"/>
+                                                    <c:param name="price" value="${pro.price}"/>
+                                                    <c:param name="description" value="${pro.description}"/>
+                                                </c:url>
+                                                <a href="${up}" class="btn btn-default">Update</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -98,33 +105,53 @@
 
         </div>
 
-        <!-- Login Modal -->
-        <div id="newProductModal" class="modal fade in" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form action="/ServiceforStudentManagement/ProductController" method="POST">
-                            <div class="form-group">
-                                <label for="username">Product Name</label>
-                                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
-                            </div>
-                            <div class="form-group">
-                                <label for="pwd">Password:</label>
-                                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-                            </div>
-                            <div style="text-align:center">
-                                <button type="submit" class="btn btn-success">Login</button>
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#forgotModal" data-dismiss="modal">Forgot Password</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            </div>
-                            <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
-                            <input type="hidden" name="action" value="newProduct"/>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <c:if test="${param.action == 'update'
+                      or param.error == 'updateError'}">
+              <script type="text/javascript">
+                  $(window).on('load', function () {
+                      $('#updateModal').modal('show');
+                  });
+              </script>
+
+              <!-- update Modal -->
+              <div id="updateModal" class="modal fade in" role="dialog">
+                  <div class="modal-dialog">
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                          <div class="modal-body">
+                              <form action="/ServiceforStudentManagement/ProviderController" method="POST" data-toggle="validator">
+                                  <div class="form-group">
+                                      <label for="username">Product Name</label>
+                                      <input type="text" class="form-control" id="username" value="${param.productName}" name="productName" required>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="quantity">Quantity: </label>
+                                      <input type="number" class="form-control" id="quantity" value="${param.quantity}" name="quantity" required>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="price">Price: </label>
+                                      <input type="number" class="form-control" id="price" value="${param.price}" name="price" required>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="description">Description: </label>
+                                      <input type="text" class="form-control" name="description" value="${param.description}" id="description" required>
+                                  </div>
+                                  <div style="text-align:center">
+                                      <button type="submit" class="btn btn-success">Update</button>
+                                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                  </div>
+                                  <input type="hidden" name="productID" value="${param.productID}"/>
+                                  <input type="hidden" name="link" value="${pageContext.request.requestURL}"/>
+                                  <input type="hidden" name="action" value="updateProduct"/>
+                                  <c:if test="${param.error == 'updateError'}">
+                                      <h5 style="color: red">UPDATE FALSE!</h5> 
+                                  </c:if>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+        </c:if>
 
         <script>
             $(document).ready(function () {

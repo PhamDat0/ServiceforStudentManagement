@@ -32,21 +32,16 @@
                         <a href="/ServiceforStudentManagement/provider/NewProduct.jsp" class="list-group-item">New Product</a>
                         <a href="/ServiceforStudentManagement/provider/ListProduct.jsp" class="list-group-item">List Product</a>
                         <a href="#registerService" data-toggle="modal" class="list-group-item">Register Service</a>
-                        <a href="/ServiceforStudentManagement/provider/ListServiceUser.jsp" class="list-group-item">List Service's Users</a>
+                        <!--<a href="/ServiceforStudentManagement/provider/ListServiceUser.jsp" class="list-group-item">List Service's Users</a>-->
                     </c:if>
 
                     <!--student and provider-->
                     <c:if test="${sessionScope.account.type < 3}">
                         <a href="/ServiceforStudentManagement/studentProvider/ViewOrder.jsp" class="list-group-item">View Order</a>
                         <a href="/ServiceforStudentManagement/studentProvider/Service.jsp" class="list-group-item">View Service</a>
-                        <a href="/ServiceforStudentManagement/studentProvider/ViewBill.jsp" class="list-group-item">View Bill</a>
+                        <!--<a href="/ServiceforStudentManagement/studentProvider/ViewBill.jsp" class="list-group-item">View Bill</a>-->
                         <a href="/ServiceforStudentManagement/studentProvider/Transaction.jsp" class="list-group-item">Transaction</a>
-                        <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="list-group-item">Feedback to Admin</a>
-                    </c:if>
-
-                    <!--student-->
-                    <c:if test="${sessionScope.account.type == 1}">
-                        <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="list-group-item">Feedback Service</a>
+                        <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="list-group-item">Feedback</a>
                     </c:if>
 
                     <!--provider and administrator-->
