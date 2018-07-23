@@ -18,10 +18,9 @@
                     <a class="navbar-brand" href="/ServiceforStudentManagement/Home.jsp">Service for Student Management</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="/ServiceforStudentManagement/AboutUs.jsp">About Us</a></li>
+                    <li><a href="/ServiceforStudentManagement/ContactUS.jsp">Contact Us</a></li>
                         <c:if test="${not empty sessionScope.account}">
-                        <!--<li><a href="#">Notification<span class="badge">5</span></a></li>-->
                         <li><a href="/ServiceforStudentManagement/user/MyProfile.jsp">Profile</a></li>
                             <c:if test="${sessionScope.account.type != 3}">
                             <li><a href="/ServiceforStudentManagement/studentProvider/Service.jsp">Service</a></li>
@@ -57,7 +56,7 @@
                     });
                 </script>
             </c:if>
-                
+
             <c:if test="${param.error == 'forgotError'}">
                 <script type="text/javascript">
                     $(window).on('load', function () {
@@ -193,5 +192,29 @@
             </div>
         </c:if>
 
+        <c:if test="${param.error == 'successRegis'}">
+            <script type="text/javascript">
+                $(window).on('load', function () {
+                    $('#signupSuccessModal').modal('show');
+                });
+            </script>
+            <div class="modal fade" id="signupSuccessModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Notice</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Register successfully!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </c:if>
+        
     </body>
 </html>

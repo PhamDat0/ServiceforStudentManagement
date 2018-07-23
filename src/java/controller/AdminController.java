@@ -262,7 +262,9 @@ public class AdminController extends HttpServlet {
             }
             if ((validusername(accname) && validpassword(pwd) && validrepassword(pwd, repwd) && validphone(phone))
                     && validinput(accname, fullname, email, address)) {
+
                 adao.insertAccount(accname, pwd, email, fullname, rolenum, address, phone, date, t);
+                
                 session.removeAttribute("un");
                 session.removeAttribute("fn");
                 session.removeAttribute("rn");

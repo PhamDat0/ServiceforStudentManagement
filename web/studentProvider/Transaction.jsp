@@ -27,7 +27,7 @@
     <body >
         <jsp:useBean id="tranBean" class="bean.TransactionBean" scope="page"/>
         <jsp:setProperty name="tranBean" property="accountName" value="${sessionScope.account.accountName}"/>
-        
+
         <jsp:include page="/header.jsp"/>
 
         <div class="container-fluid row">
@@ -59,7 +59,8 @@
                                     <form action="/ServiceforStudentManagement/AccountController" method="POST" data-toggle="validator"> 
                                         <div class="form-group">
                                             <label for="amount">Amount:</label>
-                                            <input type="number" class="form-control" id="amount" placeholder="Enter amount" name="amount" required>
+                                            <input type="number" class="form-control" id="amount" placeholder="Enter amount" name="amount" min="0" data-error="Must be positive number" required>
+                                            <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="form-group">
                                             <label for="pwdTop">Password:</label>
@@ -87,7 +88,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="amount">Amount:</label>
-                                            <input type="number" class="form-control" id="amount" placeholder="Enter amount" name="amount" required>
+                                            <input type="number" class="form-control" id="amount" placeholder="Enter amount" min="0" data-error="Must be positive number" name="amount" required>
+                                            <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="form-group">
                                             <label for="content">Content:</label>
@@ -134,14 +136,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>        
-                                <c:forEach var="pro" items="${tranBean.history}">
-                                    <tr>
-                                        <td>${pro.accountName}</td>
-                                        <td>${pro.purpose}</td>
-                                        <td>${pro.value}</td>
-                                        <td>${pro.date}</td>                                       
-                                    </tr>
-                                 </c:forEach>
+                                    <c:forEach var="pro" items="${tranBean.history}">
+                                        <tr>
+                                            <td>${pro.accountName}</td>
+                                            <td>${pro.purpose}</td>
+                                            <td>${pro.value}</td>
+                                            <td>${pro.date}</td>                                       
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -149,6 +151,30 @@
                 </div>
             </div>
 
+            <c:if test="${param.error == 'transError'}">
+                <script type="text/javascript">
+                    $(window).on('load', function () {
+                        $('#noticeTransModal').modal('show');
+                    });
+                </script>
+                <div class="modal fade" id="noticeTransModal" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Notice</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Transaction fail!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+                
             <jsp:include page="/informationBar.jsp"/>
         </div>
     </body>

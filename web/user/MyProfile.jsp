@@ -106,7 +106,6 @@
                                     <tr>
                                         <td colspan="2" align="center">
                                             <button type="submit" name="btnSave" class="btn-primary">Save</button>
-                                            <button type="button" class="btn-warning">Cancel</button>
                                         </td>
                                     </tr>
                                 </table>

@@ -39,7 +39,7 @@
                     <div class="col-sm-7">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h3>${service.serviceInfor} - Rating</h3>
+                                <h3>${service.serviceInfor}</h3>
                             </div>
                             <!--product list-->
                             <div class="panel-body">
@@ -105,7 +105,8 @@
                                     <img src="../src/image/3.png" alt="">
                                 </div>
                             </div>
-                            <!-- Controls--><a href="#img-carousel" role="button" data-slide="prev" class="left carousel-control"><i aria-hidden="true" class="fa fa-chevron-left"></i><span class="sr-only">Previous</span></a><a href="#img-carousel" role="button" data-slide="next" class="right carousel-control"><i aria-hidden="true" class="fa fa-chevron-right"></i><span class="sr-only">Next</span></a>
+                            <!-- Controls-->
+                            <a href="#img-carousel" role="button" data-slide="prev" class="left carousel-control"><i aria-hidden="true" class="fa fa-chevron-left"></i><span class="sr-only">Previous</span></a><a href="#img-carousel" role="button" data-slide="next" class="right carousel-control"><i aria-hidden="true" class="fa fa-chevron-right"></i><span class="sr-only">Next</span></a>
                         </div>
 
                     </div>

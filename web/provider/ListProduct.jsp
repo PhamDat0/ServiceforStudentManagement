@@ -40,11 +40,6 @@
                                         </c:forEach>
                                 </select>
                             </div>
-                            <!--                            <div class="form-group">
-                                                            <label for="type">Order By: </label>
-                                                            <label class="radio-inline"><input type="radio" name="optradio">High Price</label>
-                                                            <label class="radio-inline"><input type="radio" name="optradio">Low Price</label>
-                                                        </div>-->
                             <div class="input-group" class="text-center">
                                 <input type="text" class="form-control" id="filterName" placeholder="Enter name">
                                 <div class="input-group-btn">
@@ -126,11 +121,13 @@
                                   </div>
                                   <div class="form-group">
                                       <label for="quantity">Quantity: </label>
-                                      <input type="number" class="form-control" id="quantity" value="${param.quantity}" name="quantity" required>
+                                      <input type="number" class="form-control" id="quantity" min="0" data-error="Must be positive number" value="${param.quantity}" name="quantity" required>
+                                      <div class="help-block with-errors"></div> 
                                   </div>
                                   <div class="form-group">
                                       <label for="price">Price: </label>
-                                      <input type="number" class="form-control" id="price" value="${param.price}" name="price" required>
+                                      <input type="number" class="form-control" id="price" min="0" data-error="Must be positive number" value="${param.price}" name="price" required>
+                                      <div class="help-block with-errors"></div> 
                                   </div>
                                   <div class="form-group">
                                       <label for="description">Description: </label>

@@ -128,7 +128,7 @@ public class ServiceDAO {
     
     public void deleteService(int id) throws Exception {
         Connection conn = new DBContext().getConnection();
-        String query = "DELETE * FROM Service WHERE ServiceID = " + id;
+        String query = "DELETE FROM Service WHERE ServiceID = " + id;
         conn.createStatement().executeUpdate(query);
         conn.close();
     }

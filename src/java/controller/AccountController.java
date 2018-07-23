@@ -50,10 +50,6 @@ public class AccountController extends HttpServlet {
                         changePassword(request, response);
                         break;
                     }
-                    case "feedback": {
-                        feedback(request, response);
-                        break;
-                    }
                     case "topUp": {
                         topUp(request, response);
                         break;
@@ -128,11 +124,7 @@ public class AccountController extends HttpServlet {
         }
     }
 
-    private void feedback(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void topUp(HttpServletRequest request, HttpServletResponse response) {
+    private void topUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession();
         Account c = (Account) session.getAttribute("account");
@@ -141,19 +133,19 @@ public class AccountController extends HttpServlet {
         String password = request.getParameter("pwd");
         String repass = request.getParameter("rePwd");
         Calendar cal = Calendar.getInstance();
-        Date date1 = cal.getTime();
         try {
             List<Account> a = new AccountDAO().selectAccount("select * from Account where AccountName = '" + c.getAccountName() + "'");
-            System.out.println(a.get(0).getAccountName());
             if (!a.get(0).getPassword().equals(password)) {
-                response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=PasswordError");
+                response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=transError");
+                return;
             }
             new BuyBalanceDAO().insertBuyBalance(a.get(0).getAccountName(), a.get(0).getWalletID(), "Topup", Integer.parseInt(amount));
             List<Wallet> w = new WalletDAO().selectWallet("select * from Wallet where WalletID = " + a.get(0).getWalletID());
             new WalletDAO().setBalance(a.get(0).getWalletID(), w.get(0).getBalance() + Integer.parseInt(amount));
             response.sendRedirect("/ServiceforStudentManagement/user/MyProfile.jsp");
         } catch (Exception ex) {
-            System.out.println("Change password error");
+            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=transError");
+            return;
         }
     }
 
@@ -166,6 +158,9 @@ public class AccountController extends HttpServlet {
             String address = request.getParameter("txtAddress");
             String phone = request.getParameter("txtPhone");
             new AccountDAO().setAccountProfileByName(email, fullname, address, phone, date, accountName);
+            Account acc = new AccountDAO().selectAccountByName(accountName).get(0);
+            HttpSession session = request.getSession();
+            session.setAttribute("account", acc);
             response.sendRedirect("/ServiceforStudentManagement/user/MyProfile.jsp");
         } catch (ParseException ex) {
             Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
@@ -174,7 +169,7 @@ public class AccountController extends HttpServlet {
         }
     }
 
-    private void payment(HttpServletRequest request, HttpServletResponse response) {
+    private void payment(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         Account c = (Account) session.getAttribute("account");
         c = (Account) session.getAttribute("account");
@@ -187,8 +182,9 @@ public class AccountController extends HttpServlet {
             List<Account> b = new AccountDAO().selectAccount("select * from Account where AccountName = '" + receiveName + "'");
             if (!a.get(0).getPassword().equals(password)
                     || b.isEmpty()) {
-                response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=passwordError");
-            } 
+                response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=transError");
+                return;
+            }
             new BuyBalanceDAO().insertBuyBalance(a.get(0).getAccountName(), a.get(0).getWalletID(), purpose, Integer.parseInt(amount));
             List<Wallet> w = new WalletDAO().selectWallet("select * from Wallet where WalletID = " + a.get(0).getWalletID());
             new WalletDAO().setBalance(a.get(0).getWalletID(), w.get(0).getBalance() - Integer.parseInt(amount));
@@ -198,7 +194,8 @@ public class AccountController extends HttpServlet {
             new WalletDAO().setBalance(b.get(0).getWalletID(), w1.get(0).getBalance() + Integer.parseInt(amount));
             response.sendRedirect("/ServiceforStudentManagement/user/MyProfile.jsp");
         } catch (Exception ex) {
-            System.out.println("Change password error");
+            response.sendRedirect("/ServiceforStudentManagement" + request.getParameter("link").split("ServiceforStudentManagement")[1] + "?error=transError");
+            return;
         }
     }
 

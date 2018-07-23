@@ -89,7 +89,6 @@
                                                 <button type="button" class="btn btn-default">View</button>
                                             </a>
                                             <c:if test="${sessionScope.account.type == 1}">
-                                                <input type="submit" class="btn btn-default" value="Feedback"></input>
                                                 <c:if test="${param.type == 'mySer'}">
                                                     <input type="submit" class="btn btn-default" value="Rating"></input>
                                                     <input type="submit" class="btn btn-default" value="Stop Using"></input>
@@ -97,11 +96,11 @@
                                             </c:if>
                                             <c:if test="${sessionScope.account.type == 2
                                                           and sessionScope.account.accountName == ser.providerName}">
-                                                  <input type="submit" class="btn btn-default" value="List User"></input>
+                                                  <!--<input type="submit" class="btn btn-default" value="List User"></input>-->
                                                   <a href="/ServiceforStudentManagement/provider/ListProduct.jsp?serviceID=${ser.serviceID}">
                                                       <button type="button" class="btn btn-default">List Product</button>
                                                   </a>
-                                                  <input type="submit" class="btn btn-default" value="Stop"></input>
+                                                  <!--<input type="submit" class="btn btn-default" value="Stop"></input>-->
                                             </c:if>
                                         </td>
                                     </tr>

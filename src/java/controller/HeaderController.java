@@ -87,7 +87,7 @@ public class HeaderController extends HttpServlet {
             //get data
             String username = request.getParameter("txtAccountNameRegis");
             if (new AccountDAO().selectAccountByName(username).size() == 0) {
-                String roleNumber = request.getParameter("rolenumber");
+                String roleNumber = request.getParameter("roleNumber");
                 if (new AccountDAO().selectAccount("SELECT * FROM Account WHERE RoleNumber LIKE '" + roleNumber + "'").size() == 0) {
                     String password = request.getParameter("pwdRegis");
                     String fullname = request.getParameter("txtNameRegis");

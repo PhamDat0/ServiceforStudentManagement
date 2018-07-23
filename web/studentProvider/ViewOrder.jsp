@@ -83,40 +83,42 @@
                                         <tr>
                                             <jsp:setProperty name="viewOrder" property="serviceID" value="${ord.serviceID}"/>
                                             <jsp:setProperty name="viewOrder" property="productID" value="${ord.productID}"/>
-                                            <td>${viewOrder.productName} </td>
-                                            <td>${viewOrder.serviceName}</td>
-                                            <c:if test="${sessionScope.account.type == 2}">
-                                                <td>${ord.userName}</td>
+                                            <c:if test="${not empty viewOrder.serviceName}">
+                                                <td>${viewOrder.productName} </td>
+                                                <td>${viewOrder.serviceName.get(0).getServiceName()}</td>
+                                                <c:if test="${sessionScope.account.type == 2}">
+                                                    <td>${ord.userName}</td>
+                                                </c:if>
+                                                <td>${ord.destination}</td>
+                                                <td>${ord.price}</td>
+                                                <td>${ord.quantity}</td>
+                                                <td>${ord.startDate}</td>
+                                                <td>${ord.endDate}</td>
+                                                <td>${ord.status}</td>
+                                                <td style="text-align: center">
+                                                    <c:if test="${sessionScope.account.type == 1}">
+                                                        <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="btn btn-default">
+                                                            Feedback
+                                                        </a>
+                                                        <a href="/ServiceforStudentManagement/user/ServiceDetail.jsp?serviceID=${ord.serviceID}" class="btn btn-default">
+                                                            View
+                                                        </a>
+                                                    </c:if>
+                                                    <c:if test="${sessionScope.account.type == 2 and ord.status == 'Request'}">
+                                                        <a href="/ServiceforStudentManagement/OrderController?action=changeStatusOrder&status=accept&orderID=${ord.orderID}" class="btn btn-default">
+                                                            Accept
+                                                        </a>
+                                                        <a href="/ServiceforStudentManagement/OrderController?action=changeStatusOrder&status=reject&orderID=${ord.orderID}" class="btn btn-default">
+                                                            Reject
+                                                        </a>
+                                                    </c:if>
+                                                    <c:if test="${sessionScope.account.type == 2 and ord.status == 'Shipping'}">
+                                                        <a href="/ServiceforStudentManagement/OrderController?action=changeStatusOrder&status=finish&orderID=${ord.orderID}" class="btn btn-default">
+                                                            Finish
+                                                        </a>
+                                                    </c:if>
+                                                </td>
                                             </c:if>
-                                            <td>${ord.destination}</td>
-                                            <td>${ord.price}</td>
-                                            <td>${ord.quantity}</td>
-                                            <td>${ord.startDate}</td>
-                                            <td>${ord.endDate}</td>
-                                            <td>${ord.status}</td>
-                                            <td style="text-align: center">
-                                                <c:if test="${sessionScope.account.type == 1}">
-                                                    <a href="/ServiceforStudentManagement/studentProvider/Feedback.jsp" class="btn btn-default">
-                                                        Feedback
-                                                    </a>
-                                                    <a href="/ServiceforStudentManagement/user/ServiceDetail.jsp?serviceID=${ord.serviceID}" class="btn btn-default">
-                                                        View
-                                                    </a>
-                                                </c:if>
-                                                <c:if test="${sessionScope.account.type == 2 and ord.status == 'Request'}">
-                                                    <a href="/ServiceforStudentManagement/OrderController?action=changeStatusOrder&status=accept&orderID=${ord.orderID}" class="btn btn-default">
-                                                        Accept
-                                                    </a>
-                                                    <a href="/ServiceforStudentManagement/OrderController?action=changeStatusOrder&status=reject&orderID=${ord.orderID}" class="btn btn-default">
-                                                        Reject
-                                                    </a>
-                                                </c:if>
-                                                <c:if test="${sessionScope.account.type == 2 and ord.status == 'Shipping'}">
-                                                    <a href="/ServiceforStudentManagement/OrderController?action=changeStatusOrder&status=finish&orderID=${ord.orderID}" class="btn btn-default">
-                                                        Finish
-                                                    </a>
-                                                </c:if>
-                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

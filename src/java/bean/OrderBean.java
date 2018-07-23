@@ -7,6 +7,7 @@ package bean;
 
 import entity.Account;
 import entity.Order;
+import entity.Service;
 import java.io.Serializable;
 import java.util.List;
 import model.OrderDAO;
@@ -59,10 +60,10 @@ public class OrderBean implements Serializable {
         return new ProductDAO().selectProductByProductID(productID).get(0).getProductName();
     }
 
-    public String getServiceName() throws Exception {
+    public List<Service> getServiceName() throws Exception {
         String query = "SELECT * FROM Service WHERE ServiceID = " + serviceID
                 + " AND Status LIKE 'Actived'";
-        return new ServiceDAO().selectService(query).get(0).getServiceName();
+        return new ServiceDAO().selectService(query);
     }
 
     public List<Order> getOrder() throws Exception {

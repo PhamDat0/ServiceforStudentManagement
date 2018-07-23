@@ -31,7 +31,7 @@
                         <h3 style="text-align: center">CREATE NEW PRODUCT</h3>
                     </div>
                     <div class="panel-body">
-                        <form action="/ServiceforStudentManagement/ProviderController" method="POST" data-toggle="validator">
+                        <form action="/ServiceforStudentManagement/ProviderController" method="" data-toggle="validator">
                             <div class="form-group">
                                 <label for="serviceName">Service Name: </label>
                                 <select name="drServiceName" class="btn btn-default">
@@ -49,22 +49,24 @@
                             </p>
                             <div class="form-group">
                                 <label for="price">Price: </label>
-                                <input value="${sessionScope.proprice}" type="number" class="form-control" id="price" placeholder="Enter price" name="txtPrice" required>
+                                <input value="${sessionScope.proprice}" type="number" class="form-control" min="0" data-error="Must be positive number" id="price" placeholder="Enter price" name="txtPrice" required>
+                                <div class="help-block with-errors"></div>
                                 <p style="color:red;font-style: italic;">
                                     ${sessionScope.priceerror}
                                 </p>
                             </div>
                             <div class="form-group">
                                 <label for="quantity">Quantity: </label>
-                                <input value="${sessionScope.proquantity}" type="number" class="form-control" id="price" placeholder="Enter quantity" name="txtQuantity"required>
+                                <input value="${sessionScope.proquantity}" type="number" min="0" data-error="Must be positive number" class="form-control" id="price" placeholder="Enter quantity" name="txtQuantity"required>
+                                <div class="help-block with-errors"></div>
                                 <p style="color:red;font-style: italic;">
                                     ${sessionScope.quantityerror}
                                 </p>
                             </div>
                             <div class="form-group">
                                 <label for="unit">Unit: </label>
-                                <label class="radio-inline"><input type="radio" name="unit" value="piece" required>Piece</label>
-                                <label class="radio-inline"><input type="radio" name="unit" value="day" required>Day</label>
+                                <label class="radio-inline"><input type="radio" name="txtUnit" value="piece" required>Piece</label>
+                                <label class="radio-inline"><input type="radio" name="txtUnit" value="day" required>Day</label>
                             </div>
                             <p style="color:red;font-style: italic;">
                                 ${sessionScope.uniterror}

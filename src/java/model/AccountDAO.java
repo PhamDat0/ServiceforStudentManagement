@@ -173,13 +173,16 @@ public class AccountDAO {
         conn.close();
     }
 
-    public void insertAccount(String accname,String pwd,String email,String fname,String rnum,String add,String phone,String dob,int type) throws Exception {
-        WalletDAO wd=new WalletDAO();
-        wd.insertWallet();
-        int id=wd.getNextWalletID();        
+    public void insertAccount(String accname, String pwd, String email, String fname, String rnum, String add, String phone, String dob, int type) throws Exception {
+        int id = 20;
+        if (type != 3) {
+            WalletDAO wd = new WalletDAO();
+            wd.insertWallet();
+            id = wd.getNextWalletID();
+        }
+
         Calendar calendar = Calendar.getInstance();
         java.sql.Date currentdate = new java.sql.Date(calendar.getTime().getTime());
-//        setAccountStatusByName("aaaaa", currentdate+"");
         String query = "insert into Account values(?,?,?,?,?,?,?,?,?,?,?,?)";
         Connection conn = new DBContext().getConnection();
         PreparedStatement ps = conn.prepareStatement(query);
@@ -192,9 +195,9 @@ public class AccountDAO {
         ps.setString(7, phone);
         ps.setString(8, dob);
         ps.setInt(9, id);
-        ps.setString(10, currentdate+"");
+        ps.setString(10, currentdate + "");
         ps.setString(11, "Actived");
-        ps.setInt(12, type);       
+        ps.setInt(12, type);
         ps.executeUpdate();
         conn.close();
     }

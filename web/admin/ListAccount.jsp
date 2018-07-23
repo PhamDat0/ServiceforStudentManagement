@@ -37,7 +37,6 @@
                                     <option value="0" ${param.type == '0' ? "selected" : ""}>All</option>
                                     <option value="1" ${param.type == '1' ? "selected" : ""}>Student</option>
                                     <option value="2" ${param.type == '2' ? "selected" : ""}>Provider</option>
-                                    <option value="3" ${param.type == '3' ? "selected" : ""}>Admin</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -81,13 +80,7 @@
                                         <tr>
                                             <td>${acc.accountName}</td>
                                             <td>${acc.fullname}</td>
-
-                                            <c:if test="${acc.type == '3'}">
-                                                <td>Administrator</td>
-                                            </c:if>
-                                            <c:if test="${acc.type != '3'}">
-                                                <td>${acc.type == '1' ? "Student" : "Provider"}</td>
-                                            </c:if>
+                                            <td>${acc.type == '1' ? "Student" : "Provider"}</td>
                                             <td>${acc.status}</td>
                                             <td style="text-align: center">
                                                 <a href="/ServiceforStudentManagement/AdminController?action=resetPassword&accountName=${acc.accountName}" class="btn btn-default">Reset</a>
@@ -104,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row text-center">
                     <ul class="pagination">
                         <!-- Show paging navigator -->

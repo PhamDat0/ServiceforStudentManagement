@@ -170,7 +170,7 @@ public class ProviderController extends HttpServlet {
     }
 
     private boolean validnumber(String s) {
-        if (s.equals("") || s.equals(null)) {
+        if (s.equals(null) || s.equals("") ) {
             return false;
         }
         try {
@@ -186,7 +186,7 @@ public class ProviderController extends HttpServlet {
     }
 
     private boolean validString(String s) {
-        if (s.equals("") || s.equals(null)) {
+        if (s.equals(null) || s.equals("")) {
             return false;
         }
         return true;
