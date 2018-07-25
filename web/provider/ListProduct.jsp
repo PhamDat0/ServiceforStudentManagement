@@ -21,11 +21,12 @@
         <jsp:setProperty name="listProduct" property="serviceID" value="${param.serviceID}"/>
 
         <jsp:include page="/header.jsp"/>
+        
         <div class="container-fluid row">
 
             <jsp:include page="/functionBar.jsp"/>
-
-            <div class="col-sm-10">
+            <c:if test="${not empty listProduct.service}">
+                <div class="col-sm-10">
                 <!--Filter-->
                 <div class="row">
 
@@ -70,7 +71,7 @@
                                         <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="myTable">
                                     <c:forEach var="pro" items="${listProduct.product}">
                                         <tr>
                                             <td>${pro.productName}</td>
@@ -97,6 +98,10 @@
                     </div>
                 </div>
             </div>
+            </c:if>
+            <c:if test="${empty listProduct.service}">
+                <h3>Not have any service!</h3>
+            </c:if>
 
         </div>
 

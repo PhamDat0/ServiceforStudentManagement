@@ -34,7 +34,6 @@ public class InformationBarBean implements Serializable {
     }
 
     public Service getServiceProviderName() throws Exception {
-        System.out.println(serviceID);
         return new ServiceDAO().selectServiceByID(serviceID).get(0);
     }
     

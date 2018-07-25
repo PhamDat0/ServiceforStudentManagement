@@ -87,7 +87,7 @@
                                                 <a href="/ServiceforStudentManagement/AdminController?action=changeStatusAccount&accountName=${acc.accountName}" class="btn btn-default">
                                                     ${acc.status == 'Banned' ? "Resume" : "Banned"}
                                                 </a>
-                                                <a href="/ServiceforStudentManagement/AdminController?action=deleteAccount&accountName=${acc.accountName}" class="btn btn-default">Delete</a>
+                                                <!--<a href="/ServiceforStudentManagement/AdminController?action=deleteAccount&accountName=${acc.accountName}" class="btn btn-default">Delete</a>-->
                                             </td>
                                         </tr>
                                     </c:forEach>

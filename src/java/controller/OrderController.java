@@ -172,6 +172,8 @@ public class OrderController extends HttpServlet {
                 }
                 case "reject": {
                     new OrderDAO().setOrderStatus(Integer.valueOf(request.getParameter("orderID")), "Rejected");
+                    Order o = new OrderDAO().selectOrder("SELECT * FROM [Order] WHERE OrderID = " + Integer.valueOf(request.getParameter("orderID"))).get(0);
+                    new ProductDAO().setQuantity(o.getProductID(), o.getQuantity());
                     break;
                 }
                 case "cancel": {

@@ -116,6 +116,7 @@ public class AdminFilter implements Filter {
             Account acc = (Account) session.getAttribute("account");
             if (acc == null || acc.getType() != 3) {
                 httpResponse.sendRedirect("/ServiceforStudentManagement/Home.jsp");
+                return;
             }
             chain.doFilter(request, response);
         } catch (Throwable t) {

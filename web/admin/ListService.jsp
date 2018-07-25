@@ -69,7 +69,7 @@
                                         <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="myTable">
                                     <c:forEach var="ser" items="${serviceBean.allService}">
                                         <tr>
                                             <td>${ser.serviceName}</td>

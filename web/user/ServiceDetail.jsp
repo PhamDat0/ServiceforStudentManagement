@@ -187,7 +187,7 @@
                                             <td>${param.productName}</td>
                                             <td>${param.productPrice}</td>
                                             <td>${param.productUnit}</td>
-                                            <td><input type="number" name="txtAmount" value="1" required /></td>
+                                            <td><input type="number" name="txtAmount" value="1" min="1" required /></td>
                                         </tr>
                                     </tbody>
                                     <input type="hidden" name="action" value="newOrder"/>

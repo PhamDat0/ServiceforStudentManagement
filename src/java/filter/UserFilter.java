@@ -162,6 +162,7 @@ public class UserFilter implements Filter {
             Account acc = (Account) session.getAttribute("account");
             if (acc == null) {
                 httpResponse.sendRedirect("/ServiceforStudentManagement/Home.jsp");
+                return;
             }
             chain.doFilter(request, response);
         } catch (Throwable t) {

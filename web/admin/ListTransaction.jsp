@@ -69,7 +69,7 @@
                                         <th>Date</th>
                                     </tr>
                                 </thead>
-                                <tbody>        
+                                <tbody id="myTable">        
                                 <c:forEach var="pro" items="${tranBean.allHistory}">
                                     <tr>
                                         <td>${pro.accountName}</td>

@@ -68,7 +68,7 @@
                                         <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="myTable">
                                     <c:forEach var="feedback" items="${feedbackBean.feedbackList}">
                                         <tr>
                                             <td>${feedback.senderName}</td>

@@ -40,7 +40,7 @@ public class ListProductBean implements Serializable {
 
     public List<Product> getProduct() throws Exception {
         if (serviceID == 0) {
-            System.out.println("hii");
+            if(serviceList == null) return null;
             serviceID = serviceList.get(0).getServiceID();
         }
         return new ProductDAO().selectProductByServiceID(serviceID);
